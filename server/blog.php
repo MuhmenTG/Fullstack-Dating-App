@@ -22,7 +22,7 @@
         from blog b, userInfomation u
         WHERE b.userId = u.id";  
         return $this->fetchRecords($selectQuery);
-        /* $selectStatement = $this->db->prepare($selectQuery);  
+        /* test $selectStatement = $this->db->prepare($selectQuery);  
             $selectStatement->execute();
             $dataResult = $selectStatement->fetchAll();   
             return $dataResult;*/                              
