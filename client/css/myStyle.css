@@ -1,0 +1,30 @@
+.modal-footer, .modal-header, .modal-title{
+    background-color:#F05151;
+    color: black;
+    font-size: 20px;
+}
+
+.btn{
+    background-color: #F05151;
+    border-radius: 55px;
+    width: 100px;
+    color: white;
+    border: 2px solid white;
+}
+
+.modal-body{
+    background-color: #333333;;
+    color: #F05151;
+}
+
+.modal-title{
+    background: #F05151 !important;
+}
+
+.modal-content, 
+.modal-header{
+    background: #F05151 !important;
+    box-shadow: none !important;
+    border: none;
+}
+
