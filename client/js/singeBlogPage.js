@@ -10,7 +10,8 @@ if (!blogId || blogId < 0 || blogId === "") {
 
 export async function showSingleBlogPost(blogID) {
     const response = await serverHttpRequest('../api/getSingleBlogDetails.php', 'POST', { blogID });
-    await displaySinglePost(response[0], response[2].length)
+    //await displaySinglePost(response[0], response[2].length)
+    console.log(response);return
     userId = await getCurrentSessionId();
     await displayCommentPost(response[2], userId)
     //await displayCarouselPost(data[1]);
@@ -193,7 +194,6 @@ async function postNewComment() {
     const message = await document.getElementById('editComment').value;
     const data = {
         commentId,
-        userId,
         message
     }
     const response = await serverHttpRequest('../api/editUserComment.php', 'POST', data)

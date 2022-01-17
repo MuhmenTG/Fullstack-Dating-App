@@ -21,8 +21,8 @@ include('inc/header.php');
 							</ul>
 						</div>
 						<div class="form-group">
-                            <input type="text" id="searchVale" class="form-control" placeholder="Search by Name"
-                                oninput="showBlogPost(this.value)">
+                            <input type="text" id="searchPost" class="form-control" placeholder="Search by Name"
+                                >
                             <a href="#" class="sarch-member-btn"><i class="flaticon-search"></i></a>
                         </div>
 					</div>
@@ -135,10 +135,7 @@ include('inc/header.php');
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
 	<!-- Custom -->
 	<script src="js/custom.js"></script>
-	<script src="js/blogs.js"></script>
-	<script>
-	showBlogPost();	
-	</script>
+	<script src="js/blogs.js" type="module"></script>
 
 </body>
 </html>

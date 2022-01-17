@@ -1,5 +1,6 @@
 import { serverHttpRequest } from "./utilities/serverHttpRequest.js";
 const blogContainer = document.getElementById('insideContainerBlog');
+const searchPost = document.getElementById("searchPost");
 async function showBlogPost(name){
     let data = "";
     if(name != undefined){      
@@ -10,7 +11,8 @@ async function showBlogPost(name){
     }
     await viewFetchedBlogData(data)
 }
- 
+showBlogPost()
+searchPost.oninput = function() {showBlogPost(searchPost.value)}
 //Showing the fetched data from fetchblogData
 function viewFetchedBlogData(data){
     blogContainer.innerHTML =  '';

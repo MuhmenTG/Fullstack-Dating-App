@@ -22,11 +22,6 @@
         from blog b, userInfomation u
         WHERE b.userId = u.id";  
         return $this->fetchRecords($selectQuery);
-        /* test $selectStatement = $this->db->prepare($selectQuery);  
-            $selectStatement->execute();
-            $dataResult = $selectStatement->fetchAll();   
-            return $dataResult;*/                              
-
     }
 
     public function searchBetweenBlogs($name)
@@ -36,10 +31,6 @@
         from blog b, userInfomation u
         WHERE b.userId = u.id AND u.firstName LIKE :firstName";
         return $this->fetchRecords($selectQuery, ":firstName", '%'.$name.'%');
-        /*$selectStatement = $this->db->prepare($selectQuery);  
-        $selectStatement->execute([":firstName" =>  '%'.$name.'%']);
-        $dataResult = $selectStatement->fetchAll();   
-        return $dataResult;*/
     }
 
     public function specificCommentRecord($tableName, $column, $id)
@@ -50,8 +41,7 @@
         ) AS c
         INNER JOIN userInfomation AS u
         ON u.id = c.userId";
-        return $this->fetchRecords($selectQuery, ":id" ,$id);
-       
+        return $this->fetchRecords($selectQuery, ":id", $id);
     }
 
     public function specificBlogRecord($id)
@@ -59,25 +49,15 @@
         $selectQuery = "SELECT b.id, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
         u.firstName, u.lastName
         from blog b, userInfomation u
-        WHERE b.userId = u.id AND b.id = ?";          
-        return $this->fetchRecords($selectQuery, ":id" ,$id);
+        WHERE b.userId = u.id AND b.id = :id";          
+        return $this->fetchRecords($selectQuery, ":id", $id);
     }
 
     private function fetchRecords($selectQuery, $key = "", $value = ""){
-        if(empty($key) && empty($value)){
-            $selectStatement = $this->db->prepare($selectQuery);  
-            $selectStatement->execute();
-            $dataResult = $selectStatement->fetchAll();   
-            return $dataResult;
-        }
-        else{
-            $selectStatement = $this->db->prepare($selectQuery);  
-            //$selectStatement->execute([$id]);
-            $selectStatement->execute([$key => $value]);
-            $dataResult = $selectStatement->fetchAll();   
-            return $dataResult;  
-        }
-
+        $selectStatement = $this->db->prepare($selectQuery);  
+        (empty($key) && empty($value)) ? $selectStatement->execute() : $selectStatement->execute([$key => $value]);
+        $dataResult = $selectStatement->fetchAll();   
+        return $dataResult; 
     }
         
     

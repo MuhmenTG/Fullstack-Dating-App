@@ -46,7 +46,7 @@ class Comment extends Database {
     public function deleteUserComment($commentId,
     $userId){
         $deleteQuery = "DELETE FROM commentsToBlog WHERE id = ? AND userId = ?"; 
-        $deleteStatement = $this->connect()->prepare($deleteQuery);  
+        $deleteStatement = $this->db->prepare($deleteQuery);
         $executeQuery = $deleteStatement->execute([$commentId, $userId]);
         if($executeQuery){
             echo true;
@@ -57,12 +57,12 @@ class Comment extends Database {
      
     }
 
-    public function editUserComment($message, $commentId, $userId)
+    public function editUserComment($message, $commentId)
     {
         $updateQuery = "UPDATE commentsToBlog SET 
         commentMessage = :commentMessage
         WHERE id = :id"; 
-        $updateQuery = $this->connect()->prepare($updateQuery);  
+        $updateQuery = $this->db->prepare($updateQuery);
         $updateQuery->bindParam(':commentMessage', $message);
         $updateQuery->bindParam(':id', $commentId);
         $executeQuery = $updateQuery->execute();
@@ -72,5 +72,32 @@ class Comment extends Database {
         else{
             echo false;
         }
+    }
+
+    public function editUserComments($message, $commentId)
+    {
+        $updateQuery = "UPDATE commentsToBlog SET 
+        commentMessage = :commentMessage
+        WHERE id = :id"; 
+        $updateQuery->bindParam(':commentMessage', $message);
+        $updateQuery->bindParam(':id', $commentId);
+        $executeQuery = $updateQuery->execute();
+        if($executeQuery){
+            echo true;
+        }
+        else{
+            echo false;
+        }
+    }
+
+    private function executeQuery($query, $key = "", $value = ""){
+        $statement = $this->db->prepare($query);
+        for ($i=0; $i < $params.length; $i++) { 
+            $statement->bindParam($key[i], $value[i]);
+        }
+  
+        (empty($key) && empty($value)) ? $statement->execute() : $statement->execute([$key => $value]);
+        $dataResult = $statement->fetchAll();   
+        return $dataResult; 
     }
 } 
