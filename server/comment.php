@@ -30,31 +30,15 @@ class Comment extends Database {
     {
         $insertQuery = "INSERT INTO commentsToBlog (userId, postId, commentMessage) 
         VALUES(:userId, :postId, :commentMessage)";
-        $insertStatement = $this->db->prepare($insertQuery);
-        $insertStatement->bindParam(":userId", $user_id); 
-        $insertStatement->bindParam(":postId", $post_id); 
-        $insertStatement->bindParam(":commentMessage", $comment); 
-        $executeQuery = $insertStatement->execute(); 
-        if($executeQuery){
-            echo true;
-        }
-        else{
-            echo false;
-        }
+        $data = array(":userId" => $user_id, ":postId" => $post_id, ":commentMessage" => $comment);
+        return $this->executeQuery($insertQuery, $data); 
     } 
 
     public function deleteUserComment($commentId,
     $userId){
-        $deleteQuery = "DELETE FROM commentsToBlog WHERE id = ? AND userId = ?"; 
-        $deleteStatement = $this->db->prepare($deleteQuery);
-        $executeQuery = $deleteStatement->execute([$commentId, $userId]);
-        if($executeQuery){
-            echo true;
-        }
-        else{
-            echo false;
-        }
-     
+        $deleteQuery = "DELETE FROM commentsToBlog WHERE id = :id AND userId = :userId"; 
+        $data = array(":id" => $commentId, ":userId" => $userId);
+        return $this->executeQuery($deleteQuery, $data); 
     }
 
     public function editUserComment($message, $commentId)
@@ -62,42 +46,21 @@ class Comment extends Database {
         $updateQuery = "UPDATE commentsToBlog SET 
         commentMessage = :commentMessage
         WHERE id = :id"; 
-        $updateQuery = $this->db->prepare($updateQuery);
-        $updateQuery->bindParam(':commentMessage', $message);
-        $updateQuery->bindParam(':id', $commentId);
-        $executeQuery = $updateQuery->execute();
-        if($executeQuery){
-            echo true;
-        }
-        else{
-            echo false;
-        }
+        $data = array(":commentMessage" => $message, ":id" => $commentId);
+        return $this->executeQuery($updateQuery, $data); 
     }
 
-    public function editUserComments($message, $commentId)
-    {
-        $updateQuery = "UPDATE commentsToBlog SET 
-        commentMessage = :commentMessage
-        WHERE id = :id"; 
-        $updateQuery->bindParam(':commentMessage', $message);
-        $updateQuery->bindParam(':id', $commentId);
-        $executeQuery = $updateQuery->execute();
-        if($executeQuery){
-            echo true;
-        }
-        else{
-            echo false;
-        }
-    }
-
-    private function executeQuery($query, $key = "", $value = ""){
+    private function executeQuery($query, $data){
         $statement = $this->db->prepare($query);
-        for ($i=0; $i < $params.length; $i++) { 
-            $statement->bindParam($key[i], $value[i]);
+        foreach($data as $key => &$value) {    
+            $statement->bindParam($key, $value);
         }
-  
-        (empty($key) && empty($value)) ? $statement->execute() : $statement->execute([$key => $value]);
-        $dataResult = $statement->fetchAll();   
-        return $dataResult; 
+        $executeQuery = $statement->execute();
+        if($executeQuery){
+            echo true;
+        }
+        else{
+            echo false;
+        }
     }
 } 

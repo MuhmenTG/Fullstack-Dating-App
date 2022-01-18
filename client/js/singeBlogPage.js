@@ -10,8 +10,7 @@ if (!blogId || blogId < 0 || blogId === "") {
 
 export async function showSingleBlogPost(blogID) {
     const response = await serverHttpRequest('../api/getSingleBlogDetails.php', 'POST', { blogID });
-    //await displaySinglePost(response[0], response[2].length)
-    console.log(response);return
+    await displaySinglePost(response[0], response[2].length)
     userId = await getCurrentSessionId();
     await displayCommentPost(response[2], userId)
     //await displayCarouselPost(data[1]);
