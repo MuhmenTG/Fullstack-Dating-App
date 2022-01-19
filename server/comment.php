@@ -23,10 +23,7 @@ class Comment extends Database {
         $this->db=$this->connect();   
     }
 
-    public function addUserComment(
-    $comment,
-    $post_id,
-    $user_id)
+    public function addUserComment($comment, $post_id, $user_id)
     {
         $insertQuery = "INSERT INTO commentsToBlog (userId, postId, commentMessage) 
         VALUES(:userId, :postId, :commentMessage)";
@@ -34,8 +31,7 @@ class Comment extends Database {
         return $this->executeQuery($insertQuery, $data); 
     } 
 
-    public function deleteUserComment($commentId,
-    $userId){
+    public function deleteUserComment($commentId, $userId){
         $deleteQuery = "DELETE FROM commentsToBlog WHERE id = :id AND userId = :userId"; 
         $data = array(":id" => $commentId, ":userId" => $userId);
         return $this->executeQuery($deleteQuery, $data); 

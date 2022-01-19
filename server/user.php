@@ -1,43 +1,19 @@
 <?php
- ini_set('display_errors', 1);
- ini_set('display_startup_errors', 1);
- 
-//    session_start();
-//    $userID = $_SESSION['id'];
     include("inc/config.php");
- 
+    class User extends Database {
 
-
-class User extends Database {
-
-    public $db;
-    public $userID;
+    private $db;
+    private $userID;
     public function __construct()
     {
-
         parent::__construct();
         if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
             $this->userID = $_SESSION['id'];
         }
-    
         $this->db=$this->connect();
-        $this->wrongPassword="Password is invalid. Please check!";
-        $this->wrongEmail="Email is invalid. Please check!";
-        $this->loggedOut="You have succesfully logged out. Please login again, if you wish!";
-        $this->successMessage = "Your message has been sent";
-        $this->successreg = "You have been registered. You can login now";
-        $this->userExist = "User already registered with this email";
-        $this->sessionError = "It seems that session is not set. Please login again";
-
-      //$this->postPand = 2;
-
-    //   $this->$view = 1;
-        
-     //   $this->$notInterested = 0; 
-
     }
 
-    //Remanufactored code
+     
     public function login($email,
     $userPassword )
     {         
@@ -57,7 +33,7 @@ class User extends Database {
             return 3;
         } 
     }
-    //Remanufactored code
+    
     public function isRecordExits($recordSelect, $table, $colmn, $param)
     {
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
@@ -66,7 +42,7 @@ class User extends Database {
         $selectStatement->execute();
         return $selectStatement->fetch();
     }
-    //Remanufactored code
+     
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
     {
         if($this->isRecordExits('email', 'userInfomation', 'email', $emailaddress))
@@ -75,26 +51,13 @@ class User extends Database {
             echo  "<script> alert('User already Called')</script>";return;
             return;
         }
-            $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
-            VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
-            $insertStatement = $this->db->prepare($insertQuery);
-            $insertStatement->bindParam(":firstName", $firstName); 
-            $insertStatement->bindParam(":lastName", $lastName); 
-            $insertStatement->bindParam(":email", $emailaddress);
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $insertStatement->bindParam(":userPassword", $passwordHash);
-            $insertStatement->bindParam(":gender", $gender);
-            $insertStatement->bindParam(":verifyToken", $token);
-            $executeQuery = $insertStatement->execute(); 
-            if($executeQuery){
-                return 1;
-            }
-            else{
-                return 0;
-            }
-            
+        $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
+        VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
+        $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress,
+        ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
+        return $this->executeQuery($insertQuery, $data); 
     }
-    //Remanufactored code
+     
     public function completeAndEditProfileInfo($loggedInUser,
     $userPreferenceGender,
     $userLocation,
@@ -171,17 +134,8 @@ class User extends Database {
     {
         $updateQuery = "UPDATE userInfomation SET 
         isVerified = 1 WHERE verifyToken = :verifyToken";
-        $updateQuery = $this->db->prepare($updateQuery);  
-        $updateQuery->bindParam(':verifyToken', $token);
-        $isUpdate = $updateQuery->execute();
-        if($isUpdate)
-        {
-            echo true;
-        }
-        else
-        {
-            echo false;;
-        }
+        $data = array(":verifyToken" => $token);
+        $this->executeQuery($updateQuery, $data);
     }
         
     public function getProfileInfomation($userId)
@@ -193,35 +147,26 @@ class User extends Database {
         return $dataResult;
     }
     
-    public function resetPasswordSetToken($email,
-    $token)
+    public function resetPasswordSetToken($email, $token)
     {
         $insertQuery = "INSERT INTO resetPassword (userEmail, token) 
         VALUES(:userEmail, :token)";
-        $insertStatement = $this->db->prepare($insertQuery);
-        $insertStatement->bindParam(":userEmail", $email); 
-        $insertStatement->bindParam(":token", $token);
-        $executeQuery = $insertStatement->execute(); 
-        if($executeQuery){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        $data = array(":userEmail" => $email, ":token" => $token);
+        $this->executeQuery($insertQuery, $data);
     }
 
     public function updatePassword($newPassword, $token, $email){
-        $insertQuery = "SELECT * FROM resetPassword WHERE token = :token AND valid = 1";
-        $insertStatement = $this->db->prepare($insertQuery);
-        $insertStatement->bindParam(":token", $token); 
-        $executeQuery = $insertStatement->execute(); 
+        $selectQuery = "SELECT * FROM resetPassword WHERE token = :token AND valid = 1";
+        $data = array(":token" => $token);
+        $executeQuery = $this->executeQuery($selectQuery, $data); 
         if($executeQuery){
             $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
             $updateQuery = "UPDATE userInfomation SET 
             userPassword = :userPassword
             WHERE email = :email";
-            $updateQuery = $this->db->prepare($updateQuery);  
+            $data2 = array(":userPassword" => $newPassword, ":email" => $email);
+            return $this->executeQuery($updateQuery, $data2);
+          /*  $updateQuery = $this->db->prepare($updateQuery);  
             $updateQuery->bindParam(':userPassword', $newPasswordHash);
             $updateQuery->bindParam(':email', $email);
             $isUpdate = $updateQuery->execute();
@@ -232,7 +177,7 @@ class User extends Database {
             else
             {
                 echo "not updated";
-            }
+            }*/
         }
         else{
             return false;
@@ -250,15 +195,7 @@ class User extends Database {
     }
 
 
-     
-    
-    public function getLastInsertedID(){
-        $selectQuery = "SELECT userID FROM userAccounts ORDER BY userID DESC LIMIT 1";
-        $selectQuery = $this->db->prepare($selectQuery);  
-        $selectQuery->execute();
-        $result = $selectQuery->fetchColumn();
-        return $result;
-    }
+
     
     public function logout()
     {
@@ -272,24 +209,11 @@ class User extends Database {
         
     public function contactFormInformation($firstName, $lastName, $email, $phone, $messages)
     {
-        try 
-        {        
-            $insertQuery = "INSERT INTO contactTable (firstName, lastName, email, phone, messages) 
-            VALUES(:firstName, :lastName, :email, :phone, :messages)";
-            $insertStatement = $this->db->prepare($insertQuery);
-            $insertStatement->bindParam(":firstName", $firstName); 
-            $insertStatement->bindParam(":lastName", $lastName); 
-            $insertStatement->bindParam(":email", $email); 
-            $insertStatement->bindParam(":phone", $phone);
-            $insertStatement->bindParam(":messages", $messages);
-            $executeQuery = $insertStatement->execute(); 
-        }
-        catch(Exception $ex)
-        {
-            echo "<pre>";
-            print_r($ex);
-            exit();
-        }
+        $insertQuery = "INSERT INTO contactTable (firstName, lastName, email, phone, messages) 
+        VALUES(:firstName, :lastName, :email, :phone, :messages)";
+        $data = array(":firstName" => $firstName, ":lastName" => $lastName,
+        ":email" => $email, ":phone" => $phone, "messages" => $messages );
+        $this->executeQuery($insertQuery, $data);
     }      
 
 
@@ -421,6 +345,23 @@ class User extends Database {
         }
     }
     
+
+
+
+
+    private function executeQuery($query, $data){
+        $statement = $this->db->prepare($query);
+        foreach($data as $key => &$value) {    
+            $statement->bindParam($key, $value);
+        }
+        $executeQuery = $statement->execute();
+        if($executeQuery){
+            echo true;
+        }
+        else{
+            echo false;
+        }
+    }
 
  
 }
