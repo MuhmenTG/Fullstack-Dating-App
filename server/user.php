@@ -38,10 +38,7 @@
     {
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
         $data = array(":params" => $param);
-        $selectStatement = $this->connect()->prepare($selectQuery);  
-        $selectStatement->bindParam(':params', $param);
-        $selectStatement->execute();
-        return $selectStatement->fetch();
+        return $this->executeQuery($selectQuery, $data); 
     }
      
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
@@ -56,7 +53,7 @@
         VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
         $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress,
         ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
-        return $this->insertRecord($insertQuery, $data); 
+        return $this->executeQuery($insertQuery, $data); 
     }
      
     public function completeAndEditProfileInfo($loggedInUser,
@@ -111,7 +108,7 @@
                 ':userHairColor' =>  $userHairColor,
                 ':userClothingStyle' =>  $userClothingStyle,
                 ':userLivingStyle' =>  $userLivingStyle);
-            $isUpdate = $this->insertRecord($updateQuery, $data); 
+            $isUpdate = $this->executeQuery($updateQuery, $data); 
             return ($isUpdate) ? "Your profile has been updated" : "Your profile has not been updated";
          
         }
@@ -133,11 +130,10 @@
         
     public function getProfileInfomation($userId)
     {
-        $selectQuery = "SELECT * FROM userInfomation WHERE id = ?";                                
+        $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";                                
         $selectStatement = $this->db->prepare($selectQuery);  
-        $selectStatement->execute([$userId]);
-        $dataResult = $selectStatement->fetchAll();   
-        return $dataResult;
+        $data = array(":id" => $userId);
+        return $this->executeQuery($insertQuery, $data); 
     }
     
     public function resetPasswordSetToken($email, $token)
@@ -169,13 +165,8 @@
     public function getUsers()
     {
         $selectQuery = "SELECT * FROM userInfomation LIMIT 30";                                
-        $selectStatement = $this->db->prepare($selectQuery);  
-        $selectStatement->execute();
-        $result = $selectStatement->fetchAll();   
-        return $result;
+        return $this->fetchRecords($selectQuery);
     }
-
-
 
     
     public function logout()
@@ -327,22 +318,6 @@
     }
     
 
-
-
-
-    private function executeQuery($query, $data){
-        $statement = $this->db->prepare($query);
-        foreach($data as $key => &$value) {    
-            $statement->bindParam($key, $value);
-        }
-        $executeQuery = $statement->execute();
-        if($executeQuery){
-            echo true;
-        }
-        else{
-            echo false;
-        }
-    }
 
  
 }
