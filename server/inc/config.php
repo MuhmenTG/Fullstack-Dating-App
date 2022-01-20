@@ -6,7 +6,7 @@
         private  $db_password;    
         private  $db_name;        
     
-        public function __construct($db_host = "localhost", $db_user = "root", $db_password = "root", $db_name = "datingPanel")
+        protected function __construct($db_host = "localhost", $db_user = "root", $db_password = "root", $db_name = "datingPanel")
         {   
             $this->db_host = $db_host;
             $this->db_user = $db_user;
@@ -14,7 +14,7 @@
             $this->db_name = $db_name;
         }
 
-        public function connect()
+        protected function connect()
         {   
             try
             {

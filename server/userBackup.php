@@ -37,7 +37,6 @@
     public function isRecordExits($recordSelect, $table, $colmn, $param)
     {
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
-        $data = array(":params" => $param);
         $selectStatement = $this->connect()->prepare($selectQuery);  
         $selectStatement->bindParam(':params', $param);
         $selectStatement->execute();
@@ -56,7 +55,7 @@
         VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
         $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress,
         ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
-        return $this->insertRecord($insertQuery, $data); 
+        return $this->executeQuery($insertQuery, $data); 
     }
      
     public function completeAndEditProfileInfo($loggedInUser,
@@ -77,6 +76,7 @@
     $userLivingStyle){
         try 
         {
+         
             $updateQuery = "UPDATE userInfomation SET 
             userPreferenceGender = :userPreferenceGender, 
             userLocation = :userLocation, 
@@ -94,25 +94,33 @@
             userClothingStyle = :userClothingStyle, 
             userLivingStyle = :userLivingStyle 
             WHERE id = :id ";
-            $data = array(
-                ':id' => $loggedInUser,
-                ':userPreferenceGender' =>  $userPreferenceGender,
-                ':userLocation' =>  $userLocation,
-                ':userAge' => $userAge,
-                ':userHeight' =>  $userHeight,
-                ':userWeight' =>  $userWeight,
-                ':userMaximumEducation' =>  $userMaximumEducation,
-                ':userReligion' =>  $userReligion,
-                ':userMaritalStatus' =>  $userMaritalStatus,
-                ':userSmokingStaus' =>  $userSmokingStaus,
-                ':userDrinkingStatus'  =>  $userDrinkingStatus,
-                ':userParentStatus' => $userParentStatus,
-                ':userEyeColor' =>  $userEyeColor,
-                ':userHairColor' =>  $userHairColor,
-                ':userClothingStyle' =>  $userClothingStyle,
-                ':userLivingStyle' =>  $userLivingStyle);
-            $isUpdate = $this->insertRecord($updateQuery, $data); 
-            return ($isUpdate) ? "Your profile has been updated" : "Your profile has not been updated";
+            
+            $updateQuery = $this->db->prepare($updateQuery);  
+            $updateQuery->bindParam(':id', $loggedInUser);
+            $updateQuery->bindParam(':userPreferenceGender', $userPreferenceGender);
+            $updateQuery->bindParam(':userLocation', $userLocation);
+            $updateQuery->bindParam(':userAge', $userAge);
+            $updateQuery->bindParam(':userHeight', $userHeight);
+            $updateQuery->bindParam(':userWeight', $userWeight);
+            $updateQuery->bindParam(':userMaximumEducation', $userMaximumEducation);
+            $updateQuery->bindParam(':userReligion', $userReligion);
+            $updateQuery->bindParam(':userMaritalStatus', $userMaritalStatus);
+            $updateQuery->bindParam(':userSmokingStaus', $userSmokingStaus);
+            $updateQuery->bindParam(':userDrinkingStatus', $userDrinkingStatus);
+            $updateQuery->bindParam(':userParentStatus', $userParentStatus);
+            $updateQuery->bindParam(':userEyeColor', $userEyeColor);
+            $updateQuery->bindParam(':userHairColor', $userHairColor);
+            $updateQuery->bindParam(':userClothingStyle', $userClothingStyle);
+            $updateQuery->bindParam(':userLivingStyle', $userLivingStyle);
+            $isUpdate = $updateQuery->execute();
+            if($isUpdate)
+            {
+                echo "Your profile has been updated";
+            }
+            else
+            {
+                echo "Your profile has not been updated";
+            }
          
         }
         catch(Exception $ex){
