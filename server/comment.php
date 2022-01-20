@@ -19,7 +19,7 @@ class Comment extends Query {
         $insertQuery = "INSERT INTO commentsToBlog (userId, postId, commentMessage) 
         VALUES(:userId, :postId, :commentMessage)";
         $data = array(":userId" => $user_id, ":postId" => $post_id, ":commentMessage" => $comment);
-        return $this->insertRecord($insertQuery, $data); 
+        return $this->executeQuery($insertQuery, $data); 
     } 
 
     public function deleteUserComment($commentId, $userId){
