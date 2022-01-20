@@ -14,12 +14,12 @@ class Query extends Database
         return $dataResult; 
     }
     
-    protected function insertRecord($insertQuery, $data){
-        $insertStatement = $this->connect()->prepare($insertQuery);
+    protected function executeQuery($query, $data){
+        $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
-            $insertStatement->bindParam($key, $value);
+            $statement->bindParam($key, $value);
         }
-        $executeQuery = $insertStatement->execute();
+        $executeQuery = $statement->execute();
         return ($executeQuery)? true : false;
     }
     
