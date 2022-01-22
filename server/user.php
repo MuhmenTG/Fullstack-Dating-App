@@ -2,15 +2,9 @@
     include("inc/config.php");
     class User extends Database {
 
-    private $db;
-    private $userID;
     public function __construct()
     {
         parent::__construct();
-        if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
-            $this->userID = $_SESSION['id'];
-        }
-        $this->db=$this->connect();
     }
 
      
@@ -34,20 +28,13 @@
         } 
     }
     
-    public function isRecordExits($recordSelect, $table, $colmn, $param)
-    {
-        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
-        $data = array(":params" => $param);
-        return $this->executeQuery($selectQuery, $data); 
-    }
-     
+
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
     {
         if($this->isRecordExits('email', 'userInfomation', 'email', $emailaddress))
         {
             $_SESSION['emailExist'] = $this->userExist;
-            echo  "<script> alert('User already Called')</script>";return;
-            return;
+            return -1;
         }
         $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
         VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
@@ -131,7 +118,6 @@
     public function getProfileInfomation($userId)
     {
         $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";                                
-        $selectStatement = $this->db->prepare($selectQuery);  
         $data = array(":id" => $userId);
         return $this->executeQuery($insertQuery, $data); 
     }
@@ -143,6 +129,33 @@
         $data = array(":userEmail" => $email, ":token" => $token);
         $this->executeQuery($insertQuery, $data);
     }
+
+
+
+    public function getUsers()
+    {
+        $selectQuery = "SELECT * FROM userInfomation LIMIT 30";                                
+        return $this->fetchRecords($selectQuery);
+    }
+
+    
+    public function logout()
+    {
+        if(isset($_SESSION['userID']))
+        {
+            session_destroy();
+            return header('Location:./login.php');
+        }
+    }
+        
+    public function contactFormInformation($firstName, $lastName, $email, $phone, $messages)
+    {
+        $insertQuery = "INSERT INTO contactTable (firstName, lastName, email, phone, messages) 
+        VALUES(:firstName, :lastName, :email, :phone, :messages)";
+        $data = array(":firstName" => $firstName, ":lastName" => $lastName,
+        ":email" => $email, ":phone" => $phone, "messages" => $messages );
+        $this->executeQuery($insertQuery, $data);
+    }      
 
     public function updatePassword($newPassword, $token, $email){
         $selectQuery = "SELECT * FROM resetPassword WHERE token = :token AND valid = 1";
@@ -159,99 +172,43 @@
         else{
             return false;
         }
-
     }
 
-    public function getUsers()
+
+    public function isRecordExits($recordSelect, $table, $colmn, $param)
     {
-        $selectQuery = "SELECT * FROM userInfomation LIMIT 30";                                
-        return $this->fetchRecords($selectQuery);
+        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
+        $data = array(":params" => $param);
+        return $this->executeQuery($selectQuery, $data); 
     }
 
-    
-    public function logout()
-    {
-        if(isset($_SESSION['userID']))
-        {
-            session_destroy();
-            $_SESSION['loggedOut'] = $this->loggedOut;
-            return header('Location:./login.php');
-        }
-    }
-        
-    public function contactFormInformation($firstName, $lastName, $email, $phone, $messages)
-    {
-        $insertQuery = "INSERT INTO contactTable (firstName, lastName, email, phone, messages) 
-        VALUES(:firstName, :lastName, :email, :phone, :messages)";
-        $data = array(":firstName" => $firstName, ":lastName" => $lastName,
-        ":email" => $email, ":phone" => $phone, "messages" => $messages );
-        $this->executeQuery($insertQuery, $data);
-    }      
-
-
-
-    /* Updating Password at profilepage */
+     
     public function varifyPassword(
     $userID,
     $oldPassword,
     $newPassword)
     {
- 
-
-        $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";
-        $selectStatement = $this->db->prepare($selectQuery);  
-        $selectStatement->bindParam(':id', $userID);
-        $selectStatement->execute();
-        $result = $selectStatement->fetch();
-        if(password_verify($oldPassword, $result['userPassword']))
-        {
-           return 1;
-        }
-        else 
-        {
-            return 2;
-        }
- 
+        $result = $this->isRecordExits("userPassword", "userInfomation", "id", $userID);
+        return (password_verify($oldPassword, $result)) ? true : false;
     }
+
     public function savePassword(
     $userID,
     $oldPassword,
     $newPassword)
     {
-        if($this->varifyPassword( 
-        $userID,
-        $oldPassword,
-        $newPassword))
-        {
-            echo 1;
-        }
-        else{
-            echo 2;
-        }
-
-       
+        return ($this->varifyPassword($userID, $oldPassword, $newPassword)) ? $this->resetPasswordSettings($newPassword, $userID) : 3;
      
     }
-    /* Updating Password at profilepage */
-    /*
-     try {
+    public function resetPasswordSettings($newPassword, $userId){
+        try {
             $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-          
             $updateQuery = "UPDATE userInfomation SET 
             userPassword = :userPassword
             WHERE id = :id";
-            $updateQuery = $this->db->prepare($updateQuery);  
-            $updateQuery->bindParam(':userPassword', $userPassword);
-            $updateQuery->bindParam(':id', $userID);
-            $isUpdate = $updateQuery->execute();
-            if($isUpdate)
-            {
-                echo "updated";
-            }
-            else
-            {
-                echo "not updated";
-            }
+            $data = array(":userPassword" => $newPasswordHash, ":id" => $userId);
+            $isUpdate = $this->executeQuery($updateQuery, $data); 
+            return ($isUpdate) ? 1 : 2;
         }   
         catch(Exception $ex)
         {
@@ -259,7 +216,8 @@
             print_r($ex);
             exit();
         }
-    */
+    }
+
     public function advancedSeachRequest(
     $gender,
     $preference,
@@ -290,7 +248,7 @@
        
         
         try {
-            $selectStatement = $this->db->prepare($selectQuery);  
+            $selectStatement = $this->connect()->prepare($selectQuery);  
             ($gender) ? $selectStatement->bindParam(':gender', $gender) : "";
             ($preference) ? $selectStatement->bindParam(':userPreferenceGender', $preference) : "";
             ($location) ?  $selectStatement->bindParam(':userLocation', $location) : "";
@@ -323,6 +281,4 @@
 }
 
 
-     
  
-?>
