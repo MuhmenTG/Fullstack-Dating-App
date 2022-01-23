@@ -53,8 +53,10 @@ async function searchAdvanched() {
 
 async function getLimitedUserByDefault() {
     const response = await serverHttpRequest("../api/getLatestUsers.php", "POST");
+    console.log(response);
     await showLimitedUserByDefault(response);
 }
+
 
 function showLimitedUserByDefault(data) {
 
@@ -102,9 +104,11 @@ function showLimitedUserByDefault(data) {
 }
 
 window.viewDetails = async (userId) => {
-    let isLoggedIn = await checkSession()
+    const isLoggedIn = await checkSession()
+    console.log(isLoggedIn); 
     (!isLoggedIn) ? $("#loginModal").modal() : location.href = `viewUserProfile.php?id=${userId}`; 
 }
+
 document.querySelector("#searchForm").addEventListener("submit", searchAdvanched);
 
 (peopleContainer != null) ? getLimitedUserByDefault() : null;

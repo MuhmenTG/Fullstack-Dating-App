@@ -1,6 +1,7 @@
 <?php
-    include("inc/config.php");
-    class User extends Database {
+  session_start();
+  include("inc/query.php");
+    class User extends Query {
 
     public function __construct()
     {
