@@ -87,7 +87,7 @@ async function registerUser(){
 
 function validateRegistrationForm(){
     event.preventDefault();
-    (registerUser()) ?  messageBox(`#msgDiv`, "block", "green", "A verificationlink has been sent to your email. Please check and follow the instructions") : messageBox(`#msgDiv`, "block", "red", "Registration of user faild. Something went wrong.");
+    (registerUser()) ?  swal("A verificationlink has been sent to your email. Please check and follow the instructions") : messageBox(`#msgDiv`, "block", "red", "Registration of user faild. Something went wrong.");
 }
 
 document.querySelector("#registerdiv").addEventListener('submit', validateRegistrationForm)

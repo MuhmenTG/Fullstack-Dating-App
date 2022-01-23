@@ -34,14 +34,15 @@
     {
         if($this->isRecordExits('email', 'userInfomation', 'email', $emailaddress))
         {
-            $_SESSION['emailExist'] = $this->userExist;
             return -1;
         }
-        $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
-        VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
-        $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress,
-        ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
-        return $this->executeQuery($insertQuery, $data); 
+        else{
+            $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
+            VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
+            $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress, ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
+            return $this->executeQuery($insertQuery, $data); 
+        }
+     
     }
      
     public function completeAndEditProfileInfo($loggedInUser,
@@ -176,12 +177,12 @@
     }
 
 
-    public function isRecordExits($recordSelect, $table, $colmn, $param)
+   /* public function isRecordExits($recordSelect, $table, $colmn, $param)
     {
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
         $data = array(":params" => $param);
         return $this->executeQuery($selectQuery, $data); 
-    }
+    }*/
 
      
     public function varifyPassword(

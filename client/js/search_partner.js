@@ -105,7 +105,6 @@ function showLimitedUserByDefault(data) {
 
 window.viewDetails = async (userId) => {
     const isLoggedIn = await checkSession()
-    console.log(isLoggedIn); 
     (!isLoggedIn) ? $("#loginModal").modal() : location.href = `viewUserProfile.php?id=${userId}`; 
 }
 
