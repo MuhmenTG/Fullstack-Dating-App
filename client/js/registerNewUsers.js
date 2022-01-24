@@ -82,12 +82,24 @@ function checkMatchPassword(){
 async function registerUser(){
     const data = await getRegistrationDetails();
     const response = await serverHttpRequest('../api/registerNewUser.php', 'POST', data);
-    return (response) ?  true : false
+    switch(response) {
+        case  -1:
+            swal("This user already exist.");
+            break;
+        case 0:
+            swal("Registration of user faild. Something went wrong.");
+            break;
+        case 1:
+            swal("A verificationlink has been sent to your email. Please check and follow the instructions") ;
+            break;
+        default:
+           break;
+    }
 }
 
 function validateRegistrationForm(){
     event.preventDefault();
-    (registerUser()) ?  swal("A verificationlink has been sent to your email. Please check and follow the instructions") : messageBox(`#msgDiv`, "block", "red", "Registration of user faild. Something went wrong.");
+    registerUser();
 }
 
 document.querySelector("#registerdiv").addEventListener('submit', validateRegistrationForm)

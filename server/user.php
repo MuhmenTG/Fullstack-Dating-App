@@ -32,14 +32,17 @@
 
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
     {
+         
         if($this->isRecordExits('email', 'userInfomation', 'email', $emailaddress))
         {
             return -1;
         }
         else{
+            
             $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
             VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
-            $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress, ":userPassword" => $password, ":gender" => $gender, ":verifyToken" => $token);
+            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+            $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress, ":userPassword" => $hashPassword, ":gender" => $gender, ":verifyToken" => $token);
             return $this->executeQuery($insertQuery, $data); 
         }
      

@@ -25,8 +25,9 @@ class Query extends Database
     
     protected function isRecordExits($recordSelect, $table, $colmn, $param)
     {
-        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
-        $data = array(":params" => $param);
-        return $this->executeQuery($selectQuery, $data); 
+        
+        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params"; 
+        $row = $this->fetchRecords($selectQuery, ":params", $param); 
+        return (count($row) > 0) ? 1 : 0;
     }
 }

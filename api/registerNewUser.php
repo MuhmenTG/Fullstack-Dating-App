@@ -16,14 +16,12 @@
     $password, 
     $gender,
     $token);
-    echo $userRegister;exit;
-    $message = "Hi from PHP mailer". "<a href='http://localhost:8888/RistaByMuhmen/client/verify.php?token=${token}'>Click here to verify</a>";
-    Email::sendMail($emailaddress, 'Thanks for your registration', $message);
-    if($userRegister){
-        return true;
-    }
-    else{
-        return false;
-    }
+    /*if($userRegister == 1){
+        $message = "Hi from PHP mailer". "<a href='http://localhost:8888/RistaByMuhmen/client/verify.php?token=${token}'>Click here to verify</a>";
+        Email::sendMail($emailaddress, 'Thanks for your registration', $message);
+    }*/
+    return json_encode($userRegister);
+    
+
         
 ?> 
