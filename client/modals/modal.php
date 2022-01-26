@@ -87,7 +87,7 @@
                     <input class="form-control" type="text" name="emailaddress" id="emailaddress"
                         placeholder="Please enter your emailaddresse">
                 </div>
-                <span id='emailaddressmessage'></span>
+              <span id='emailaddressmessage'></span>
                 <div class="form-group">
                     <label for="pass">Password</label>
                     <input type="password" class="form-control" name="password" id="password"

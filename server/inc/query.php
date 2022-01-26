@@ -25,9 +25,8 @@ class Query extends Database
     
     protected function isRecordExits($recordSelect, $table, $colmn, $param)
     {
-        
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params"; 
         $row = $this->fetchRecords($selectQuery, ":params", $param); 
-        return (count($row) > 0) ? 1 : 0;
+        return (sizeof($row) > 0) ? 1 : 0;
     }
 }

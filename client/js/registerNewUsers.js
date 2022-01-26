@@ -82,6 +82,7 @@ function checkMatchPassword(){
 async function registerUser(){
     const data = await getRegistrationDetails();
     const response = await serverHttpRequest('../api/registerNewUser.php', 'POST', data);
+    console.log(response);
     switch(response) {
         case  -1:
             swal("This user already exist.");
