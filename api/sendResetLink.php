@@ -5,12 +5,25 @@
     $email = $data['email'];
     $token = bin2hex(openssl_random_pseudo_bytes(8));
     $userObject = new User();
-    $userObject->resetPasswordSetToken(
+    $isSendLink = $userObject->resetPasswordSetToken(
         $email,
         $token    
     );
-    $resetLink = 
-    "Hello member! As per your request, we hereby send you a link to reset
-    <a href='http://localhost:8888/RistaByMuhmen/client/forgot_password.php?token={$token}&email={$email}'>Click To Reset password</a>";
-    Email::sendMail($email, 'Instructions to reset your Password', $resetLink);
+    switch ($isSendLink) {
+        case 1:
+            echo 1;
+            $resetLink = 
+            "Hello member! As per your request, we hereby send you a link to reset
+            <a href='http://localhost:8888/RistaByMuhmen/client/forgot_password.php?token={$token}&email={$email}'>Click To Reset password</a>";
+            Email::sendMail($email, 'Instructions to reset your Password', $resetLink);    
+            break;
+        case 0:
+            echo 0;
+            break;
+        case -1:
+            echo -1;
+            break;
+        default:
+            break;
+}
    

@@ -117,7 +117,7 @@
         $updateQuery = "UPDATE userInfomation SET 
         isVerified = 1 WHERE verifyToken = :verifyToken";
         $data = array(":verifyToken" => $token);
-        $this->executeQuery($updateQuery, $data);
+        return $this->executeQuery($updateQuery, $data);
     }
         
     public function getProfileInfomation($userId)
@@ -129,11 +129,18 @@
     
     public function resetPasswordSetToken($email, $token)
     {
-        $insertQuery = "INSERT INTO resetPassword (userEmail, token) 
-        VALUES(:userEmail, :token)";
-        $data = array(":userEmail" => $email, ":token" => $token);
-        $this->executeQuery($insertQuery, $data);
+        if($this->isRecordExits('email', 'userInfomation', 'email', $email)) 
+        {
+            $insertQuery = "INSERT INTO resetPassword (userEmail, token) 
+            VALUES(:userEmail, :token)";
+            $data = array(":userEmail" => $email, ":token" => $token);
+            return $this->executeQuery($insertQuery, $data) ? 1 : 0;
+        }
+        else{
+           return -1;         
+        } 
     }
+ 
 
 
 

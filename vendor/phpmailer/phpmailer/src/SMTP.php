@@ -269,7 +269,8 @@ class SMTP
 
             return;
         }
-        switch ($this->Debugoutput) {
+        //Commented code debugger for checking user email in db to show proper msg to use in frontend
+       /* switch ($this->Debugoutput) {
             case 'error_log':
                 //Don't output, just log
                 error_log($str);
@@ -298,7 +299,7 @@ class SMTP
                     )
                 ),
                 "\n";
-        }
+        }*/
     }
 
     /**

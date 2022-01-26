@@ -16,11 +16,9 @@
     $password, 
     $gender,
     $token);
-    /*if($userRegister == 1){
-        $message = "Hi from PHP mailer". "<a href='http://localhost:8888/RistaByMuhmen/client/verify.php?token=${token}'>Click here to verify</a>";
-        Email::sendMail($emailaddress, 'Thanks for your registration', $message);
-    }*/
     echo json_encode($userRegister);
-    
-
+    if($userRegister == 1){
+        $message = "Hi from PHP mailer". "<a href='http://localhost:8888/RistaByMuhmen/client/verify.php?token=${token}&email=${emailaddress}'>Click here to verify</a>";
+        Email::sendMail($emailaddress, 'Thanks for your registration', $message);
+    }
         
