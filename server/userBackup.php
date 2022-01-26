@@ -211,10 +211,7 @@
     public function varifyPassword(
     $userID,
     $oldPassword,
-    $newPassword)
-    {
- 
-
+    $newPassword)    {
         $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";
         $selectStatement = $this->db->prepare($selectQuery);  
         $selectStatement->bindParam(':id', $userID);
