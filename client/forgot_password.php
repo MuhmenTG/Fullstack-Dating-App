@@ -14,10 +14,10 @@
             <h1>Reset Password</h1>
         </div>
         <div class="log_body">
-            <form>
+            <form id="savePasswordBtn" >
                 <table width="400">
                     <tr>
-                        <td><input type="password" oninput="checkInputPassword()" placeholder="Enter your new Password"
+                        <td><input type="password" placeholder="Enter your new Password"
                                 name="password" id="password" class="log_user"></td>
                     </tr>
 
@@ -27,15 +27,15 @@
                     <tr>
                         <td>
 
-                            <input type="password" oninput="checkMatchPassword()"
+                            <input type="password"  
                                 placeholder="Re-enter your new Password" name="confirmedpassword" id="confirmedpassword"
-                                >
+                                class="log_user">
                         </td>
                     </tr>
                     <div id='confirmedpasswordRequired'></div>
 
                     <tr>
-                        <td><input type="submit" class="btn btn-lg" id="savePasswordBtn" type="submit"
+                        <td><input type="submit" class="btn btn-lg" type="submit"
                                 value="Save new Password"></td>
                     </tr>
 
@@ -49,6 +49,5 @@
 
 </html>
 
-<script src="js/registration.js"></script>
-<script src="js/resetPassword.js"></script>
-<script src="js/validateForm.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/resetPassword.js" type="module"></script>

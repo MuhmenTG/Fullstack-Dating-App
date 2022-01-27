@@ -61,6 +61,7 @@
 										<li><a href="blog.php">Blog</a></li>
 										<li><a href="about_us.php">About us</a></li>
 										<li><a href="contact_us.php">Contact Us</a></li>
+										<li><a href="shoppy.php">Under Some Wired Construction</a></li>
 									</ul>
 								</nav>
 							</div>

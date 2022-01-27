@@ -6,7 +6,7 @@ const email = urlParams.get('email');
 
 async function resetPassword(){
     event.preventDefault();
-    const newPassword = await document.getElementById('newPassword').value;
+    const newPassword = await document.getElementById('password').value;
     const data = {
         newPassword,
         token,
@@ -14,11 +14,11 @@ async function resetPassword(){
     }
     const response = await serverHttpRequest('../api/resetPassword.php', 'POST', data);
     (response) ?
-        messageBox(`#resetPasswordMsg`, "block", "green", "Password updated succesfully")
+       swal('Updated')
     :
-        messageBox(`#resetPasswordMsg`, "block", "red", "Password was not succesfully updated");
+        swal('not updated')
  
 }
 
-document.getElementById('savePasswordBtn').addEventListener('click', resetPassword );
+document.getElementById('savePasswordBtn').addEventListener('submit', resetPassword );
   

@@ -170,15 +170,13 @@
     }      
 
     public function updatePassword($newPassword, $token, $email){
-        $selectQuery = "SELECT * FROM resetPassword WHERE token = :token AND valid = 1";
-        $data = array(":token" => $token);
-        $executeQuery = $this->executeQuery($selectQuery, $data); 
+        $executeQuery = $this->isRecordExits("token", "resetPassword", "token", $token); 
         if($executeQuery){
             $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
             $updateQuery = "UPDATE userInfomation SET 
             userPassword = :userPassword
             WHERE email = :email";
-            $data2 = array(":userPassword" => $newPassword, ":email" => $email);
+            $data2 = array(":userPassword" => $newPasswordHash, ":email" => $email);
             return $this->executeQuery($updateQuery, $data2);
         }
         else{
