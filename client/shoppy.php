@@ -3,13 +3,10 @@
 	include('inc/header.php');
 
 ?>
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myBasket">Basket</button>
 
 <section>
-    <h1>Shoppy</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, nemo obcaecati harum esse, impedit reiciendis
-        commodi voluptatem sapiente, fuga ipsam assumenda praesentium quam fugiat doloremque. Velit labore
-        necessitatibus dignissimos expedita qui, odit repellendus, accusantium in perspiciatis dolorum iste, rerum
-        praesentium.</p>
+   <H1>check out our shop</H1>
 </section>
 <link rel="stylesheet" href="css/shop.css">
 
@@ -61,6 +58,62 @@
 
 
 
+<div id="myBasket" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">My basket</h4>
+      </div>
+      
+      <div class="modal-body">
+        <table class="show-cart table">
+          
+        </table>
+        <div>Total price: $<span class="total-cart"></span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -70,6 +123,10 @@
 
 <!-- Bootstrap -->
 <script src="js/shop.js" type="module"></script>
+<script src="js/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Plugins -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
 <!-- Custom -->
 

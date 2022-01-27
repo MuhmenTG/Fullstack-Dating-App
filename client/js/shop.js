@@ -3,7 +3,6 @@ const productsRow = document.getElementById("productsRow");
 
 function displayProducts(){
     shoppyProducts.forEach((shoppyProduct) => {
-        console.log(shoppyProduct);
         productsRow.innerHTML += `
         <div class="col-md-3">
             <div class="wsk-cp-product">
@@ -20,14 +19,28 @@ function displayProducts(){
                     </div>
                     <div class="card-footer">
                         <div class="wcf-left"><span class="price">${shoppyProduct.prodctPrice}</span></div>
-                        <button id="${shoppyProduct.productId}" class="c-btn btn1">Add to cart!</button>
+                        <button class="btn btn-info btn-md" onclick="addProductToCart(${shoppyProduct.productId})">Add to cart!</button>
                     </div>
                 </div>
             </div>
         </div>
-        
         `;
     });
 }
 
 displayProducts();
+//Using window because otherwise it will not call the onclick in the display funtion.
+let myBasket = [];
+
+window.addProductToCart = async (productId) => {
+  const oneProduct = shoppyProducts.find((product) => product.productId === productId);
+    myBasket.push({
+        ...oneProduct,
+    })
+    saveIntoCart();
+}
+
+function saveIntoCart(){
+    localStorage.setItem('basket', JSON.stringify(myBasket))
+}
+
