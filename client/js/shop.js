@@ -44,3 +44,17 @@ function saveIntoCart(){
     localStorage.setItem('basket', JSON.stringify(myBasket))
 }
 
+
+function getBasketData(){
+   let data = localStorage.getItem('basket');
+   console.log(data);
+}
+
+
+
+
+
+$(window).on('shown.bs.modal', function() { 
+    $('#modal').modal('show');
+    console.log('shown');
+});

@@ -3,7 +3,7 @@
 	include('inc/header.php');
 
 ?>
-<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myBasket">Basket</button>
+<button type="button" id="modal" class="btn btn-info btn-md">Basket</button>
 
 <section>
    <H1>check out our shop</H1>
@@ -70,6 +70,9 @@
       <div class="modal-body">
         <table class="show-cart table">
           
+
+        <script src="js/shop.js" type="module"></script>
+
         </table>
         <div>Total price: $<span class="total-cart"></span></div>
       </div>
