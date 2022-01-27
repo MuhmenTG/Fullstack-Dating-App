@@ -5,6 +5,7 @@ async function showBlogPost(name){
     let data = "";
     if(name != undefined){      
         data = await serverHttpRequest('../api/blogSearch.php', 'POST', name)
+        console.log(data);
     }
     else{
         data = await serverHttpRequest('../api/allBlogs.php', 'POST')

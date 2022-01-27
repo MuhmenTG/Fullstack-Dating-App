@@ -1,4 +1,4 @@
-const shoppyProducts = [
+export const shoppyProducts = [
     {
         productId: 0,
         productName: 'Rose bucket',
