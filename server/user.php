@@ -187,13 +187,6 @@
     }
 
 
-   /* public function isRecordExits($recordSelect, $table, $colmn, $param)
-    {
-        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params AND isVerified = 1"; 
-        $data = array(":params" => $param);
-        return $this->executeQuery($selectQuery, $data); 
-    }*/
-
      
     public function varifyPassword(
     $userID,

@@ -29,7 +29,7 @@
 
                             <input type="password" oninput="checkMatchPassword()"
                                 placeholder="Re-enter your new Password" name="confirmedpassword" id="confirmedpassword"
-                                class="log_user">
+                                >
                         </td>
                     </tr>
                     <div id='confirmedpasswordRequired'></div>

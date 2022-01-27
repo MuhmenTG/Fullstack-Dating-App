@@ -20,7 +20,7 @@
 								<li><a href="home.php">Home</a></li>
 								<li><a href="search_partner.php">Explore</a></li>
 								 
-								<li><a href="#">Online Users</a></li>
+								<li><a href="#">Online </a></li>
 								<li><a href="online_search_country.php">Countries</a></li>
 								<li><a href="search_by_map.php">All World</a></li>
 								<li><a href="#">Blog</a></li>

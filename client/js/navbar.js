@@ -59,12 +59,11 @@ async function authorizedNavbar() {
         <ul class="list-unstyled">
             <li><a href="index.php">Home</a></li>
             <li><a href="search_partner.php">Explore</a></li>
-            <li><a href="online_search_result.php">Online Users</a></li>
-            <li><a href="online_search_country.php">Countries</a></li>
-          
+            <li><a href="online_search_result.php">Online Users</a></li>    
             <li><a href="blog.php">Blog</a></li>
             <li><a href="about_us.php">About us</a></li>
             <li><a href="contact_us.php">Contact Us</a></li>
+            <li><a href="shop.php">Under Construction</a></li>
         </ul>
     </nav>
         
