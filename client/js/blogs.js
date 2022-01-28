@@ -3,8 +3,8 @@ const blogContainer = document.getElementById('insideContainerBlog');
 const searchPost = document.getElementById("searchPost");
 async function showBlogPost(name){
     let data = "";
-    if(name != undefined){      
-        data = await serverHttpRequest('../api/blogSearch.php', 'POST', name)
+    if(name != undefined){       
+        data = await serverHttpRequest('../api/blogSearch.php', 'POST', {name})
         console.log(data);
     }
     else{

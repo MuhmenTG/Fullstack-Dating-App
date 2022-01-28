@@ -6,10 +6,10 @@ function displayProducts(){
         productsRow.innerHTML += `
         <div class="col-md-3">
             <div class="wsk-cp-product">
-                <div class="wsk-cp-img">
+                
                     <img src="${shoppyProduct.pruductImage}"
                         alt="Product" class="img-responsive" />
-                </div>
+                
                 <div class="wsk-cp-text">
                     <div class="title-product">
                         <h3>${shoppyProduct.productName}</h3>
@@ -50,11 +50,3 @@ function getBasketData(){
    console.log(data);
 }
 
-
-
-
-
-$(window).on('shown.bs.modal', function() { 
-    $('#modal').modal('show');
-    console.log('shown');
-});

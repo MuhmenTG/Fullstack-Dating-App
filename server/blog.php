@@ -12,8 +12,9 @@
     public function getBlogs($searchParams = NULL)
     {
         $paramType = gettype($searchParams);
-        $selectQuery = "SELECT b.id, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
-        u.firstName, u.lastName
+    
+        $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
+        u.firstName, u.lastName, u.id
         from blog b, userInfomation u
         WHERE b.userId = u.id";
         switch ($paramType) {
@@ -22,7 +23,7 @@
                 break;
             case 'string':
                 $selectQuery .= " AND u.firstName LIKE :firstName";
-                return $this->fetchRecords($selectQuery, ":firstName", '%'.$name.'%');
+                return $this->fetchRecords($selectQuery, ":firstName", '%'.$searchParams.'%');
                 break;
             case 'integer':
                 $selectQuery .= " AND b.id = :id";          

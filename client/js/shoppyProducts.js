@@ -4,7 +4,7 @@ export const shoppyProducts = [
         productName: 'Rose bucket',
         prodctPrice: 250,
         productDescription: 'A red rose for your love.',
-        pruductImage: '../media/images/pictureProducuts.png',
+        pruductImage: "../media/images/800px_COLOURBOX6926518.jpeg",
     },
     {
         productId: 1,

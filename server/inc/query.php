@@ -9,7 +9,15 @@ class Query extends Database
 
     protected function fetchRecords($selectQuery, $key = "", $value = ""){
         $selectStatement = $this->connect()->prepare($selectQuery);  
-        (empty($key) && empty($value)) ? $selectStatement->execute() : $selectStatement->execute([$key => $value]);
+
+        if(!empty($key) && !empty($value)){
+            $selectStatement->bindParam($key,$value);
+            $selectStatement->execute();
+        } 
+        else{
+            $selectStatement->execute();
+
+        }
         $dataResult = $selectStatement->fetchAll();   
         return $dataResult; 
     }
