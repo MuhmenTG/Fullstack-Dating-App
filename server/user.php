@@ -124,7 +124,7 @@
     {
         $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";                                
         $data = array(":id" => $userId);
-        return $this->executeQuery($insertQuery, $data); 
+        return $this->executeQuery($selectQuery, $data); 
     }
     
     public function resetPasswordSetToken($email, $token)

@@ -3,7 +3,6 @@
 	include('inc/header.php');
 
 ?>
-<button type="button" id="modal" class="btn btn-info btn-md">Basket</button>
 
 <section>
    <H1>check out our shop</H1>
