@@ -14,10 +14,8 @@
 
         public function getSpeficProduct($productId){
             $selectQuery = "SELECT * FROM products WHERE productId = :productId";
-            $data = array(":productId" => $productId);
-            return $this->fetchRecords($selectQuery, $data);
+            return $this->fetchRecords($selectQuery, ":productId", $productId);       
         }
 }
 
 
- 
