@@ -33,13 +33,12 @@ function displayProducts(response){
 }
 getProducts();
 
+let myBasket = [];
 
 window.addProductToCart = async (productId) => {
-    const response = await serverHttpRequest('../api/getSpecificProduct.php', 'POST', {productId})
-    console.log(response);
-   /* const oneProduct = shoppyProducts.find((product) => product.productId === productId);
-      myBasket.push({
-          ...oneProduct,
-      })
-      saveIntoCart();*/
-}  
+    const product = await serverHttpRequest('../api/getSpecificProduct.php', 'POST', {productId})
+    myBasket.push({
+          ...product,
+    })
+    localStorage.setItem('basket', JSON.stringify(myBasket))
+}
