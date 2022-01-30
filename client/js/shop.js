@@ -22,7 +22,7 @@ function displayProducts(response){
                     </div>
                     <div class="card-footer">
                         <div class="wcf-left"><span class="price">${v[2]}</span></div>
-                        <button class="btn btn-info btn-md" onclick="addProductToCart(${v[0]})">Add to cart!</button>
+                        <button class="btn" onclick="addProductToCart(${v[0]})">Add to cart!</button>
                     </div>
                 </div>
             </div>
@@ -42,3 +42,4 @@ window.addProductToCart = async (productId) => {
     })
     localStorage.setItem('basket', JSON.stringify(myBasket))
 }
+

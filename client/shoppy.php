@@ -1,18 +1,21 @@
 <?php
 	include('inc/top.php');
 	include('inc/header.php');
-
 ?>
+<a href="cart.php" class="btn">
+    <span class=""></span> Your Cart
+</a>
 
 <section>
-   <H1>check out our shop</H1>
+    <H1>check out our shop</H1>
 </section>
 <link rel="stylesheet" href="css/shop.css">
+
 
 <div class="shell">
     <div class="container">
         <div class="row" id="productsRow">
-           
+
         </div>
     </div>
 </div>
@@ -58,29 +61,29 @@
 
 
 <div id="myBasket" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+    <div class="modal-dialog">
 
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">My basket</h4>
-      </div>
-      
-      <div class="modal-body">
-        <table class="show-cart table">
-          
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">My basket</h4>
+            </div>
 
-        <script src="js/shop.js" type="module"></script>
+            <div class="modal-body">
+                <table class="show-cart table">
 
-        </table>
-        <div>Total price: $<span class="total-cart"></span></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+
+                    <script src="js/shop.js" type="module"></script>
+
+                </table>
+                <div>Total price: $<span class="total-cart"></span></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
-
-  </div>
 </div>
 
 
