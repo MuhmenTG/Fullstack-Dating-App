@@ -12,17 +12,14 @@ function getLoginsDetails()
 
 async function userLogin(){
     event.preventDefault();
-    const data = await getLoginsDetails()
+    const data = getLoginsDetails() // This function isn't async
     const response = await serverHttpRequest('../api/login.php', 'POST', data);
-    switch(response){
-        case 1: 
-        messageBox(`#loginmsg`, "block", "red", "Email not exist");
-        break;
-        case 2: 
-        messageBox(`#loginmsg`, "block", "red", "Wrong Password");
-        break;
-        default:
-        location.href = 'myProfileEdit.php';       
+
+    // Don't tell the user whether or not the e-mail account exists, if the password is wrong. This is an OWASP security "best practice".
+    if(!response.loggedIn) {
+        messageBox(`#loginmsg`, "block", "red", "Invalid credentials, please try again");
+    } else {
+        location.href = 'myProfileEdit.php';
     }
 }
 
