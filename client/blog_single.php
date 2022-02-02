@@ -164,11 +164,6 @@ include('inc/header.php');
                                 <input type="text" class="form-control" id="email" placeholder="Email id">
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="from-group">
-                                <input type="text" class="form-control" id="number" placeholder="Contact Number">
-                            </div>
-                        </div>
                         <div class="col-lg-12">
                             <div class="from-group">
                                 <textarea class="form-control" id="comment"

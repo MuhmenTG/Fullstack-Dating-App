@@ -16,7 +16,7 @@ async function addComment(){
         swal("You have to login or register to comment");
     }
 }
-async function middleware(){ 
+/*async function middleware(){ 
     const data = await getUserCommentInfo()
     const userid = await serverHttpRequest('../api/checkUserRecords.php', 'POST', {email: data.email})
     if(userid == "" || userid == undefined){
@@ -27,6 +27,28 @@ async function middleware(){
         const newData = {
             email: data.email,
             number: data.number,
+            comment: data.comment,
+            post_id: data.post_id,
+            userid: userid.id,
+        }
+        const response = await serverHttpRequest('../api/addUserComment.php', 'POST', newData);
+        swal("Comment added");
+        if(response){
+            showSingleBlogPost(data.post_id);
+            clearInputField();
+        }
+    }
+}*/
+ async function middleware(){ 
+    const data = await getUserCommentInfo()
+    const response = await serverHttpRequest('../api/addUserComment.php', 'POST', {email: data.email})
+    if(response == "" || response == undefined){
+        messageBox(`#errormsg`, "block", "red", "User could not be found.");
+    }
+    else
+    {
+        const newData = {
+            email: data.email,
             comment: data.comment,
             post_id: data.post_id,
             userid: userid.id,
