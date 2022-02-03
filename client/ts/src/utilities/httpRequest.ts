@@ -1,5 +1,7 @@
+import { key, methodType, urlPath } from "../inc/types";
+
 export class HttpRequest {
-    async serverHttpRequest(url:string, methodType:string, data?:Object, key?:string|number) : Promise<Response | undefined> {
+    static async server<T>(url:urlPath, methodType:methodType, data?:Object, key?:key) : Promise<T | undefined> {
         try 
             {
             let response:any;
@@ -21,8 +23,7 @@ export class HttpRequest {
                     method: methodType
                 });
             }
-           
-            return await response.json();         
+            return await response.json();       
         } 
         catch (error) 
         {

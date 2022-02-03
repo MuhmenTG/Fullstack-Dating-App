@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 export class HttpRequest {
-    serverHttpRequest(url, methodType, data, key) {
+    static server(url, methodType, data, key) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let response;

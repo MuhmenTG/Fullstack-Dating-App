@@ -1,14 +1,14 @@
-import { serverHttpRequest } from "./utilities/serverHttpRequest.js";
+import { HttpRequest } from "./utilities/serverHttpRequest.js";
 const blogContainer = document.getElementById('insideContainerBlog');
 const searchPost = document.getElementById("searchPost");
 async function showBlogPost(name){
     let data = "";
     if(name != undefined){       
-        data = await serverHttpRequest('../api/blogSearch.php', 'POST', {name})
+        data = await HttpRequest.server('../api/blogSearch.php', 'POST', {name})
         console.log(data);
     }
     else{
-        data = await serverHttpRequest('../api/allBlogs.php', 'POST')
+        data = await HttpRequest.server('../api/allBlogs.php', 'POST')
     }
     await viewFetchedBlogData(data)
 }
