@@ -14,19 +14,14 @@
     {         
         $result = $this->isRecordExits('*', 'userInfomation', 'email', $email);
         if(!$result){
-            return 1;
+            return false;
         }
         if(!password_verify($userPassword, $result['userPassword']))
         {
-            return 2;
+            return false;
         }
-        $userID = $result['id'];
-        $_SESSION['email'] = $email;
-        $_SESSION['id'] = $userID;
-        if(isset($_SESSION['email']) && isset($_SESSION['id']))
-        {
-            return 3;
-        } 
+
+        return $result;
     }
     
 
@@ -150,16 +145,6 @@
         return $this->fetchRecords($selectQuery);
     }
 
-    
-    public function logout()
-    {
-        if(isset($_SESSION['userID']))
-        {
-            session_destroy();
-            return header('Location:./login.php');
-        }
-    }
-        
     public function contactFormInformation($firstName, $lastName, $email, $phone, $messages)
     {
         $insertQuery = "INSERT INTO contactTable (firstName, lastName, email, phone, messages) 
@@ -178,8 +163,7 @@
             WHERE email = :email";
             $data2 = array(":userPassword" => $newPasswordHash, ":email" => $email);
             return $this->executeQuery($updateQuery, $data2);
-        }
-        else{
+        } else {
             return false;
         }
     }
