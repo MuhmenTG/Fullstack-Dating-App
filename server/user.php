@@ -9,31 +9,26 @@
     }
 
      
-    public function login($email,
-    $userPassword )
-    {         
-        $result = $this->isRecordExits('*', 'userInfomation', 'email', $email);
-        if(!$result){
-            return 1;
+    public function login($email, $userPassword )
+    {     
+        $result = $this->isRecordExits('userPassword, id', 'userInfomation', 'email', $email, true);  
+        if(!$result){ 
+            return false; 
         }
-        if(!password_verify($userPassword, $result['userPassword']))
-        {
-            return 2;
+        if(password_verify($userPassword, $result['userPassword']))
+        {     
+            return $result['id'];
         }
-        $userID = $result['id'];
-        $_SESSION['email'] = $email;
-        $_SESSION['id'] = $userID;
-        if(isset($_SESSION['email']) && isset($_SESSION['id']))
-        {
-            return 3;
-        } 
+        else{
+            return false;
+        }
     }
     
 
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
     {
-        
-        if($this->isRecordExits('email', 'userInfomation', 'email', $emailaddress))
+        $result = $this->isRecordExits('email', 'userInfomation', 'email', $emailaddress);
+        if(!$result)
         {
             return -1;
         }

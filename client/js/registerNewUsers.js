@@ -1,4 +1,4 @@
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest } from './utilities/serverHttpRequest.js';
 import { messageBox } from './utilities/message.js'
 
 const firstName = document.getElementById("firstname") 
@@ -81,7 +81,7 @@ function checkMatchPassword(){
 
 async function registerUser(){
     const data = await getRegistrationDetails();
-    const response = await serverHttpRequest('../api/registerNewUser.php', 'POST', data);
+    const response = await HttpRequest.server('../api/registerNewUser.php', 'POST', data);
     switch(response) {
         case  -1:
             swal("This user already exist.");

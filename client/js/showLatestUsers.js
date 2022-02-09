@@ -1,7 +1,7 @@
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest } from './utilities/serverHttpRequest.js';
 
 async function getLatestUser(){
-    let data = await serverHttpRequest('../api/getLatestUsers.php', 'POST')
+    let data = await HttpRequest.server('../api/getLatestUsers.php', 'POST')
     await showLatestUsers(data);
 }
 

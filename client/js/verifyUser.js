@@ -1,4 +1,4 @@
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest } from './utilities/serverHttpRequest.js';
 const urlParams =  new URLSearchParams(window.location.search);
 const token = urlParams.get("token");
 const email = urlParams.get("email");
@@ -7,7 +7,7 @@ const email = urlParams.get("email");
 
 async function verifyUser(){
     let data = {token, email}
-    let response = await serverHttpRequest("../api/verifyUser.php", 'POST', data)
+    let response = await HttpRequest.server("../api/verifyUser.php", 'POST', data)
     if(response)
     {
        document.getElementById('msg').innerHTML = "Verification successfull"

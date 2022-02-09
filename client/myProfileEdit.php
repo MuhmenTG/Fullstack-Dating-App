@@ -1,4 +1,4 @@
-<script src="js/utilities/redirect.js" type="module"></script> 
+<!--<script src="js/utilities/redirect.js" type="module"></script> -->
 
 <?php 
 include('inc/top.php');

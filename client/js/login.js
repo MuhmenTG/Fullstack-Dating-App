@@ -1,5 +1,5 @@
 import { messageBox } from './utilities/message.js';
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest } from './utilities/serverHttpRequest.js';
 function getLoginsDetails()
 {
     const email = document.getElementById("email").value;
@@ -13,16 +13,13 @@ function getLoginsDetails()
 async function userLogin(){
     event.preventDefault();
     const data = await getLoginsDetails()
-    const response = await serverHttpRequest('../api/login.php', 'POST', data);
-    switch(response){
-        case 1: 
-        messageBox(`#loginmsg`, "block", "red", "Email not exist");
-        break;
-        case 2: 
-        messageBox(`#loginmsg`, "block", "red", "Wrong Password");
-        break;
-        default:
-        location.href = 'myProfileEdit.php';       
+    const response = await HttpRequest.server("../api/login.php", 'POST', data);
+    if(response){
+        location.href = 'myProfileEdit.php';    
+        messageBox(`#loginmsg`, "block", "red", "");
+    }
+    else{
+        messageBox(`#loginmsg`, "block", "red", "Login credentials incorrect.");
     }
 }
 

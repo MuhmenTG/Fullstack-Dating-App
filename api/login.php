@@ -9,17 +9,14 @@
     $email,
     $userPassword 
     );
-    switch ($userLogin) {
-        case 1:
-            echo 1;
-            break;
-        case 2:
-            echo 2;
-            break;
-        case 3:
-            echo 3;
-            break;
-        default:
-            break;
+    if($userLogin){
+        $_SESSION['email'] = $email;
+        $_SESSION['id'] = $userLogin;
+        if(isset($_SESSION['email']) && isset($_SESSION['id']))
+        {
+            echo true;
+        }
     }
-    
+    else {
+       echo false;
+    }

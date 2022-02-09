@@ -1,4 +1,4 @@
-import { serverHttpRequest } from "./utilities/serverHttpRequest.js";
+import { HttpRequest } from "./utilities/serverHttpRequest.js";
 
 const urlParams =  new URLSearchParams(window.location.search);
 const token =  urlParams.get('token');
@@ -12,7 +12,7 @@ async function resetPassword(){
         token,
         email
     }
-    const response = await serverHttpRequest('../api/resetPassword.php', 'POST', data);
+    const response = await HttpRequest.server('../api/resetPassword.php', 'POST', data);
     (response) ?
        swal('Updated')
     :

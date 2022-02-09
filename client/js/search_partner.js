@@ -1,4 +1,4 @@
-import { serverHttpRequest } from "./utilities/serverHttpRequest.js";
+import { HttpRequest} from "./utilities/serverHttpRequest.js";
 import { checkSession } from "./utilities/checkSession.js";
 const peopleContainer = document.querySelector("#peopleContainer");
 
@@ -43,7 +43,7 @@ async function searchAdvanched() {
     const isLoggedIn = await checkSession();
     if(isLoggedIn){
         const data = await getSearchParamValues();
-        const response = await serverHttpRequest("../api/advancedSearch.php", "POST", data);
+        const response = await HttpRequest.server("../api/advancedSearch.php", "POST", data);
         await showLimitedUserByDefault(response);
     }
     else{
@@ -52,7 +52,7 @@ async function searchAdvanched() {
 }
 
 async function getLimitedUserByDefault() {
-    const response = await serverHttpRequest("../api/getLatestUsers.php", "POST");
+    const response = await HttpRequest.server("../api/getLatestUsers.php", "POST");
     console.log(response);
     await showLimitedUserByDefault(response);
 }

@@ -1,11 +1,11 @@
-import { serverHttpRequest } from "./serverHttpRequest.js";
+import { HttpRequest } from "./serverHttpRequest.js";
 
 export async function checkSession(){
-    let isLoggedIn = await serverHttpRequest("../api/checkSession.php", "POST");
+    let isLoggedIn = await HttpRequest.server("../api/checkSession.php", "POST");
     return isLoggedIn;
 }
 
 export async function getCurrentSessionId(){ 
-    const userId = await serverHttpRequest("../api/returnCurrentSessionId.php", "POST")
+    const userId = await HttpRequest.server("../api/returnCurrentSessionId.php", "POST");
     return (userId) ? userId : false;
 }

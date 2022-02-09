@@ -19,9 +19,22 @@ class Query extends Database
         }
         $dataResult = $selectStatement->fetchAll();   
         return $dataResult; 
-        
     }
-    
+
+    protected function fetchRecord($selectQuery, $key = "", $value = ""){
+        $selectStatement = $this->connect()->prepare($selectQuery);  
+        if(!empty($key) && !empty($value)){
+            $selectStatement->bindParam($key, $value);
+            $selectStatement->execute();
+        } 
+        else
+        {
+            $selectStatement->execute();
+        }
+        $dataResult = $selectStatement->fetch();   
+        return $dataResult; 
+    }
+     
     protected function executeQuery($query, $data){
         $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
@@ -31,10 +44,12 @@ class Query extends Database
         return ($executeQuery)? true : false;
     }
     
-    protected function isRecordExits($recordSelect, $table, $colmn, $param)
+    protected function isRecordExits($recordSelect, $table, $colmn, $param, $isVerfied = false)
     {
-        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params"; 
-        $row = $this->fetchRecords($selectQuery, ":params", $param); 
-        return (sizeof($row) > 0) ? 1 : 0;
+        $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params";
+        ($isVerfied) ? $selectQuery .= " AND isVerified = 1" : null;
+        $row = $this->fetchRecord($selectQuery, ":params", $param); 
+        return  $row;
+         
     }
 }
