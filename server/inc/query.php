@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include("databaseConfig.php");
 class Query extends Database  
 {
     protected function __construct()

@@ -19,7 +19,7 @@ async function userLogin(){
         messageBox(`#loginmsg`, "block", "red", "");
     }
     else{
-        messageBox(`#loginmsg`, "block", "red", "Login credentials incorrect.");
+        messageBox(`#loginmsg`, "block", "red", "Login credentials incorrect, try again");
     }
 }
 
