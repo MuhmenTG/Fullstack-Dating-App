@@ -1,6 +1,7 @@
 <!--<script src="js/utilities/redirect.js" type="module"></script> -->
 
 <?php 
+include('inc/redirect.php');
 include('inc/top.php');
 include('inc/afterLoggedInHeader.php');
 ?>

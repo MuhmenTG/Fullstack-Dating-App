@@ -28,7 +28,7 @@
     public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
     {
         $result = $this->isRecordExits('email', 'userInfomation', 'email', $emailaddress);
-        if(!$result)
+        if($result)
         {
             return -1;
         }

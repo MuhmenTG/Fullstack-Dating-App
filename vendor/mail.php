@@ -25,11 +25,12 @@ class Email
             $mail->isSMTP(); //Send using SMTP
             $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
-         
+            $mail->Username = 'muhmenpk@gmail.com'; //SMTP username
+            $mail->Password = 'ekchothh162QR22R'; //SMTP password
             $mail->SMTPSecure = 'tls'; //Enable implicit TLS encryption
             $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             //Recipients
-            $mail->setFrom('', "Ristha By Muhmen");
+            $mail->setFrom('muhmenpk@gmail.com', "Ristha By Muhmen");
             $mail->AddReplyTo($to, "Ristha By Muhmen");
             $mail->addAddress($to, 'Ristha By Muhmen'); // Add a recipient
             

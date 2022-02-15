@@ -13,7 +13,22 @@
 
     <div id="wrapper">
         <header class="new-block header">
+                <div class="topnav new-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                         
+                            <div class="right-nav">
+                                
+                                <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span>
 
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        
             <div class="main-nav new-block">
                 <div class="overlay"></div>
                 <div class="container-fluid pad0">

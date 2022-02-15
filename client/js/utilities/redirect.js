@@ -1,10 +1,5 @@
-import { checkSession } from "./checkSession.js";
-
-export async function redirect(){
-    let check = await checkSession();
-    console.log(check);
-    if(!check){
-        location.replace('index.php?isLoggedOut=true');
-    }
+const urlParams =  new URLSearchParams(window.location.search);
+const isloggedOut =  urlParams.get('isLoggedOut');
+if(isloggedOut){
+    swal("You have signed out.")
 }
-redirect();

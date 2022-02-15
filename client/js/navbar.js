@@ -4,7 +4,9 @@ async function authorizedNavbar() {
     const isLoggedIn = await checkSession();
     const loggedInNavbar = document.getElementById('loggedInNav');
     if(isLoggedIn){
-        loggedInNavbar.innerHTML = ` 
+        loggedInNavbar.innerHTML = `
+       
+
                     <nav class="nav">
                             <ul class="list-unstyled">
                             <li>
@@ -48,7 +50,7 @@ async function authorizedNavbar() {
                                 <li><a href="blog.php">Blog</a></li>
                                 <li><a href="about_us.php">About us</a></li>
                                 <li><a href="contact_us.php">Contact Us</a></li>
-                                <li><button> your button that looks like a link</button></li>
+                            
                             </ul>
                         </nav>
     `;
