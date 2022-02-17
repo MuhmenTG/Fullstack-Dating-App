@@ -136,6 +136,7 @@ include('inc/header.php');
 	<!-- Custom -->
 	<script src="js/custom.js"></script>
 	<script src="js/blogs.js" type="module"></script>
+	<script src="js/navbar.js" type="module"></script>
 
 </body>
 </html>

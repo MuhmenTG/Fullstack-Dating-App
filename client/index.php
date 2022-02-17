@@ -583,13 +583,14 @@
 <!-- Include jQuery -->
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script src="js/utilities/redirect.js"></script>
 <script src="js/validation.js" type="module"></script>
 <script src="js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Plugins -->
 <script src="js/plugins.js"></script>
+<script src="js/navbar.js" type="module"></script>
 <script src="js/homeSearch.js" type="module"></script> 
 <script src="js/showLatestUsers.js" type="module"></script>
 <!-- Googleapis -->

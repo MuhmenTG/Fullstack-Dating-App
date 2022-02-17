@@ -113,7 +113,7 @@ include('inc/header.php');
 <!-- Plugins -->
 <script src="js/plugins.js"></script>
 <!-- Googleapis -->
- 
+<script src="js/navbar.js" type="module"></script>
 <script src="js/custom.js"></script>
 <script src="js/registration.js" type="module"></script>
 <script src="js/contactUs.js" type="module"></script>

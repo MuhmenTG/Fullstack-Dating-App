@@ -484,6 +484,6 @@ include('inc/header.php');
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
 	<!-- Custom -->
 	<script src="js/custom.js"></script>
-
+	<script src="js/navbar.js" type="module"></script>
 </body>
 </html>
