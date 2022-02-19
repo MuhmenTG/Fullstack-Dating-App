@@ -16,6 +16,7 @@
 	<!-- responsive css -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<!-- color css -->
+	<link rel="stylesheet" href="css/newUserProfilePage.css">
 	<link rel="stylesheet" href="css/colors.css">
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="sweetalert2.min.css">

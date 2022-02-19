@@ -4,25 +4,328 @@ include('inc/top.php');
 include('inc/header.php');
 ?>
 
-<main>
-    <section class="top">
+<main class="main">
 
+    <section class="top">
+        <nav class="profile-nav">
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#settings">Settings</a></li>
+            </ul>
+        </nav>
     </section>
     <section class="main-section">
+        
+        
         <div class="profileInfo">
+            <div class="basicInfo">
+                <h2>Base Info</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
 
+            <div class="basicInfo">
+                <h2>Base Info</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="basicInfo">
+                <h2>Base Info</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="basicInfo">
+                <h2>Base Info</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
+
+        
         </div>
         <div class="sidebar">
-
+        <div class="basicInfo">
+                <h2>Candidates you meight like</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="basicInfo">
+                <h2>Base Info</h2>
+                <div class="basic_info_group">
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        Muhmen Parvaze
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                    Im:
+                    </div>
+                    <div>
+                        Men
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Loking for a:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div>
+                        Marital Status:
+                    </div>
+                    <div>
+                        <select name="" id="">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic_info_group">
+                    <div> 
+                        Age:
+                    </div>
+                    <div>
+                       <input type="text">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
    
 </main>
 
+ 
 
-
-
+ 
 
 <!-- Plugins -->
 <?php include('inc/footer.php')?>

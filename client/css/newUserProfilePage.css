@@ -1,0 +1,113 @@
+.main{
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.top{
+    background-color: blueviolet;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-nav{
+    background-color: red;
+}
+
+.profile-nav ul {
+    list-style: none;
+}
+
+.profile-nav ul li{
+    margin: 0 5px;
+    background-color: blue;
+    
+}
+
+.profile-nav ul li a{
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  padding: 16px;
+
+}
+
+
+.profile-nav ul li a:hover{
+ background-color: green;
+  }
+
+  
+.main-section{
+    background-color: yellow;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-wrap: wrap;
+}
+
+
+.profileInfo{
+    width: 60%;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-wrap: wrap;
+    
+}
+.basicInfo{
+    width: 100%;
+    padding: 10px;
+    margin: 16px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.basic_info_group{
+    width: 100%;   
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.basic_info_group div{
+    width: 50%;   
+    display: flex;
+
+    align-items: center; 
+    flex-wrap: wrap;
+    color: aliceblue;
+    padding: 16px;
+
+}
+
+.basic_info_group div:nth-child(1){
+    justify-content: flex-end;
+}
+
+
+.basic_info_group div:nth-child(2){
+    justify-content: flex-start;
+}
+
+.sidebar{
+    width: 40%;
+    background-color: azure;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    flex-wrap: wrap;
+}
