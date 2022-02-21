@@ -1,8 +1,9 @@
 body {
-    background: #391965;
+    background: #eff3f6;
+    color: black;
   }
   .main {
-    background: #391965;
+ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +14,7 @@ body {
   }
   
   .top {
-    background-color: #210053;
+    background-color: #323232;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -86,13 +87,18 @@ body {
   .basicInfo {
     width: 100%;
     margin: auto;
-    background-color: #210053;
+    background:white;
     border-radius: 5px;
     padding: 16px;
     margin: 16px 0;
+    color: black;
+  }
+  .basicInfo div:first-of-type{
+    
+    color: black;
   }
   .basicInfo_heading {
-    color: #ffffff;
+    color: black;
   }
   hr {
     border: 1px solid #391965;
