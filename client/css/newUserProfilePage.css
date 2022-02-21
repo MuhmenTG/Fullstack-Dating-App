@@ -91,6 +91,7 @@ body {
     border-radius: 5px;
     padding: 16px;
     margin: 16px 0;
+    border-radius: 6px;
     color: black;
   }
   .basicInfo div:first-of-type{

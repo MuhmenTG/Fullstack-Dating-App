@@ -19,7 +19,7 @@ include('inc/header.php');
                 <h2 class="basicInfo_heading">Base Info</h2>
                 <hr />
                 <div class="basic_info_group">
-                    <div class="basicInfo_heading">Firstname</div>
+                    <div>Firstname</div>
                     <div>Muhmen</div>
                 </div>
                 <div class="basic_info_group">
