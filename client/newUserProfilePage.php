@@ -13,6 +13,11 @@ include('inc/header.php');
             </ul>
         </nav>
     </section>
+    <section class="progress-section">
+        <div class="progress">
+          <div class="bar shadow overlap"></div>
+        </div>
+    </section>
     <section class="main-section">
         <div class="profileInfo">
             <div class="basicInfo">
@@ -144,13 +149,7 @@ include('inc/header.php');
                             <option value="1.41">1.41</option>
                         </select>
                     </div>
-                </div>
-                 
-
-              
-               
-               
-                 
+                </div>               
             </div>
 
 
@@ -363,20 +362,7 @@ include('inc/header.php');
                             <option value="1.41">1.41</option>
                         </select>
                     </div>
-                </div>
-                 
-
-
-
-              
-               
-
-
-
-              
-               
-               
-                 
+                </div> 
             </div>
         </div>
         <div class="sidebar">
@@ -402,3 +388,4 @@ include('inc/header.php');
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/navbar.js" type="module"></script>
+<script src="js/progressbar.js" type="module"></script>

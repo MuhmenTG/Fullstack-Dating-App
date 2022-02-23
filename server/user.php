@@ -273,6 +273,10 @@
         }
     }
     
+    public function getUserInfo($userId){
+        $selectQuery = "SELECT * FROM userInfomation INNER JOIN candidatePreferences WHERE userInfomation.id = candidatePreferences.userId AND userInfomation.id = :id";                                
+        return $this->fetchRecord($selectQuery, ":id", $userId); 
+    }
 
 
  
