@@ -1,6 +1,47 @@
 import { getCurrentSessionId } from "./utilities/checkSession.js";
 import { HttpRequest } from "./utilities/serverHttpRequest.js";
 
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const gender = document.getElementById("gender");
+const userLocation = document.getElementById("userLocation");
+const userAge = document.getElementById("userAge");
+const userHeight = document.getElementById("userHeight");
+const userWeight = document.getElementById("userWeight");
+const userMaximumEducation = document.getElementById("userMaximumEducation");  
+const userReligion = document.getElementById("userReligion");
+const userMaritalStatus = document.getElementById("userMaritalStatus");
+const userSmokingStaus = document.getElementById("userSmokingStaus");
+const userDrinkingStatus = document.getElementById("userDrinkingStatus");
+const userParentStatus = document.getElementById("userParentStatus");
+const userEyeColor = document.getElementById("userEyeColor");
+const userHairColor = document.getElementById("userHairColor");
+const userClothingStyle = document.getElementById("userClothingStyle");
+const userLivingStyle = document.getElementById("userLivingStyle");
+const sexOfPotentialCandidate = document.getElementById("sexOfPotentialCandidate");
+const minAgeOfPotentialCandidate = document.getElementById("minAgeOfPotentialCandidate"); 
+const maxAgeOfPotentialCandidate = document.getElementById("maxAgeOfPotentialCandidate"); 
+const minHeightOfPotentialCandidate = document.getElementById("minHeightOfPotentialCandidate");
+const maxHeightOfPotentialCandidate = document.getElementById("maxHeightOfPotentialCandidate");
+const minWeightOfPotentialCandidate = document.getElementById("minWeightOfPotentialCandidate");
+const maxWeightOfPotentialCandidate = document.getElementById("maxWeightOfPotentialCandidate");
+const cityOfPotentialCandidate = document.getElementById("cityOfPotentialCandidate");
+const civilPotentialCandidate = document.getElementById("civilPotentialCandidate");
+const wishedStatusPotentialCandidate = document.getElementById("wishedStatusPotentialCandidate");
+const religionOfPotentialCandidate = document.getElementById("religionOfPotentialCandidate");
+
+const smokingStatusOfPotentialCandidate = document.getElementById("smokingStatusOfPotentialCandidate");
+const eyeColorOfPotentialCandidate = document.getElementById("eyeColorOfPotentialCandidate");
+const bodyOfPotentialCandidate = document.getElementById("bodyOfPotentialCandidate");
+const clothingOfPotentialCandidate = document.getElementById("clothingOfPotentialCandidate");
+const BodyArtOfPotentialCandidate = document.getElementById("BodyArtOfPotentialCandidate");
+const educationOfPotentialCandidate = document.getElementById("educationOfPotentialCandidate");
+const jobOfPotentialCandidate = document.getElementById("jobOfPotentialCandidate");
+const livingStyleOfPotentialCandidate = document.getElementById("livingStyleOfPotentialCandidate");
+const vehicleOfPotentialCandidate = document.getElementById("vehicleOfPotentialCandidate");
+const numOfChildrenOfPotentialCandidate = document.getElementById("numOfChildrenOfPotentialCandidate");
+const monthlyIncomeOfPotentialCandidate = document.getElementById("monthlyIncomeOfPotentialCandidate"); 
+
 function progressbar(percent){
     const bars = document.querySelectorAll('.bar');
     const progress = document.querySelectorAll('.progress');
@@ -65,14 +106,60 @@ async function getUserInfo(){
        if(response["livingStyleOfPotentialCandidate"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }
        if(response["vehicleOfPotentialCandidate"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }
        if(response["numOfChildrenOfPotentialCandidate"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }
-       if(response["monthlyIncomeOfPotentialCandidate"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }
-       
+       if(response["monthlyIncomeOfPotentialCandidate"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }  
     }
-    console.log(info);
-    console.log(totalParams);
     percentage = Math.floor((info / totalParams) * 100);
-    console.log(percentage);
     progressbar(percentage)
 }
 
 getUserInfo();
+
+function updateUserInfo(e){
+    event.preventDefault();
+    console.log(e.value);
+}
+
+
+firstName.oninput = function() {updateUserInfo(firstName)};
+lastName.oninput = function() {updateUserInfo(lastName)};
+gender.onchange = function() {updateUserInfo(gender)};
+userAge.onchange = function() {updateUserInfo( userAge)};
+userHeight.onchange = function() {updateUserInfo( userHeight )};
+userWeight.onchange = function() {updateUserInfo( userWeight )};
+userMaximumEducation.onchange = function() {updateUserInfo( userMaximumEducation )};  
+userReligion.onchange = function() {updateUserInfo( userReligion )};
+userMaritalStatus.onchange = function() {updateUserInfo( userMaritalStatus )};
+userSmokingStaus.onchange = function() {updateUserInfo( userSmokingStaus )};
+userDrinkingStatus.onchange = function() {updateUserInfo( userDrinkingStatus )};
+userParentStatus.onchange = function() {updateUserInfo( userParentStatus )};
+userEyeColor.onchange = function() {updateUserInfo( userEyeColor )};
+userHairColor.onchange = function() {updateUserInfo( userHairColor )};
+userClothingStyle.onchange = function() {updateUserInfo( userClothingStyle )};
+sexOfPotentialCandidate.onchange = function() {updateUserInfo( sexOfPotentialCandidate )};
+minAgeOfPotentialCandidate.onchange = function() {updateUserInfo( minAgeOfPotentialCandidate )}; 
+maxAgeOfPotentialCandidate.onchange = function() {updateUserInfo( maxAgeOfPotentialCandidate )}; 
+minHeightOfPotentialCandidate.onchange = function() {updateUserInfo( minHeightOfPotentialCandidate )};
+maxHeightOfPotentialCandidate.onchange = function() {updateUserInfo( maxHeightOfPotentialCandidate )}
+minWeightOfPotentialCandidate.onchange = function() {updateUserInfo( minWeightOfPotentialCandidate )};
+maxWeightOfPotentialCandidate.onchange = function() {updateUserInfo( maxWeightOfPotentialCandidate )};
+cityOfPotentialCandidate.onchange = function() {updateUserInfo( cityOfPotentialCandidate )};
+wishedStatusPotentialCandidate.onchange = function() {updateUserInfo( wishedStatusPotentialCandidate )};
+religionOfPotentialCandidate.onchange = function() {updateUserInfo( religionOfPotentialCandidate )};
+
+smokingStatusOfPotentialCandidate.onchange = function() {updateUserInfo( smokingStatusOfPotentialCandidate )};
+eyeColorOfPotentialCandidate.onchange = function() {updateUserInfo( eyeColorOfPotentialCandidate )};
+/*
+
+civilPotentialCandidate.onchange = function() {updateUserInfo( civilPotentialCandidate )};
+
+userLivingStyle.oninput = function() {updateUserInfo( userLivingStyle )};
+
+bodyOfPotentialCandidate.oninput = function() {updateUserInfo( bodyOfPotentialCandidate )};
+clothingOfPotentialCandidate.oninput = function() {updateUserInfo( clothingOfPotentialCandidate )};
+BodyArtOfPotentialCandidate.oninput = function() {updateUserInfo( BodyArtOfPotentialCandidate )};
+educationOfPotentialCandidate.oninput = function() {updateUserInfo( educationOfPotentialCandidate )};
+jobOfPotentialCandidate.oninput = function() {updateUserInfo( jobOfPotentialCandidate )};
+livingStyleOfPotentialCandidate.oninput = function() {updateUserInfo( livingStyleOfPotentialCandidate )};
+vehicleOfPotentialCandidate.oninput = function() {updateUserInfo( vehicleOfPotentialCandidate )};
+numOfChildrenOfPotentialCandidate.oninput = function() {updateUserInfo( numOfChildrenOfPotentialCandidate )};
+monthlyIncomeOfPotentialCandidate.oninput = function() {updateUserInfo( monthlyIncomeOfPotentialCandidate )}; */
