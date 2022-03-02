@@ -51,5 +51,18 @@ class Query extends Database
         $row = $this->fetchRecord($selectQuery, ":params", $param); 
         return  $row;
          
+        
     }
+
+    protected function isColumnExits($table, $colmns)
+    {
+        $showQuery = "SHOW COLUMNS FROM $table LIKE '$colmns'";
+        $colmn = $this->fetchRecords($showQuery); 
+        return $colmn;
+    }
+
+
+
+
+    
 }

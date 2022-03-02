@@ -309,6 +309,7 @@ include('inc/header.php');
                     <div>Hair Color:</div>
                     <div>
                         <select class="select" name="hairColorOfPotentialCandidate" id="hairColorOfPotentialCandidate">
+                        <option value="" selected>hair color</option>
                         <option value="Amber">Amber</option>
                         <option value="Blue">Blue</option>
                         <option value="Brown">Brown</option>
@@ -322,8 +323,12 @@ include('inc/header.php');
                     <div>Body Style</div>
                     <div>
                         <select class="select" name="bodyOfPotentialCandidate" id="bodyOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value="" disabled selected> Select  physique </option>
+                        <option value="Thin"> Thin </option>
+                        <option value="Normal"> Normal </option>
+                        <option value="Well-trained"> Well-trained </option>
+                        <option value="Overweight"> Overweight </option>
+                        <option value="Other"> Other </option>
                         </select>
                     </div>
                 </div>
@@ -331,8 +336,11 @@ include('inc/header.php');
                     <div>Appearance:</div>
                     <div>
                         <select class="select" name="apperanceOfPotentialCandidate" id="apperanceOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value="" disabled selected> Select Appearance </option>
+                        <option value="Very attractive"> Very attractive </option>
+                        <option value="Attractive"> Attractive </option>
+                        <option value="Medium"> Medium </option>
+                        <option value= "Not relevant or important"> Not relevant or important </option>
                         </select>
                     </div>
                 </div>
@@ -340,26 +348,22 @@ include('inc/header.php');
                     <div>Clothing:</div>
                     <div>
                         <select class="select" name="clothingOfPotentialCandidate" id="clothingOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value="" disabled selected> Select clothing style </option>
+                        <option value="Classic"> Classic </option>
+                        <option value="Old School"> Old School </option>
+                        <option value="Branded"> Branded </option>
+                        <option value="Goth"> Goth </option>
+                        <option value="Other"> Other </option>
                         </select>
                     </div>
                 </div>
                 <div class="basic_info_group">
                     <div>Body Art</div>
                     <div>
-                        <select class="select" name="clothingOfPotentialCandidate" id="clothingOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="basic_info_group">
-                    <div>Body Style</div>
-                    <div>
-                        <select class="select" name="bodyOfPotentialCandidate" id="bodyOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <select class="select" name="BodyArtOfPotentialCandidat" id="BodyArtOfPotentialCandidat">
+                        <option value="" disabled selected> Select Body Decoration </option>
+                        <option value="Piercing"> Piercings </option>
+                        <option value="Tattoo"> Tattoo </option>
                         </select>
                     </div>
                 </div>
@@ -367,8 +371,15 @@ include('inc/header.php');
                     <div>Job:</div>
                     <div>
                         <select class="select" name="jobOfPotentialCandidate" id="jobOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value= "" disabled selected> Select Employment </option>
+                                        <option value="Information Technology"> Information Technology </option>
+                                        <option value="Engineering and Engineering"> Engineering and Engineering </option>
+                                        <option value="Management and Staff"> Management and Staff </option>
+                                        <option value="Trade and service"> Trade and service </option>
+                                        <option value="Social and health"> Social and health </option>
+                                        <option value="Office and Finance"> Office and Finance </option>
+                                        <option value="Sales and Communications"> Sales and Communications </option>
+                                        <option value="Other"> Other </option>
                         </select>
                     </div>
                 </div>
@@ -376,8 +387,12 @@ include('inc/header.php');
                     <div>Living Style:</div>
                     <div>
                         <select class="select" name="livingStyleOfPotentialCandidate" id="livingStyleOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value="" disabled selected> Select your Housing situation </option>
+                        <option value="College"> College </option>
+                        <option value="Own house"> Own house </option>
+                        <option value="Condominium"> Condominium </option>
+                        <option value="Condominium"> Condominium </option>
+                        <option value="Other"> Other </option>
                         </select>
                     </div>
                 </div>
@@ -385,8 +400,12 @@ include('inc/header.php');
                     <div>Vechile</div>
                     <div>
                         <select class="select" name="vehicleOfPotentialCandidate" id="vehicleOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                        <option value="" disabled selected> Select your transportation </option>
+                        <option value="Have a car"> Have a car </option>
+                        <option value="Do not have a house"> Do not have a car </option>
+                        <option value="Cycle"> Cycle </option>
+                        <option value="Motorcycle"> Motorcycle </option>
+                        <option value="Other"> Other </option>
                         </select>
                     </div>
                 </div>
@@ -394,8 +413,11 @@ include('inc/header.php');
                     <div>Number of children</div>
                     <div>
                         <select class="select" name="numOfChildrenOfPotentialCandidate" id="numOfChildrenOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                            <option value="" disabled selected> number of children </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     </div>
                 </div>
@@ -403,8 +425,19 @@ include('inc/header.php');
                     <div>Income</div>
                     <div>
                         <select class="select" name="monthlyIncomeOfPotentialCandidate" id="monthlyIncomeOfPotentialCandidate">
-                            <option value="1.40">1.40</option>
-                            <option value="1.41">1.41</option>
+                   
+                        <option value="Mindre end 3000 kr,-">more then 3000</option>
+                                        <option value="5.000-10.000 kr,-">5.000-10.000 kr,-</option>
+                                        <option value="10.000-15.000 kr,-">10.000-15.000 kr,-</option>
+                                        <option value="15.000-25.000 kr,-">15.000-25.000 kr,-</option>
+                                        <option value="25.000-30.000 kr,-">25.000-30.000 kr,-</option>
+                                        <option value="30.000-35.000 kr,-">30.00i0-35.000 kr,-</option>
+                                        <option value="30.000-35.000 kr,-">30.000-35.000 kr,-</option>
+                                        <option value="35.000-40.000 kr,-">35.000-40.000 kr,-</option>
+                                        <option value="40.000-45.000 kr,-">40.000-45.000 kr,-</option>
+                                        <option value="45.000-50.000 kr,-">45.000-50.000 kr,-</option>
+                                        <option value="+50.000 kr,-">+50.000 kr,-</option>
+                                        <option value="Ønskes ikke at informere">Ønskes ikke at informere</option>
                         </select>
                     </div>
                 </div> 

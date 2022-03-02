@@ -42,70 +42,26 @@
         }
      
     }
-     
-    public function completeAndEditProfileInfo($loggedInUser,
-    $userPreferenceGender,
-    $userLocation,
-    $userAge,
-    $userHeight,
-    $userWeight,
-    $userMaximumEducation,
-    $userReligion,
-    $userMaritalStatus,
-    $userSmokingStaus,
-    $userDrinkingStatus,
-    $userParentStatus,
-    $userEyeColor,
-    $userHairColor,
-    $userClothingStyle,
-    $userLivingStyle){
-        try 
-        {
-            $updateQuery = "UPDATE userInfomation SET 
-            userPreferenceGender = :userPreferenceGender, 
-            userLocation = :userLocation, 
-            userAge = :userAge, 
-            userHeight = :userHeight, 
-            userWeight = :userWeight, 
-            userMaximumEducation = :userMaximumEducation, 
-            userReligion = :userReligion, 
-            userMaritalStatus = :userMaritalStatus, 
-            userSmokingStaus = :userSmokingStaus, 
-            userDrinkingStatus = :userDrinkingStatus, 
-            userParentStatus = :userParentStatus, 
-            userEyeColor = :userEyeColor, 
-            userHairColor = :userHairColor, 
-            userClothingStyle = :userClothingStyle, 
-            userLivingStyle = :userLivingStyle 
-            WHERE id = :id ";
-            $data = array(
-                ':id' => $loggedInUser,
-                ':userPreferenceGender' =>  $userPreferenceGender,
-                ':userLocation' =>  $userLocation,
-                ':userAge' => $userAge,
-                ':userHeight' =>  $userHeight,
-                ':userWeight' =>  $userWeight,
-                ':userMaximumEducation' =>  $userMaximumEducation,
-                ':userReligion' =>  $userReligion,
-                ':userMaritalStatus' =>  $userMaritalStatus,
-                ':userSmokingStaus' =>  $userSmokingStaus,
-                ':userDrinkingStatus'  =>  $userDrinkingStatus,
-                ':userParentStatus' => $userParentStatus,
-                ':userEyeColor' =>  $userEyeColor,
-                ':userHairColor' =>  $userHairColor,
-                ':userClothingStyle' =>  $userClothingStyle,
-                ':userLivingStyle' =>  $userLivingStyle);
-            $isUpdate = $this->executeQuery($updateQuery, $data); 
-            return ($isUpdate) ? "Your profile has been updated" : "Your profile has not been updated";
-         
-        }
-        catch(Exception $ex){
-            echo "<pre>";
-            print_r($ex);
-            exit();
-        }
+    
 
-    }
+
+ 
+
+    public function completeAndEditProfileInfo($key, $value, $userId){
+            try 
+            { 
+                $updateQuery = ($this->isColumnExits("userInfomation", $key)) ? "UPDATE userInfomation SET " :  "UPDATE candidatePreferences SET ";
+                $updateQuery .=  "$key = :params WHERE id = :id";
+                $personalData = array(':params' => $value, ':id' => $userId);
+                $isUpdate = $this->executeQuery($updateQuery, $personalData); 
+                return ($isUpdate) ? "Your profile has been updated" : "Your profile has not been updated";
+            }
+            catch(Exception $ex){
+                echo "<pre>";
+                print_r($ex);
+                exit();
+            }
+        }
 
     public function verifyUser($token)
     {

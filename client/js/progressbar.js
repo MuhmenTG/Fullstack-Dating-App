@@ -33,9 +33,9 @@ const religionOfPotentialCandidate = document.getElementById("religionOfPotentia
 const smokingStatusOfPotentialCandidate = document.getElementById("smokingStatusOfPotentialCandidate");
 const eyeColorOfPotentialCandidate = document.getElementById("eyeColorOfPotentialCandidate");
 const bodyOfPotentialCandidate = document.getElementById("bodyOfPotentialCandidate");
+const apperanceOfPotentialCandidate = document.getElementById("apperanceOfPotentialCandidate");
 const clothingOfPotentialCandidate = document.getElementById("clothingOfPotentialCandidate");
-const BodyArtOfPotentialCandidate = document.getElementById("BodyArtOfPotentialCandidate");
-const educationOfPotentialCandidate = document.getElementById("educationOfPotentialCandidate");
+const BodyArtOfPotentialCandidate = document.getElementById("BodyArtOfPotentialCandidat");
 const jobOfPotentialCandidate = document.getElementById("jobOfPotentialCandidate");
 const livingStyleOfPotentialCandidate = document.getElementById("livingStyleOfPotentialCandidate");
 const vehicleOfPotentialCandidate = document.getElementById("vehicleOfPotentialCandidate");
@@ -114,14 +114,17 @@ async function getUserInfo(){
 
 getUserInfo();
 
-function updateUserInfo(e){
+async function updateUserInfo(key, v){
     event.preventDefault();
-    console.log(e.value);
+    const userId = await getCurrentSessionId();
+    const response = await HttpRequest.server('../api/editUserInfo.php', 'POST', {key, value: v.value, userId});
+    console.log(response);
 }
 
 
-firstName.oninput = function() {updateUserInfo(firstName)};
-lastName.oninput = function() {updateUserInfo(lastName)};
+firstName.oninput = function() {updateUserInfo("firstName",firstName)};
+
+lastName.oninput = function() {updateUserInfo("lastName", lastName)};
 gender.onchange = function() {updateUserInfo(gender)};
 userAge.onchange = function() {updateUserInfo( userAge)};
 userHeight.onchange = function() {updateUserInfo( userHeight )};
@@ -135,7 +138,7 @@ userParentStatus.onchange = function() {updateUserInfo( userParentStatus )};
 userEyeColor.onchange = function() {updateUserInfo( userEyeColor )};
 userHairColor.onchange = function() {updateUserInfo( userHairColor )};
 userClothingStyle.onchange = function() {updateUserInfo( userClothingStyle )};
-sexOfPotentialCandidate.onchange = function() {updateUserInfo( sexOfPotentialCandidate )};
+sexOfPotentialCandidate.onchange = function() {updateUserInfo("sexOfPotentialCandidate", sexOfPotentialCandidate )};
 minAgeOfPotentialCandidate.onchange = function() {updateUserInfo( minAgeOfPotentialCandidate )}; 
 maxAgeOfPotentialCandidate.onchange = function() {updateUserInfo( maxAgeOfPotentialCandidate )}; 
 minHeightOfPotentialCandidate.onchange = function() {updateUserInfo( minHeightOfPotentialCandidate )};
@@ -145,21 +148,25 @@ maxWeightOfPotentialCandidate.onchange = function() {updateUserInfo( maxWeightOf
 cityOfPotentialCandidate.onchange = function() {updateUserInfo( cityOfPotentialCandidate )};
 wishedStatusPotentialCandidate.onchange = function() {updateUserInfo( wishedStatusPotentialCandidate )};
 religionOfPotentialCandidate.onchange = function() {updateUserInfo( religionOfPotentialCandidate )};
-
 smokingStatusOfPotentialCandidate.onchange = function() {updateUserInfo( smokingStatusOfPotentialCandidate )};
 eyeColorOfPotentialCandidate.onchange = function() {updateUserInfo( eyeColorOfPotentialCandidate )};
+bodyOfPotentialCandidate.onchange = function() {updateUserInfo( bodyOfPotentialCandidate )};
+apperanceOfPotentialCandidate.onchange = function(){updateUserInfo(apperanceOfPotentialCandidate)};
+clothingOfPotentialCandidate.onchange = function() {updateUserInfo( clothingOfPotentialCandidate )};
+BodyArtOfPotentialCandidate.onchange = function() {updateUserInfo( BodyArtOfPotentialCandidate )};
+jobOfPotentialCandidate.onchange = function() {updateUserInfo( jobOfPotentialCandidate )};
+livingStyleOfPotentialCandidate.onchange = function() {updateUserInfo( livingStyleOfPotentialCandidate )};
+vehicleOfPotentialCandidate.onchange = function() {updateUserInfo( vehicleOfPotentialCandidate )};
+numOfChildrenOfPotentialCandidate.onchange = function() {updateUserInfo( numOfChildrenOfPotentialCandidate )}
+monthlyIncomeOfPotentialCandidate.onchange = function() {updateUserInfo( monthlyIncomeOfPotentialCandidate )};
 /*
 
 civilPotentialCandidate.onchange = function() {updateUserInfo( civilPotentialCandidate )};
 
 userLivingStyle.oninput = function() {updateUserInfo( userLivingStyle )};
 
-bodyOfPotentialCandidate.oninput = function() {updateUserInfo( bodyOfPotentialCandidate )};
-clothingOfPotentialCandidate.oninput = function() {updateUserInfo( clothingOfPotentialCandidate )};
-BodyArtOfPotentialCandidate.oninput = function() {updateUserInfo( BodyArtOfPotentialCandidate )};
+
 educationOfPotentialCandidate.oninput = function() {updateUserInfo( educationOfPotentialCandidate )};
-jobOfPotentialCandidate.oninput = function() {updateUserInfo( jobOfPotentialCandidate )};
-livingStyleOfPotentialCandidate.oninput = function() {updateUserInfo( livingStyleOfPotentialCandidate )};
-vehicleOfPotentialCandidate.oninput = function() {updateUserInfo( vehicleOfPotentialCandidate )};
-numOfChildrenOfPotentialCandidate.oninput = function() {updateUserInfo( numOfChildrenOfPotentialCandidate )};
-monthlyIncomeOfPotentialCandidate.oninput = function() {updateUserInfo( monthlyIncomeOfPotentialCandidate )}; */
+
+;
+ */
