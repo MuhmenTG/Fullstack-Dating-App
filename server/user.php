@@ -48,20 +48,29 @@
  
 
     public function completeAndEditProfileInfo($key, $value, $userId){
-            try 
-            { 
-                $updateQuery = ($this->isColumnExits("userInfomation", $key)) ? "UPDATE userInfomation SET " :  "UPDATE candidatePreferences SET ";
-                $updateQuery .=  "$key = :params WHERE id = :id";
-                $personalData = array(':params' => $value, ':id' => $userId);
-                $isUpdate = $this->executeQuery($updateQuery, $personalData); 
-                return ($isUpdate) ? "Your profile has been updated" : "Your profile has not been updated";
+        
+        try 
+        { 
+           /* if($this->isColumnExits("userInfomation", $key)){
+                $updateQuery = "UPDATE userInfomation SET ";
             }
-            catch(Exception $ex){
-                echo "<pre>";
-                print_r($ex);
-                exit();
-            }
+            else{
+                $updateQuery = "UPDATE candidatePreferences SET ";
+            }*/
+           
+            $updateQuery = ($this->isColumnExits("userInfomation", $key)) ? "UPDATE userInfomation SET $key = :params WHERE id = :id " :  "UPDATE candidatePreferences SET  $key = :params WHERE userId = :id";
+           
+            
+            $personalData = array(':params' => $value, ':id' => $userId);
+            $isUpdate = $this->executeQuery($updateQuery, $personalData); 
+            return ($isUpdate) ? true : false;
         }
+        catch(Exception $ex){
+            echo "<pre>";
+            print_r($ex);
+            exit();
+        }
+    }
 
     public function verifyUser($token)
     {

@@ -36,10 +36,12 @@ class Query extends Database
     }
      
     protected function executeQuery($query, $data){
+        
         $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);
         }
+
         $executeQuery = $statement->execute();
         return ($executeQuery)? true : false;
     }
@@ -58,7 +60,7 @@ class Query extends Database
     {
         $showQuery = "SHOW COLUMNS FROM $table LIKE '$colmns'";
         $colmn = $this->fetchRecords($showQuery); 
-        return $colmn;
+        return count($colmn);
     }
 
 

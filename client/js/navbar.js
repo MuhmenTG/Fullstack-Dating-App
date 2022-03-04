@@ -21,6 +21,7 @@ async function authorizedNavbar() {
         loggedInNavbar.innerHTML = `
                 <ul class="list-unstyled">
                     <li><a href="myProfileEdit.php">My Account</a></li>
+                    
                     <li><a href="search_partner.php">Explore</a></li>
                     <li><a href="suggest_candidates.php">Candidates you might like</a></li>
                     <li><a href="online_search_country.php">Countries</a></li>

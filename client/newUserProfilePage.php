@@ -5,21 +5,15 @@ include('inc/header.php');
 ?>
 
 <main class="main">
-    <section class="top">
-        <nav class="profile-nav">
-            <ul>
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#settings">Settings</a></li>
-            </ul>
-        </nav>
-    </section>
-    <section class="progress-section">
+    
+    
+    <section class="main-section">
+        <div class="profileInfo" id="profileInfo">
+        <section class="progress-section">
         <div class="progress">
           <div class="bar shadow overlap"></div>
         </div>
     </section>
-    <section class="main-section">
-        <div class="profileInfo">
             <div class="basicInfo">
                 <h2 class="basicInfo_heading">Base Info</h2>
                 <hr />
@@ -367,6 +361,23 @@ include('inc/header.php');
                         </select>
                     </div>
                 </div>
+
+                <div class="basic_info_group">
+                    <div>Education:</div>
+                    <div>
+                        <select class="select" name="educationOfPotentialCandidate" id="educationOfPotentialCandidate">
+                        <option value="" disabled selected>Choose Education</option>
+                        <option value="high school education">high school education</option>
+                        <option value="university education">university education</option>
+                        <option value="Technical">Technical</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
                 <div class="basic_info_group">
                     <div>Job:</div>
                     <div>
@@ -426,7 +437,7 @@ include('inc/header.php');
                     <div>
                         <select class="select" name="monthlyIncomeOfPotentialCandidate" id="monthlyIncomeOfPotentialCandidate">
                    
-                        <option value="Mindre end 3000 kr,-">more then 3000</option>
+                                     <option value="Mindre end 3000 kr,-">more then 3000</option>
                                         <option value="5.000-10.000 kr,-">5.000-10.000 kr,-</option>
                                         <option value="10.000-15.000 kr,-">10.000-15.000 kr,-</option>
                                         <option value="15.000-25.000 kr,-">15.000-25.000 kr,-</option>
@@ -443,9 +454,21 @@ include('inc/header.php');
                 </div> 
             </div>
         </div>
+        <div class="settingsection" id="settingsection">
+
+        </div>
         <div class="sidebar">
          
         </div>
+
+        <ul class="menu">
+           <a href="se">settings</a>
+            <li title="about"><a href="#settingsection" class=" about">about</a></li>
+            <li title="archive"><a href="#" class="archive">archive</a></li>
+        </ul>
+
+
+  
     </section>
 </main>
 
@@ -467,4 +490,5 @@ include('inc/header.php');
 <script src="js/custom.js"></script>
 <script src="js/navbar.js" type="module"></script>
 <script src="js/progressbar.js" type="module"></script>
+<script src="js/profileSettings.js" type="module"></script>
 <script src="js/dropdowns.js"></script>

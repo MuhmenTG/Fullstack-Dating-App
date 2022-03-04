@@ -15,7 +15,7 @@ async function userLogin(){
     const data = await getLoginsDetails()
     const response = await HttpRequest.server("../api/login.php", 'POST', data);
     if(response){
-        location.href = 'myProfileEdit.php';    
+        location.href = 'newUserProfilePage.php';    
     }
     else{
         messageBox(`#loginmsg`, "block", "red", "Login credentials incorrect, try again");
