@@ -48,19 +48,9 @@
  
 
     public function completeAndEditProfileInfo($key, $value, $userId){
-        
         try 
         { 
-           /* if($this->isColumnExits("userInfomation", $key)){
-                $updateQuery = "UPDATE userInfomation SET ";
-            }
-            else{
-                $updateQuery = "UPDATE candidatePreferences SET ";
-            }*/
-           
             $updateQuery = ($this->isColumnExits("userInfomation", $key)) ? "UPDATE userInfomation SET $key = :params WHERE id = :id " :  "UPDATE candidatePreferences SET  $key = :params WHERE userId = :id";
-           
-            
             $personalData = array(':params' => $value, ':id' => $userId);
             $isUpdate = $this->executeQuery($updateQuery, $personalData); 
             return ($isUpdate) ? true : false;

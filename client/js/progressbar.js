@@ -33,6 +33,7 @@ const religionOfPotentialCandidate = document.getElementById("religionOfPotentia
 const smokingStatusOfPotentialCandidate = document.getElementById("smokingStatusOfPotentialCandidate");
 const eyeColorOfPotentialCandidate = document.getElementById("eyeColorOfPotentialCandidate");
 const bodyOfPotentialCandidate = document.getElementById("bodyOfPotentialCandidate");
+const hairColorOfPotentialCandidate = document.getElementById("hairColorOfPotentialCandidate");
 const apperanceOfPotentialCandidate = document.getElementById("apperanceOfPotentialCandidate");
 const clothingOfPotentialCandidate = document.getElementById("clothingOfPotentialCandidate");
 const BodyArtOfPotentialCandidate = document.getElementById("BodyArtOfPotentialCandidat");
@@ -58,11 +59,11 @@ function progressbar(percent){
         bar.style.width = `${percent}%`;
     });
     })
-
-
 }
 
 async function getUserInfo(){
+    const progress = document.querySelectorAll('.progress');
+    progress[0].innerHTML = "Loarding";
     const userId = await getCurrentSessionId()
     const response = await HttpRequest.server('../api/getUserInfo.php', 'POST', {id: userId});
     let totalParams = 0;    
@@ -117,12 +118,14 @@ getUserInfo();
 
 async function updateUserInfo(key, v){
     event.preventDefault();
+    const progress = document.querySelectorAll('.progress');
+    progress[0].innerHTML = "Loarding";
+    
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/editUserInfo.php', 'POST', {key, value: v.value, userId});
     if(response){
-        console.log('updated');
+        getUserInfo();
     }
-  
 }
 
 
@@ -142,7 +145,6 @@ userEyeColor.onchange = function() {updateUserInfo("userEyeColor", userEyeColor 
 userHairColor.onchange = function() {updateUserInfo("userHairColor", userHairColor )};
 userClothingStyle.onchange = function() {updateUserInfo( "userClothingStyle", userClothingStyle )};
 sexOfPotentialCandidate.onchange = function() {updateUserInfo("sexOfPotentialCandidate", sexOfPotentialCandidate )};
-
 minAgeOfPotentialCandidate.onchange = function() {updateUserInfo("minAgeOfPotentialCandidate", minAgeOfPotentialCandidate )}; 
 maxAgeOfPotentialCandidate.onchange = function() {updateUserInfo("maxAgeOfPotentialCandidate", maxAgeOfPotentialCandidate )}; 
 minHeightOfPotentialCandidate.onchange = function() {updateUserInfo("minHeightOfPotentialCandidate", minHeightOfPotentialCandidate )};
@@ -157,6 +159,7 @@ eyeColorOfPotentialCandidate.onchange = function() {updateUserInfo("eyeColorOfPo
 bodyOfPotentialCandidate.onchange = function() {updateUserInfo("bodyOfPotentialCandidate", bodyOfPotentialCandidate)};
 educationOfPotentialCandidate.onchange = function() {updateUserInfo("educationOfPotentialCandidate", educationOfPotentialCandidate)}
 apperanceOfPotentialCandidate.onchange = function(){updateUserInfo("apperanceOfPotentialCandidate", apperanceOfPotentialCandidate)};
+hairColorOfPotentialCandidate.onchange = function(){updateUserInfo("hairColorOfPotentialCandidate", hairColorOfPotentialCandidate)}
 clothingOfPotentialCandidate.onchange = function() {updateUserInfo("clothingOfPotentialCandidate", clothingOfPotentialCandidate )};
 BodyArtOfPotentialCandidate.onchange = function() {updateUserInfo("BodyArtOfPotentialCandidate", BodyArtOfPotentialCandidate )};
 jobOfPotentialCandidate.onchange = function() {updateUserInfo("jobOfPotentialCandidate", jobOfPotentialCandidate )};
