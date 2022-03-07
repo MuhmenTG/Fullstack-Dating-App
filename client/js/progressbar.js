@@ -66,12 +66,23 @@ async function getUserInfo(){
     progress[0].innerHTML = "Loarding";
     const userId = await getCurrentSessionId()
     const response = await HttpRequest.server('../api/getUserInfo.php', 'POST', {id: userId});
+    for (const key in response) {
+        if(key != 4 && key != 0 && key != 28)
+
+        console.log(`${key}: ${response[key]}`);
+    }
+    /*for (let i = 0; i < response.length; i++) {
+        const element = response[i];
+        console.log(element);
+        
+    }*/
+  /* response.map((v, i) => {
+        console.log(response[i]);
+    })*/
     let totalParams = 0;    
     let info = 0;
     let percentage = 0;
     if(response){
-      
-     
        if(response["userPreferenceGender"] == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;info = info + 1; }
        if(response["userLocation"]  == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1; info = info + 1; }
        if(response["userAge"]  == null) { totalParams = totalParams + 1 }else{ totalParams = totalParams + 1;  info = info + 1; }
