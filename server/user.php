@@ -17,6 +17,7 @@
         }
         if(password_verify($userPassword, $result['userPassword']))
         {     
+            $this->changeLoggedInStatus($result['id']);
             return $result['id'];
         }
         else{
@@ -41,8 +42,7 @@
             return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
         }
      
-    }
-    
+    }    
 
 
  
@@ -60,6 +60,14 @@
             print_r($ex);
             exit();
         }
+    }
+
+    public function changeLoggedInStatus($userId)
+    {
+        $updateQuery = "UPDATE userInfomation SET 
+        isLoggedIn = :isLoggedIn WHERE id = :userId";
+        $data = array(":isLoggedIn" => "online", ":userId" => $userId);
+        return $this->executeQuery($updateQuery, $data);
     }
 
     public function verifyUser($token)

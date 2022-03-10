@@ -36,12 +36,10 @@ class Query extends Database
     }
      
     protected function executeQuery($query, $data){
-        
         $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);
         }
-
         $executeQuery = $statement->execute();
         return ($executeQuery)? true : false;
     }
@@ -51,10 +49,21 @@ class Query extends Database
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params";
         ($isVerfied) ? $selectQuery .= " AND isVerified = 1" : null;
         $row = $this->fetchRecord($selectQuery, ":params", $param); 
-        return  $row;
-         
-        
+        return  $row;   
     }
+
+    protected function isRecord($selectQuery, $data)
+    {
+        $statement = $this->connect()->prepare($selectQuery);
+        foreach($data as $key => &$value) {    
+            $statement->bindParam($key, $value);
+        }
+        $statement->execute();
+        $dataResult = $statement->fetch();   
+        return $dataResult; 
+    }
+
+    
 
     protected function isColumnExits($table, $colmns)
     {
@@ -62,6 +71,8 @@ class Query extends Database
         $colmn = $this->fetchRecords($showQuery); 
         return count($colmn);
     }
+
+
 
 
 

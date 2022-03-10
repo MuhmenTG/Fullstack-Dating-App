@@ -24,6 +24,7 @@ async function authorizedNavbar() {
                     
                     <li><a href="search_partner.php">Explore</a></li>
                     <li><a href="suggest_candidates.php">Candidates you might like</a></li>
+                    <li><a href="friend_request.php">Friend Requests</a></li>
                     <li><a href="online_search_country.php">Countries</a></li>
                     <li><a href="blog.php">Blog</a></li>
                     <li><a href="about_us.php">About us</a></li>
