@@ -12,9 +12,9 @@
     {
     
         $selectQuery = "SELECT * FROM friends WHERE senderId = :senderUserId AND receiverId = :receiverId AND acceptenceStatus = :acceptenceStatus";
-        $isExistData = array("senderUserId" => $senderUserId, "receiverId" => $receiverId, ":acceptenceStatus" => "Friends");
+        $isExistData = array("senderUserId" => $senderUserId, "receiverId" => $receiverId, ":acceptenceStatus" => "pending");
         $result = $this->isRecord($selectQuery, $isExistData);
-        if(count($result) > 0)
+      /*  if(count($result) > 0)
         {
             return -1;
         }
@@ -24,7 +24,7 @@
             VALUES(:senderId, :receiverId)";
             $data = array(":senderId" => $senderUserId, ":receiverId" => $receiverId);
             return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
-        }
+        }*/
     }
  
 
@@ -62,19 +62,35 @@
 
     public function getOutgoingFriendRequests($userId)
     {
-        $selectQuery = "SELECT * FROM friends WHERE acceptenceStatus = :acceptenceStatus AND senderId = :senderId";
-        $data = array(":senderId" => $userId);
-        return $this->executeQuery($selectQuery, $data); 
+        $selectQuery = "SELECT 
+        firstName, 
+        lastname,
+        userInfomation.id
+        FROM 
+        userInfomation
+        INNER JOIN
+        friends
+        ON userInfomation.id = friends.receiverId
+        WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.senderId = :senderId";
+        $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
+        return $this->isRecord($selectQuery, $data); 
     }
 
     public function getIncomingFriendRequests($userId){
-        $selectQuery = "SELECT * FROM friends WHERE acceptenceStatus = :acceptenceStatus AND receiverId = :senderId";
-        $data = array(":senderId" => $userId);
-        return $this->executeQuery($selectQuery, $data); 
+        $selectQuery = "SELECT 
+        firstName, 
+        lastname,
+        userInfomation.id
+        FROM 
+        userInfomation
+        INNER JOIN
+        friends
+        ON userInfomation.id = friends.senderId
+        WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
+        $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
+        return $this->isRecord($selectQuery, $data); 
     }
 
  
 }
 
-
- 

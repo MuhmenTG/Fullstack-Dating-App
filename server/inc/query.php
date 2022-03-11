@@ -59,8 +59,8 @@ class Query extends Database
             $statement->bindParam($key, $value);
         }
         $statement->execute();
-        $dataResult = $statement->fetch();   
-        return $dataResult; 
+        $result = $statement->fetchAll();
+        return $result;
     }
 
     
