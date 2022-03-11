@@ -2,12 +2,16 @@
 include('../../server/friends.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $friend = new Friends();
-$senderUserId = $data['userId'];
-$receiverId = $data['receiverId'];
-$result = $friend->sendFriendRequest($senderUserId, $receiverId);
-if($result){
-
-}
-else{
-    
+$userId = $data['id'];
+$requestToUserId = $data['receiverUserId'];
+$request = $friend->sendFriendRequest($userId, $requestToUserId);
+switch($request){
+    case -1:
+      echo -1;
+        break;
+    case 1:
+        echo 1;
+        break;
+    default:
+        break;
 }

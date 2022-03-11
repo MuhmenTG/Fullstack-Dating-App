@@ -54,6 +54,7 @@ class Query extends Database
 
     protected function isRecord($selectQuery, $data)
     {
+        
         $statement = $this->connect()->prepare($selectQuery);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);

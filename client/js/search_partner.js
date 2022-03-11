@@ -1,5 +1,6 @@
 import { HttpRequest} from "./utilities/serverHttpRequest.js";
 import { checkSession } from "./utilities/checkSession.js";
+import { getCurrentSessionId } from "./utilities/checkSession.js";
 const peopleContainer = document.querySelector("#peopleContainer");
 
 function getSearchParamValues() {
@@ -84,12 +85,14 @@ function showLimitedUserByDefault(data) {
                     <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
                     <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
                     <button class="c-btn btn1" onclick="viewDetails(${v[0]})">See full Details</button>
+                    <br> 
+                    <button class="c-btn btn1" onclick="sendFriendRequest(${v[0]})">Send Friend Invitation</button>
                     </a>
                 </div>
             </div>
         </div>
 
-`;
+    `;
     });
     peopleContainer.innerHTML += `
   
@@ -98,7 +101,7 @@ function showLimitedUserByDefault(data) {
             <a href="#" class="c-btn btn1"> View More</a>
         </div>
         </div>
- `;
+    `;
 
 
 }
@@ -107,7 +110,22 @@ window.viewDetails = async (userId) => {
     const isLoggedIn = await checkSession()
     (!isLoggedIn) ? $("#loginModal").modal() : location.href = `viewUserProfile.php?id=${userId}`; 
 }
-
+window.sendFriendRequest = async(receiverUserId)  => {
+    const userId = await getCurrentSessionId();
+    const requestTo = receiverUserId;
+    const data = {id: userId, receiverUserId: requestTo}
+    const response = await HttpRequest.server('../api/Friends/sendFriendRequest.php', 'POST', data);
+    switch(response){
+        case -1:
+            swal("Request Already sent");
+            break;
+        case 1:
+            swal("Friend request is sent")
+            break;
+        default:
+            break;
+    }
+}
 document.querySelector("#searchForm").addEventListener("submit", searchAdvanched);
 
 (peopleContainer != null) ? getLimitedUserByDefault() : null;

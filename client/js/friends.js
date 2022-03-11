@@ -27,9 +27,7 @@ function displayInRequest(response){
                 <button class="btn btn-accept">Accept</button>
                 <a href="view_user.php?id=${v.id}" class="btn btn-accept">View Profile</a>
             </label>
-        </li>
-    
-        `;
+        </li>`;
     });
 }
 
