@@ -23,7 +23,7 @@ function displayInRequest(response){
                ${v.firstName + " " + v.lastname}
             </label>
             <label class="pull-right">
-                <button class="btn btn-danger">Delete</button>
+                <button  class="btn btn-danger">Delete</button>
                 <button class="btn btn-accept">Accept</button>
                 <a href="view_user.php?id=${v.id}" class="btn btn-accept">View Profile</a>
             </label>
@@ -43,7 +43,7 @@ function displayOutRequest(response){
                 ${v.firstName + " " + v.lastname}
             </label>
             <label class="pull-right">
-                <button class="btn btn-danger">Delete</button>
+                <button onClick="callFunction()" class="btn btn-danger">Delete</button>
                 <button class="btn btn-danger">Accept</button>
                 <button class="btn btn-danger">View Profile</button>
             </label>
@@ -54,3 +54,4 @@ function displayOutRequest(response){
 
 }
 getIncomingFriendsRequest();
+function callFunction(){}
