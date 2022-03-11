@@ -16,7 +16,7 @@
         AND receiverId = :receiverId 
         AND acceptenceStatus = :acceptenceStatus";
         $isExistData = array(":senderUserId" => $userId, ":receiverId" => $requestToUser, ":acceptenceStatus" => "pending");
-        $result = $this->returnData($selectQuery, $isExistData);
+        $result = $this->returnExecutedQueryRecord($selectQuery, $isExistData);
         if(count($result) > 0)
         {
             return -1;
@@ -68,14 +68,14 @@
         $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.receiverId
         WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.senderId = :senderId";
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
-        return $this->returnData($selectQuery, $data); 
+        return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
     public function getIncomingFriendRequests($userId){
         $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
         WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
-        return $this->returnData($selectQuery, $data); 
+        return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
  

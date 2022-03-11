@@ -52,7 +52,7 @@ class Query extends Database
         return  $row;   
     }
 
-    protected function returnData($selectQuery, $data)
+    protected function returnExecutedQueryRecord($selectQuery, $data)
     {
         
         $statement = $this->connect()->prepare($selectQuery);
