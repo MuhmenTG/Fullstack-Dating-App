@@ -31,48 +31,25 @@
     }
  
 
-    public function acceptFriendRequest($senderId, $receiverId)
+    public function changeFriendRequestStatus($requestId, $senderId, $receiverId, $status)
     {
         $updateQuery = "UPDATE friends SET 
-        acceptenceStatus = :acceptenceStatus  WHERE AND senderId = :senderUserId AND receiverId = :receiverId";
-        $data = array(":acceptenceStatus" => "Friends", ":senderUserId" => $senderId, ":receiverId" => $receiverId);
+        acceptenceStatus = :acceptenceStatus WHERE id = :requestId";
+        $data = array(":acceptenceStatus" => $status, ":requestId" => $requestId);
         return $this->executeQuery($updateQuery, $data);
     }
  
 
-    public function cancelFriendRequest($senderId, $receiverId)
-    {
-        $deleteQuery = "DELETE FROM friends WHERE acceptenceStatus = :acceptenceStatus AND senderId = :senderUserId AND receiverId = :receiverId"; 
-        $data = array(":acceptenceStatus" => "pending", ":senderUserId" => $senderId, ":receiverId" => $receiverId);
-        return $this->executeQuery($deleteQuery, $data); 
-    }
- 
-    public function unFriendFriendship($senderId, $receiverId)
-    {
-        $deleteQuery = "DELETE FROM friends WHERE acceptenceStatus = :acceptenceStatus AND senderId = :senderUserId AND receiverId = :receiverId
-        OR acceptenceStatus = :acceptenceStatus AND senderId = :receiverId AND receiverId = :senderUserId";
-        $data = array(":acceptenceStatus" => "Friends", ":senderUserId" => $senderId, ":receiverId" => $receiverId);
-        return $this->executeQuery($deleteQuery, $data); 
-    }
-
-    public function blockUser($senderId, $receiverId)
-    {
-        $insertQuery = "INSERT INTO friends (senderId, receiverId, acceptenceStatus ) 
-        VALUES(:senderId, :receiverId, :acceptenceStatus)";
-        $data = array(":senderId" => $senderId, ":receiverId" => $receiverId, ":acceptenceStatus" => "Blocked");
-        return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
-    }
-
     public function getOutgoingFriendRequests($userId)
     {
-        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.receiverId
+        $selectQuery = "SELECT friends.id AS requestId, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.receiverId
         WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.senderId = :senderId";
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
     public function getIncomingFriendRequests($userId){
-        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
+        $selectQuery = "SELECT friends.id AS requestId, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
         WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 

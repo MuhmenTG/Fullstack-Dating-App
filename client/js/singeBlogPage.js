@@ -168,7 +168,7 @@ async function checkUserBeforeModity(cId, userId, data){
         (data == undefined) ? getComment(commentId, userId) : postComment(commentId, data)
     } 
     else {
-        console.log('not ok');
+        
     } 
 }
 
