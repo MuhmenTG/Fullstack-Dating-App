@@ -64,8 +64,6 @@ class Query extends Database
         return $result;
     }
 
-    
-
     protected function isColumnExits($table, $colmns)
     {
         $showQuery = "SHOW COLUMNS FROM $table LIKE '$colmns'";

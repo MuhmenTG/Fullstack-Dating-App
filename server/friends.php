@@ -29,7 +29,6 @@
             return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
         }
     }
- 
 
     public function changeFriendRequestStatus($requestId, $senderId, $receiverId, $status)
     {
@@ -39,7 +38,6 @@
         return $this->executeQuery($updateQuery, $data);
     }
  
-
     public function getOutgoingFriendRequests($userId)
     {
         $selectQuery = "SELECT friends.id AS requestId, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.receiverId

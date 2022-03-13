@@ -8,7 +8,7 @@ $friendId = $data['friendId'];
 $status = $data["status"];
 $result = $friend->changeFriendRequestStatus($requestId, $senderUserId, $receiverId, $status);
 if($result){
-
+    echo 1;
 }
 else{
     

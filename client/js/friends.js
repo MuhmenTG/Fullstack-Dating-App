@@ -2,13 +2,11 @@ import { getCurrentSessionId } from "./utilities/checkSession.js";
 import { HttpRequest } from "./utilities/serverHttpRequest.js";
 const incoming = document.getElementById("incoming");
 const outgoing = document.getElementById("outgoing");
-async function getIncomingFriendsRequest(){
+async function getFriendsRequest(){
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/Friends/getRequests.php', 'POST', {id: userId});
-    if(response){
-        await displayInRequest(response[0]);
-        await displayOutRequest(response[1])
-    }
+    await displayInRequest(response[0]);
+    await displayOutRequest(response[1]);
 }
 
 function displayInRequest(response){
@@ -56,7 +54,7 @@ function displayOutRequest(response){
     modifyFriendRequest("data-request", "delete-btn", "data-delete", checkUserBeforeModity);
 
 }
-getIncomingFriendsRequest();
+getFriendsRequest();
 
 
 function modifyFriendRequest(requestId, btnClass, btnDataName, callback, btnUserId = "data-userId") {
@@ -89,7 +87,9 @@ async function checkUserBeforeModity(requestId, friendId, status){
 async function friendRequestStatus(requestId, userId, friendId, status){
    let data = {requestId, userId, friendId, status} 
    const response = await HttpRequest.server("../api/Friends/changeFriendRequest.php", "POST", data)
-   if(response){console.log(response);}
+   if(response){
+      await getFriendsRequest()
+   }
 }
 
  
