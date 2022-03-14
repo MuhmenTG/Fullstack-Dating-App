@@ -84,9 +84,7 @@ function showLimitedUserByDefault(data) {
                 <div class="txt-block">
                     <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
                     <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
-                    <button class="c-btn btn1" onclick="viewDetails(${v[0]})">See full Details</button>
-                    <br> 
-                    <button class="c-btn btn1" onclick="sendFriendRequest(${v[0]})">Send Friend Invitation</button>
+                    <button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i> Like</button>
                     </a>
                 </div>
             </div>
@@ -102,7 +100,7 @@ function showLimitedUserByDefault(data) {
         </div>
         </div>
     `;
-
+ 
 
 }
 

@@ -47,7 +47,7 @@
     }
 
     public function getIncomingFriendRequests($userId){
-        $selectQuery = "SELECT friends.id AS requestId, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
+        $selectQuery = "SELECT friends.id AS requestId, friends.acceptenceStatus AS friendStatus, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
         WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 

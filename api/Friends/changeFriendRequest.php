@@ -8,8 +8,8 @@ $friendId = $data['friendId'];
 $status = $data["status"];
 $result = $friend->changeFriendRequestStatus($requestId, $senderUserId, $receiverId, $status);
 if($result){
-    echo 1;
+    echo json_encode(true);
 }
 else{
-    
-}
+    echo json_encode(false);
+};

@@ -13,20 +13,27 @@ function displayInRequest(response){
     if(response == null){
         //Errorhandling   
     }
+ 
     response.map((v, i) => {
-       
-        incoming.innerHTML += `
-        <li class="list-group-item text-left">
-            <label class="name">
-               ${v.firstName + " " + v.lastname}
-            </label>
-            <label class="pull-right">
-                <button data-request="${v.requestId}" data-userId="${v.id}" class="btn rejectRequest-btn">Reject</button>
-                <button data-request="${v.requestId}"  data-userId="${v.id}" class="btn acceptRequest-btn">Accept</button>
-                <button data-request="${v.requestId}" data-userId="${v.id}" class="btn blockRequest-btn">Block</button>
-                <a href="view_user.php?id=${v.id}" class="btn btn-profile">View Profile</a>
-            </label>
-        </li>`;
+        if(v.friendStatus != "pending")
+        {
+
+        }
+        else
+        {
+            incoming.innerHTML += `
+            <li class="list-group-item text-left">
+                <label class="name">
+                ${v.firstName + " " + v.lastname}
+                </label>
+                <label class="pull-right">
+                    <button data-request="${v.requestId}" data-userId="${v.id}" class="btn rejectRequest-btn">Reject</button>
+                    <button data-request="${v.requestId}"  data-userId="${v.id}" class="btn acceptRequest-btn">Accept</button>
+                    <button data-request="${v.requestId}" data-userId="${v.id}" class="btn blockRequest-btn">Block</button>
+                    <a href="view_user.php?id=${v.id}" class="btn btn-profile">View Profile</a>
+                </label>
+            </li>`;
+        }
     });
     modifyFriendRequest("data-request", "rejectRequest-btn", "data-userId", checkUserBeforeModity);
     modifyFriendRequest("data-request", "acceptRequest-btn", "data-userId", checkUserBeforeModity);
@@ -81,15 +88,13 @@ function modifyFriendRequest(requestId, btnClass, btnDataName, callback, btnUser
 
 async function checkUserBeforeModity(requestId, friendId, status){
     const userId = await getCurrentSessionId();
-    friendRequestStatus(requestId, userId, friendId, status);
+    const response = await friendRequestStatus(requestId, userId, friendId, status);
+    if(response){
+       await getFriendsRequest()
+    }
 }
 
 async function friendRequestStatus(requestId, userId, friendId, status){
    let data = {requestId, userId, friendId, status} 
-   const response = await HttpRequest.server("../api/Friends/changeFriendRequest.php", "POST", data)
-   if(response){
-      await getFriendsRequest()
-   }
+   return await HttpRequest.server("../api/Friends/changeFriendRequest.php", "POST", data)
 }
-
- 

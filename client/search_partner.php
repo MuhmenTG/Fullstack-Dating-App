@@ -383,7 +383,7 @@ include('inc/header.php')
 	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Custom -->
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/navbar.js" type="module"></script>
     <script src="js/search_partner.js" type="module"></script>
 	<script src="js/custom.js"></script>
