@@ -12,18 +12,19 @@ include('inc/header.php');
         <h3 class="text-muted prj-name">
             Pending Friend Requests
         </h3>
+
     </div>
 
 
     <div class="jumbotron list-content">
+       
         <ul class="list-group" id="incoming">
-              <li class="list-group-item title">
-                Your incoming friend requests
-              </li>
+
+            <h3 id="msg"></h3>
         </ul>
     </div>
 </div>
-</div> 
+</div>
 
 <div class="container bootstrap snippets bootdey">
 
@@ -36,11 +37,8 @@ include('inc/header.php');
 
     <div class="jumbotron list-content">
         <ul class="list-group" id="outgoing">
-            <li class="list-group-item title">
-                Your sent friend requests
-            </li>
-             
            
+
 
 
         </ul>

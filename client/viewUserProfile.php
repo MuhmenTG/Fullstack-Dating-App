@@ -3,67 +3,58 @@ include('inc/top.php');
 include('inc/header.php');
 
 ?>
-<link rel="stylesheet" href="css/viewprofile.css">
-<button class="btn btn-danger btn-sm" onclick="window.history.back()">Back to results </button>
+<div class="topper">
+  <h1>User Profile</h1>
+</div>
 <div class="container">
-    <div class="row profile">
-        <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="https://gravatar.com/avatar/31b64e4876d603ce78e04102c67d6144?s=80&d=https://codepen.io/assets/avatars/user-avatar-80x80-bdcd44a3bfb9a5fd01eb8b86f9e033fa1a9897c3a15b33adfc2649a002dab1b6.png"
-                        class="img-responsive" alt="">
-                </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div id="intro" class="profile-usertitle">
-
-                    <div class="profile-usertitle-job">
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-success btn-sm">Love/Like</button>
-                    <button type="button" class="btn btn-danger btn-sm">Message</button>
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-
-
-                <div class="portlet light bordered">
-                    <!-- STAT -->
-
-                    <!-- END STAT -->
-                    <div id="about">
-
-
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="profile-content">
-                <div class="container bootstrap snippets bootdey">
-                    <div class="panel-body inf-content">
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <strong>Information</strong><br>
-                                <div class="table-responsive">
-                                    <table id="userTableDetails" class="table table-user-information">
-                                      
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="photo">
+      <img src="http://static4.businessinsider.com/image/52c9702c6bb3f751704f26dd/according-to-science-these-are-the-best-photos-to-use-in-your-dating-profile.jpg" />
+      <p>Jane Doe</p>
+    </div>
+    <div class="personal">
+      <div>
+       <h3>Current Saved Address</h3>
+        <p>42 Wallaby Lane</p>
+        <input type="submit" value="Edit" />
+      </div>
+      <div>
+        <h3>Current Subscription Plan</h3>
+        <p><a href="#">Get Fit Family Pack</a></p>
+        <input type="submit" value="Edit" />
+      </div>
+    </div>
+    <div class="points">
+      <h4>875</h4>
+      <p>Power Points</p>
+    </div>
+    <div class="deal">
+      <h3>Latest Deal</h3>
+      <img src="http://lorempixel.com/600/215" />
+    </div>
+    <div class="recent">
+      <div>
+        <h4>Recent Activity</h4>
+          <ul>
+            <li>Action 1 <span> 10pts</span></li>
+            <li>Action 2 <span> 5pts</span></li>
+            <li>Action 3 <span> 15pts</span></li>
+            <li>Action 4 <span> 10pts</span></li>
+            <li>Action 5 <span> 30pts</span></li>
+            <li>Action 6 <span> 5pts</span></li>
+          </ul>  
+      </div>
+    </div>
+    <div class="bought">
+      <div>
+        <h4>Recent Purchases</h4>
+        <ul>
+          <li>Item 1 <span> 100pts</span></li>
+          <li>Item 2 <span> 50pts</span></li>
+          <li>Item 3 <span> 120pts</span></li>
+          <li>Item 4 <span> 100pts</span></li>
+          <li>Item 5 <span> 50pts</span></li>
+          </ul> 
+      </div>
     </div>
 </div>
 

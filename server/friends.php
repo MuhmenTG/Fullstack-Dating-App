@@ -37,6 +37,12 @@
         $data = array(":acceptenceStatus" => $status, ":requestId" => $requestId);
         return $this->executeQuery($updateQuery, $data);
     }
+
+    public function deleteSentFriendRequest($requestId, $senderUserId, $receiverId){
+        $deleteQuery = "DELETE FROM friends WHERE senderId = :senderId AND receiverId = :receiverId";
+        $data = array(":senderId" => $senderUserId, ":receiverId" => $receiverId);
+        return $this->executeQuery($deleteQuery, $data);
+    }
  
     public function getOutgoingFriendRequests($userId)
     {
@@ -52,6 +58,7 @@
         $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
+
 
  
 }

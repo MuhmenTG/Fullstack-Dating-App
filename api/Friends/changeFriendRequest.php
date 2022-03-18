@@ -6,7 +6,12 @@ $requestId = $data['requestId'];
 $userId = $data['userId'];
 $friendId = $data['friendId'];
 $status = $data["status"];
-$result = $friend->changeFriendRequestStatus($requestId, $senderUserId, $receiverId, $status);
+if($status === "delete"){
+    $result = $friend->deleteSentFriendRequest($requestId, $senderUserId, $receiverId);
+}   
+else{
+    $result = $friend->changeFriendRequestStatus($requestId, $senderUserId, $receiverId, $status);
+}
 if($result){
     echo json_encode(true);
 }
