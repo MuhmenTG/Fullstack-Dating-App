@@ -36,6 +36,7 @@ class Query extends Database
     }
      
     protected function executeQuery($query, $data){
+       
         $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);

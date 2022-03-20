@@ -461,17 +461,7 @@ include('inc/header.php');
         </div>
         <div class="settingsection" id="settingsection">
 
-        </div>
-        <div class="sidebar">
-
-        </div>
-
-        <ul class="menu">
-            <a href="se">settings</a>
-            <li title="about"><a href="#settingsection" class=" about">about</a></li>
-            <li title="archive"><a href="#" class="archive">archive</a></li>
-        </ul>
-
+           
 
 
     </section>

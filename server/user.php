@@ -241,9 +241,16 @@
         return $this->fetchRecord($selectQuery, ":id", $userId); 
     }
 
+    public function suspendUserAcount($userId){
+        $updateQuery = "UPDATE userInfomation SET 
+        isSuspended = :isSuspended WHERE id = :userId";
+        $data = array(":isSuspended" => 1, ":userId" => $userId);
+        return $this->executeQuery($updateQuery, $data);
+    }
+
+
 
  
 }
 
 
- 

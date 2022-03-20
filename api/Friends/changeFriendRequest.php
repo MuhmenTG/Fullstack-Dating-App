@@ -3,14 +3,13 @@ include('../../server/friends.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $friend = new Friends();
 $requestId = $data['requestId'];
-$userId = $data['userId'];
-$friendId = $data['friendId'];
 $status = $data["status"];
-if($status === "delete"){
-    $result = $friend->deleteSentFriendRequest($requestId, $senderUserId, $receiverId);
+if($status == "delete"){
+  
+    $result = $friend->deleteSentFriendRequest($requestId);
 }   
 else{
-    $result = $friend->changeFriendRequestStatus($requestId, $senderUserId, $receiverId, $status);
+    $result = $friend->changeFriendRequestStatus($requestId, $status);
 }
 if($result){
     echo json_encode(true);

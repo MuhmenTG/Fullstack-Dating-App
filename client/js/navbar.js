@@ -20,16 +20,15 @@ async function authorizedNavbar() {
 
         loggedInNavbar.innerHTML = `
                 <ul class="list-unstyled">
-                    <li><a href="myProfileEdit.php">My Account</a></li>
-                    
+                    <li><a href="newUserProfilePage.php">My Account</a></li>
+                    <li><a href="settings.php">My Settings</a></li>
                     <li><a href="search_partner.php">Explore</a></li>
-                    <li><a href="suggest_candidates.php">Candidates you might like</a></li>
+                    <li><a href="suggest_candidates.php">Found Matches</a></li>
                     <li><a href="friend_request.php">Friend Requests</a></li>
-                    <li><a href="online_search_country.php">Countries</a></li>
-                    <li><a href="blog.php">Blog</a></li>
-                    <li><a href="about_us.php">About us</a></li>
-                    <li><a href="contact_us.php">Contact Us</a></li>
-                </ul>
+                    <li><a href="">Love&Likes</a></li>
+                    <li><a href="chat.php">My messsages</a></li>
+
+                  </ul>
                          
     `;
     }

@@ -30,7 +30,7 @@
         }
     }
 
-    public function changeFriendRequestStatus($requestId, $senderId, $receiverId, $status)
+    public function changeFriendRequestStatus($requestId, $status)
     {
         $updateQuery = "UPDATE friends SET 
         acceptenceStatus = :acceptenceStatus WHERE id = :requestId";
@@ -38,9 +38,9 @@
         return $this->executeQuery($updateQuery, $data);
     }
 
-    public function deleteSentFriendRequest($requestId, $senderUserId, $receiverId){
-        $deleteQuery = "DELETE FROM friends WHERE senderId = :senderId AND receiverId = :receiverId";
-        $data = array(":senderId" => $senderUserId, ":receiverId" => $receiverId);
+    public function deleteSentFriendRequest($requestId){
+        $deleteQuery = "DELETE FROM friends WHERE id = :requestId";
+        $data = array(":requestId" => $requestId);
         return $this->executeQuery($deleteQuery, $data);
     }
  
