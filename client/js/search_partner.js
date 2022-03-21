@@ -2,7 +2,7 @@ import { HttpRequest} from "./utilities/serverHttpRequest.js";
 import { checkSession } from "./utilities/checkSession.js";
 import { getCurrentSessionId } from "./utilities/checkSession.js";
 const peopleContainer = document.querySelector("#peopleContainer");
-
+const lazyDiv = document.querySelector("#div");
 function getSearchParamValues() {
     let gender = document.getElementById("gender").value;
     let preference = document.getElementById("lookingfor").value;
@@ -53,13 +53,14 @@ async function searchAdvanched() {
 }
 
 async function getLimitedUserByDefault() {
-    const response = await HttpRequest.server("../api/getLatestUsers.php", "POST");
-    console.log(response);
-    await showLimitedUserByDefault(response);
+    const userId = await getCurrentSessionId();
+
+    const response = await HttpRequest.server("../api/getLatestUsers.php", "POST", {userId});
+    await showLimitedUserByDefault(response, userId);
 }
 
 
-function showLimitedUserByDefault(data) {
+function showLimitedUserByDefault(data, userId) {
 
     peopleContainer.innerHTML = "";
 
@@ -72,26 +73,57 @@ function showLimitedUserByDefault(data) {
     </div>
     </div>
     `;
-
-    data.map((v, i) => {
-        peopleContainer.innerHTML += `
-  
-        <div class="col-md-3 col-sm-4  col-xs-6">
-            <div class="block-stl2">
-                <div class="img-holder">
-                    <img src="media/images/img13.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="txt-block">
-                    <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
-                    <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
-                    <button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i> Like</button>
-                    </a>
+    if(userId != undefined) {
+        data.map((v, i) => {
+        
+            peopleContainer.innerHTML += `
+      
+            <div class="col-md-3 col-sm-4  col-xs-6">
+                <div class="block-stl2">
+                    <div class="img-holder">
+                        <img src="media/images/img13.jpg" alt="" class="img-responsive">
+                    </div>
+                    <div class="txt-block">
+                        <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
+                        <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
+                        <button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+    
+        `;
+        });
+    }
+    if(data[1]){
+       
+        data[1].map((v, i) => {
+            peopleContainer.innerHTML += `
+            <div class="col-md-3 col-sm-4  col-xs-6">
+                <div class="block-stl2">
+                    <div class="img-holder">
+                        <img src="media/images/img13.jpg" alt="" class="img-responsive">
+                    </div>
+                    <div class="txt-block">
+                        <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
+                        <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>`
+                        data[0].map((v, i) => {
+                            lazyDiv.innerHTML = `<button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  
+                            <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> 
+                            <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i>Liked!</button>`;
+                        })
+                        lazyDiv.innerHTML = `<button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  
+                        <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> 
+                        <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i> Like!</button>`;
+                    `</div>
+                </div>
+            </div>
+    
+        `;
+        });
+    }
 
-    `;
-    });
+  
     peopleContainer.innerHTML += `
   
         <div class="col-lg-12">
