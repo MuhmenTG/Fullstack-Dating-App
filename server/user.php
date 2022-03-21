@@ -104,10 +104,27 @@
 
     public function getUsers()
     {
-        $selectQuery = "SELECT * FROM userInfomation LIMIT 30";                                
+        $selectQuery = "SELECT * FROM userInfomation";                                
         return $this->fetchRecords($selectQuery);
     }
 
+    public function getLikedUsers($userId)
+    {
+        $selectQuery = "SELECT * FROM likes where likedBy = :userId";             
+        return $this->fetchRecords($selectQuery, ":userId", $userId);
+    }
+
+    public function addLikePerson($likedByUserId, $likedUserId){
+        $insertQuery = "INSERT INTO contactTable (likedBy, liked) VALUES(:likedBy, :liked)";
+        $data = array(":likedBy" => $likedByUserId, ":liked" => $likedUserId);
+        $this->executeQuery($insertQuery, $data);
+    }
+
+    public function removeLikePerson($likedByUserId, $likedUserId){
+        $deleteQuery = "DELETE FROM likes WHERE likedBy = :likedBy AND liked = :liked";
+        $data = array(":likedBy" => $likedByUserId, ":liked" => $likedUserId);
+        $this->executeQuery($deleteQuery, $data);
+    }
     
     public function logout()
     {
