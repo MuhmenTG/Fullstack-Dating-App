@@ -59,7 +59,21 @@
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
+    public function changeLike($userId, $receiverId){
 
+        $selectQuery = "SELECT * FROM likes WHERE likedBy = :likedBy AND liked = :liked";
+        $likeData = array(":likedBy" => $userId, ":liked" => $receiverId);
+        $result = $this->returnExecutedQueryRecord($selectQuery, $likeData);
+        if(count($result) > 0)
+        {
+            $SqlQuery = "DELETE FROM likes WHERE likedBy = :likedBy AND liked = :liked";
+        }
+        else{
+            $SqlQuery = "INSERT INTO likes (likedBy, liked) VALUES (:likedBy, :liked)";
+        }
+        return $this->executeQuery($SqlQuery, $likeData);
+      
+    }
  
 }
 

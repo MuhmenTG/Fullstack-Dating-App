@@ -2,7 +2,7 @@ import { HttpRequest} from "./utilities/serverHttpRequest.js";
 import { checkSession } from "./utilities/checkSession.js";
 import { getCurrentSessionId } from "./utilities/checkSession.js";
 const peopleContainer = document.querySelector("#peopleContainer");
-const lazyDiv = document.querySelector("#div");
+
 function getSearchParamValues() {
     let gender = document.getElementById("gender").value;
     let preference = document.getElementById("lookingfor").value;
@@ -54,13 +54,19 @@ async function searchAdvanched() {
 
 async function getLimitedUserByDefault() {
     const userId = await getCurrentSessionId();
-
     const response = await HttpRequest.server("../api/getLatestUsers.php", "POST", {userId});
-    await showLimitedUserByDefault(response, userId);
+    if(userId){
+        console.log('loggedIn');
+        await showLimitedUserForLoggedInUser(response, userId);
+    }
+    else{
+        await showLimitedUserByDefault(response);
+    }
+
 }
 
 
-function showLimitedUserByDefault(data, userId) {
+function showLimitedUserByDefault(data) {
 
     peopleContainer.innerHTML = "";
 
@@ -73,7 +79,8 @@ function showLimitedUserByDefault(data, userId) {
     </div>
     </div>
     `;
-    if(userId != undefined) {
+   
+    
         data.map((v, i) => {
         
             peopleContainer.innerHTML += `
@@ -94,10 +101,41 @@ function showLimitedUserByDefault(data, userId) {
     
         `;
         });
-    }
+        peopleContainer.innerHTML += `
+  
+        <div class="col-lg-12">
+        <div class="text-center">
+            <a href="#" class="c-btn btn1"> View More</a>
+        </div>
+        </div>
+    `;
+
+}
+
+
+
+function showLimitedUserForLoggedInUser(data, userId) {
+
+    peopleContainer.innerHTML = "";
+
+    peopleContainer.innerHTML = `
+    <div class="col-lg-12">
+    <div class="title2">
+        <h2 class="fz35">Search Result : 247</h2>
+        <div class="clearfix"></div>
+        <p class="fz20">Aliquam a neque tortor. Donec iaculis auctor turpis. Eporttitor<br> mattis ullamcorper urna. Cras quis elementum</p>
+    </div>
+    </div>
+    `;
+   
     if(data[1]){
-       
+       let found = false;
         data[1].map((v, i) => {
+            data[0].map((j, i) =>{
+                if(j.liked == v.id){
+                   found = true;
+                }
+            })
             peopleContainer.innerHTML += `
             <div class="col-md-3 col-sm-4  col-xs-6">
                 <div class="block-stl2">
@@ -106,25 +144,18 @@ function showLimitedUserByDefault(data, userId) {
                     </div>
                     <div class="txt-block">
                         <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
-                        <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>`
-                        data[0].map((v, i) => {
-                            lazyDiv.innerHTML = `<button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  
-                            <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> 
-                            <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i>Liked!</button>`;
-                        })
-                        lazyDiv.innerHTML = `<button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button>  
+                        <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
+                        <button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button> 
                         <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> 
-                        <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-heart"></i> Like!</button>`;
-                    `</div>
+                        <button class="btn" onclick="sendLike(${v[0]})"><i class="fa fa-heart"></i>${(found) ? 'unLike' : 'Like'}</button>
+                    </div>
                 </div>
             </div>
     
         `;
+        found = false;
         });
-    }
-
-  
-    peopleContainer.innerHTML += `
+        peopleContainer.innerHTML += `
   
         <div class="col-lg-12">
         <div class="text-center">
@@ -132,9 +163,9 @@ function showLimitedUserByDefault(data, userId) {
         </div>
         </div>
     `;
- 
-
+    }
 }
+
 
 window.viewDetails = async (userId) => {
     const isLoggedIn = await checkSession()
@@ -156,6 +187,19 @@ window.sendFriendRequest = async(receiverUserId)  => {
             break;
     }
 }
+
+window.sendLike = async(receiverUserId)  => {
+    const userId = await getCurrentSessionId();
+    const requestTo = receiverUserId;
+    const data = {id: userId, receiverUserId: requestTo};
+    
+    const response = await HttpRequest.server('../api/Friends/likePerson.php', 'POST', data);
+    if(response){
+       await getLimitedUserByDefault();
+    }
+
+}
+
 document.querySelector("#searchForm").addEventListener("submit", searchAdvanched);
 
 (peopleContainer != null) ? getLimitedUserByDefault() : null;

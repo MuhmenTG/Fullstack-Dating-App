@@ -183,10 +183,7 @@ include('inc/header.php')
 			<div class="container">
 				<div class="row" id="peopleContainer">
 				
-				<div class="txt-block">
-					<p id="div"></p>
-
-                </div>
+			 
 				</div>
 			</div>
 		</section> 

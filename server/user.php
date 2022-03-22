@@ -98,9 +98,6 @@
            return -1;         
         } 
     }
- 
-
-
 
     public function getUsers()
     {
@@ -114,17 +111,6 @@
         return $this->fetchRecords($selectQuery, ":userId", $userId);
     }
 
-    public function addLikePerson($likedByUserId, $likedUserId){
-        $insertQuery = "INSERT INTO contactTable (likedBy, liked) VALUES(:likedBy, :liked)";
-        $data = array(":likedBy" => $likedByUserId, ":liked" => $likedUserId);
-        $this->executeQuery($insertQuery, $data);
-    }
-
-    public function removeLikePerson($likedByUserId, $likedUserId){
-        $deleteQuery = "DELETE FROM likes WHERE likedBy = :likedBy AND liked = :liked";
-        $data = array(":likedBy" => $likedByUserId, ":liked" => $likedUserId);
-        $this->executeQuery($deleteQuery, $data);
-    }
     
     public function logout()
     {
