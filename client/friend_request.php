@@ -61,3 +61,9 @@ include('inc/header.php');
 <script src="js/custom.js"></script>
 <script src="js/friends.js" type="module"></script>
 <script src="js/navbar.js" type="module"></script>
+<script src="./js/utilities/pushNotifications/push.min.js"></script>
+<script src="./js/utilities/pushNotifications/serviceWorker.min.js"></script>
+<script>
+    Push.create('Hello World!')
+
+</script>

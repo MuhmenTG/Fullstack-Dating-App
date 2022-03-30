@@ -118,54 +118,7 @@
                 </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="introducing-wrapper">
-                        <div class="introducing-block ">
-                            <div class="inner-wrapper">
-                                <h2>Introducing Lamour</h2>
-                                <p>Connecting singles across the world to their ideal partner</p>
-                                <form id="searchForm">
-                                    <div id="msgerror"></div>
-                                    <label>I am a :</label>
-                                    <div class="form-group">
-                                        <select id="gender">
-                                            <option value="" selected>Choose Your Preferences</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    <label>Between Age :</label>
-                                    <div class="age-block">
-                                        <div class="form-group">
-                                            <select id="minimumAge">
-                                                <option value="18" selected>18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select id="maximumAge">
-                                                <option value="30" selected>30</option>
-                                                <option value="31">31</option>
-                                                <option value="32">32</option>
-                                                <option value="33">33</option>
-                                                <option value="34">34</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button id="searchBtn" class="c-btn bubbly-button btn1">Take a Chance</button>
-                                    </div>
-                                   <!-- <div class="form-group">
-                                        <a href="#" class="c-btn btn-fb"><i
-                                                class="flaticon-social-facebook-circular-button"></i> Sign In</a>
-                                        <a href="#" class="c-btn btn-gplus"><img src="media/images/gpluse.png" alt="">
-                                            <span>Sign In</span></a>
-                                    </div>-->
-                                </form>
-                            </div>
-                        </div>
+                         
                     </div>
                 </div>
             </div>

@@ -57,7 +57,7 @@ async function getLimitedUserByDefault() {
     const response = await HttpRequest.server("../api/getLatestUsers.php", "POST", {userId});
     if(userId){
         console.log('loggedIn');
-        await showLimitedUserForLoggedInUser(response, userId);
+        await showLimitedUserForLoggedInUser(response);
     }
     else{
         await showLimitedUserByDefault(response);
@@ -67,9 +67,7 @@ async function getLimitedUserByDefault() {
 
 
 function showLimitedUserByDefault(data) {
-
     peopleContainer.innerHTML = "";
-
     peopleContainer.innerHTML = `
     <div class="col-lg-12">
     <div class="title2">
@@ -77,14 +75,10 @@ function showLimitedUserByDefault(data) {
         <div class="clearfix"></div>
         <p class="fz20">Aliquam a neque tortor. Donec iaculis auctor turpis. Eporttitor<br> mattis ullamcorper urna. Cras quis elementum</p>
     </div>
-    </div>
-    `;
+    </div>`;
    
-    
-        data.map((v, i) => {
-        
-            peopleContainer.innerHTML += `
-      
+    data.map((v, i) => {
+        peopleContainer.innerHTML += `
             <div class="col-md-3 col-sm-4  col-xs-6">
                 <div class="block-stl2">
                     <div class="img-holder">
@@ -97,27 +91,22 @@ function showLimitedUserByDefault(data) {
                         </a>
                     </div>
                 </div>
-            </div>
-    
-        `;
+            </div>`;
         });
-        peopleContainer.innerHTML += `
-  
-        <div class="col-lg-12">
-        <div class="text-center">
-            <a href="#" class="c-btn btn1"> View More</a>
-        </div>
-        </div>
-    `;
+        peopleContainer.innerHTML += ` 
+            <div class="col-lg-12">
+            <div class="text-center">
+                <a href="#" class="c-btn btn1"> View More</a>
+            </div>
+            </div>`;
 
 }
 
 
 
-function showLimitedUserForLoggedInUser(data, userId) {
+function showLimitedUserForLoggedInUser(data) {
 
     peopleContainer.innerHTML = "";
-
     peopleContainer.innerHTML = `
     <div class="col-lg-12">
     <div class="title2">
@@ -192,7 +181,6 @@ window.sendLike = async(receiverUserId)  => {
     const userId = await getCurrentSessionId();
     const requestTo = receiverUserId;
     const data = {id: userId, receiverUserId: requestTo};
-    
     const response = await HttpRequest.server('../api/Friends/likePerson.php', 'POST', data);
     if(response){
        await getLimitedUserByDefault();

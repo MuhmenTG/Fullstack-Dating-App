@@ -5,6 +5,7 @@ const outgoing = document.getElementById("outgoing");
 async function getFriendsRequest(){
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/Friends/getRequests.php', 'POST', {id: userId});
+
     await displayInRequest(response[0]);
     await displayOutRequest(response[1]);
 }
@@ -87,7 +88,6 @@ function modifyFriendRequest(requestId, btnClass, callback) {
                 callback(this.getAttribute(requestId), "blocked"); 
                 break;
             case "deleteRequest-btn":
-                console.log(requestId);
                 callback(this.getAttribute(requestId), "delete"); 
                 break;
             default:
@@ -100,8 +100,10 @@ function modifyFriendRequest(requestId, btnClass, callback) {
 
 async function checkUserBeforeModity(requestId, status){
     const response = await friendRequestStatus(requestId, status);
-    if(response){
-       await getFriendsRe$quest()
+    console.log(response);
+    if(response.success){
+        console.log(response);return;
+       await getFriendsRequest()
     }
 }
 

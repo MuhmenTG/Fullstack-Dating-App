@@ -67,6 +67,21 @@
         ((count($result) > 0)) ? $SqlQuery = "DELETE FROM likes WHERE likedBy = :likedBy AND liked = :liked" :  $SqlQuery = "INSERT INTO likes (likedBy, liked) VALUES (:likedBy, :liked)";
         return $this->executeQuery($SqlQuery, $likeData);
     }
+
+    public function getOutgoingLikes($userId)
+    {
+        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = liked.likedBy AND liked.likedBy = :likedBy";
+        $data = array(":likedBy" => $userId);
+        return $this->returnExecutedQueryRecord($selectQuery, $data); 
+    }
+
+    public function getIncomingLikes($userId){
+        $selectQuery = "SELECT friends.id AS requestId, friends.acceptenceStatus AS friendStatus, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
+        WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
+        $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
+        return $this->returnExecutedQueryRecord($selectQuery, $data); 
+    }
+
  
 }
 

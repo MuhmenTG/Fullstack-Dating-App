@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 export class HttpRequest {
     static server(url, methodType, data, key) {
+
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 let response;
@@ -23,12 +24,14 @@ export class HttpRequest {
                         method: methodType,
                         body: JSON.stringify(data)
                     });
+                   
                 }
                 else {
                     response = yield fetch(url, {
                         method: methodType
                     });
                 }
+                 
                 return yield response.json();
             }
             catch (error) {
