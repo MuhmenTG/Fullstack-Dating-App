@@ -5,12 +5,12 @@ const outgoing = document.getElementById("outgoing");
 async function getFriendsRequest(){
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/Friends/getRequests.php', 'POST', {id: userId});
-
     await displayInRequest(response[0]);
     await displayOutRequest(response[1]);
 }
 
 function displayInRequest(response){
+     
     if(response == null){
         //Errorhandling   
     }
@@ -18,9 +18,10 @@ function displayInRequest(response){
                                   Your incoming friend requests
                             </li>`;
     response.map((v, i) => {
-        if(v.friendStatus != "pending")
+        console.log(v);
+        if(v.acceptenceStatus != "pending")
         {
-   
+            
         }
         else
         {
@@ -45,10 +46,11 @@ function displayInRequest(response){
 }
 
 function displayOutRequest(response){
+     
     if(response == null){
         //Errorhandling   
     }
-    console.log(response);
+     
     outgoing.innerHTML = ` <li class="list-group-item title">
                                 Your sent friend requests
                         </li>`;
@@ -100,9 +102,9 @@ function modifyFriendRequest(requestId, btnClass, callback) {
 
 async function checkUserBeforeModity(requestId, status){
     const response = await friendRequestStatus(requestId, status);
-    console.log(response);
-    if(response.success){
-        console.log(response);return;
+    console.log(requestId);return;
+    if(response){
+        console.log(response);
        await getFriendsRequest()
     }
 }

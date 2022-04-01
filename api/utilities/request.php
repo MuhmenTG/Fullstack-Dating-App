@@ -9,7 +9,7 @@ class Request
   public function __construct(){
     $this->method = $_SERVER['REQUEST_METHOD'];  
     $this->data = json_decode(
-      file_get_contents("php://input"), true,  JSON_THROW_ON_ERROR);
+      file_get_contents("php://input"), true);
   }
 
   public function has(string $key): bool
@@ -19,7 +19,7 @@ class Request
 
 	public function get(string $key)
   {
-    return $this->data[$key] || null;
+    return $this->data[$key];
   }
 
 	/*public static function get(string $key): mixed
