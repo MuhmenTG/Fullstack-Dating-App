@@ -102,7 +102,7 @@ function modifyFriendRequest(requestId, btnClass, callback) {
 
 async function checkUserBeforeModity(requestId, status){
     const response = await friendRequestStatus(requestId, status);
-    console.log(requestId);return;
+    console.log(await response);
     if(response){
         console.log(response);
        await getFriendsRequest()

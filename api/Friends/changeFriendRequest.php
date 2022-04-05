@@ -16,12 +16,12 @@ try {
     if($status == "delete"){
         $result = $friend->deleteSentFriendRequest($requestId);
         $response = ($result) ?  $response->toJSON(['success' => 'Friend request deleted']) : $response->code(400).toJSON(['error' => "friend request deleted"]);
-        return $response;
+        echo $response;
     }
     else{
         $result = $friend->changeFriendRequestStatus($requestId, $status);
         $response = ($result) ? $response->toJSON(['success' => 'Friend request '.$request->get("status") ]) : $response->code(400).toJSON(['error' => "friend request unsuccesfull"]);
-        return $response;
+        echo $response;
     }
 } catch(Exception $e) {
     return $response->code($e->code).toJSON(['error' => $e->message]);
