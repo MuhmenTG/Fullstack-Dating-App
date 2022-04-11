@@ -1,3 +1,4 @@
+
 <?php
 include('inc/top.php');
 include('inc/header.php');
@@ -301,6 +302,7 @@ include('inc/header.php');
 <script src="js/custom.js"></script>
 <script src="js/singeBlogPage.js" type="module"></script>
 <script src="js/comment.js" type="module"></script>
+<script src="js/navbar.js" type="module"></script>
 </body>
 
 

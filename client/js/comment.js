@@ -1,6 +1,6 @@
 import { blogId, showSingleBlogPost } from './singeBlogPage.js';
 import { checkSession } from './utilities/checkSession.js';
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest} from "./utilities/serverHttpRequest.js";
 import { messageBox } from './utilities/message.js';
 let emailField = document.getElementById('email'); 
 let numberField = document.getElementById('number'); 
@@ -41,7 +41,7 @@ async function addComment(){
 }*/
  async function middleware(){ 
     const data = await getUserCommentInfo()
-    const response = await serverHttpRequest('../api/addUserComment.php', 'POST', {email: data.email})
+    const response = await HttpRequest.server('../api/addUserComment.php', 'POST', {email: data.email})
     if(response == "" || response == undefined){
         messageBox(`#errormsg`, "block", "red", "User could not be found.");
     }
@@ -53,7 +53,7 @@ async function addComment(){
             post_id: data.post_id,
             userid: userid.id,
         }
-        const response = await serverHttpRequest('../api/addUserComment.php', 'POST', newData);
+        const response = await HttpRequest.server('../api/addUserComment.php', 'POST', newData);
         swal("Comment added");
         if(response){
             showSingleBlogPost(data.post_id);

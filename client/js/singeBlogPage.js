@@ -1,5 +1,5 @@
 import { getCurrentSessionId } from './utilities/checkSession.js';
-import { serverHttpRequest } from './utilities/serverHttpRequest.js';
+import { HttpRequest} from "./utilities/serverHttpRequest.js";
 //const sliderPost = document.querySelector(".b_slider");
 let commentId;
 let userId;
@@ -9,7 +9,7 @@ if (!blogId || blogId < 0 || blogId === "") {
 }
 
 export async function showSingleBlogPost(blogID) {
-    const response = await serverHttpRequest('../api/getSingleBlogDetails.php', 'POST', { blogID });
+    const response = await HttpRequest.server('../api/Blogs/getSingleBlogDetails.php', 'POST', { blogID });
     await displaySinglePost(response[0], response[2].length)
     userId = await getCurrentSessionId();
     await displayCommentPost(response[2], userId)
@@ -22,17 +22,21 @@ function displaySinglePost(data, comments) {
         document.querySelector('.single-blog-wrapper').innerHTML = `
         <div class="blog-txt">
         <div class="inner-txt-block">
-            <a href="#">
-                <h2> Nam vulputate vitae mauris at facilisis. Fusce vel eros commodo, consequat augue
-                    sit amet.</h2>
-            </a>
+                <h2>${v[3]}</h2>
+        <br />
             <ul class="list-unstyled profile-contact">
-                <li><a href="#"><i class="fa fa-user"></i>${v[5]} ${v[6]}</a></li>
-                <li><a href="#"><i class="fa fa-clock-o"></i>${v[4]}</a></li>
-
+                <li><a href="#"><i class="fa fa-user"></i>${v[6]}</a></li>
+                <br />
+                <li><a href="#"><i class="fa fa-clock-o"></i>${v[5]}</a></li>
+                <br />
                 <li><a href="#"><i class="fa fa-comment-o"></i>${comments}</a></li>
+
+        <br />
+        <br />
+                <li>${v[4]}</li>
+
             </ul>
-            <p>${v[3]}</p>
+    
         </div>
     </div>
     `

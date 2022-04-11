@@ -4,11 +4,11 @@ const searchPost = document.getElementById("searchPost");
 async function showBlogPost(name){
     let data = "";
     if(name != undefined){       
-        data = await HttpRequest.server('../api/blogSearch.php', 'POST', {name})
+        data = await HttpRequest.server('../api/Blogs/blogSearch.php', 'POST', {name})
         console.log(data);
     }
     else{
-        data = await HttpRequest.server('../api/allBlogs.php', 'POST')
+        data = await HttpRequest.server('../api/Blogs/allBlogs.php', 'POST')
     }
     await viewFetchedBlogData(data)
 }
@@ -24,6 +24,7 @@ function viewFetchedBlogData(data){
     else
     {  
         data.map((v, i) => {        
+            console.log(v);
             blogContainer.innerHTML +=  
               `<div class="col-lg-12" id="col-lg-12">
                 <div class="blogs">
@@ -39,7 +40,7 @@ function viewFetchedBlogData(data){
                                 <li><a href="#"><i class="fa fa-comment-o"></i>66</a></li>
                             </ul>
                             <p>${v.shortDescription}</p>
-                            <a href="blog_single.php?id=${v.id}" class='c-btn btn1'>Read More</a>
+                            <a href="blog_single.php?id=${v[0]}" class='c-btn btn1'>Read More</a>
                         </div>
                     </div>
                 </div>

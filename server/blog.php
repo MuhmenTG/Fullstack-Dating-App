@@ -12,7 +12,6 @@
     public function getBlogs($searchParams = NULL)
     {
         $paramType = gettype($searchParams);
-    
         $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
         u.firstName, u.lastName, u.id
         from blog b, userInfomation u
@@ -25,14 +24,21 @@
                 $selectQuery .= " AND u.firstName LIKE :firstName";
                 return $this->fetchRecords($selectQuery, ":firstName", '%'.$searchParams.'%');
                 break;
-            case 'integer':
-                $selectQuery .= " AND b.id = :id";          
-                return $this->fetchRecords($selectQuery, ":id", $id);
-                break;
             default:
                 return;
         }
     }
+
+    public function getSpecificBlog($searchParams = NULL)
+    {
+        
+        $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
+        u.firstName, u.lastName, u.id
+        from blog b, userInfomation u
+        WHERE b.userId = u.id AND b.id = :id";
+        return $this->fetchRecords($selectQuery, ":id", $searchParams);
+    }
+
 
     public function specificCommentRecord($tableName, $column, $id)
     {

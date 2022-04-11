@@ -23,6 +23,7 @@ async function authorizedNavbar() {
                     <li><a href="newUserProfilePage.php">My Account</a></li>
                     <li><a href="settings.php">My Settings</a></li>
                     <li><a href="search_partner.php">Explore</a></li>
+                    <li><a href="blog.php">Blog</a></li>
                     <li><a href="suggest_candidates.php">Found Matches</a></li>
                     <li><a href="friend_request.php">Friend Requests</a></li>
                     <li><a href="favorite.php">Love&Likes</a></li>
