@@ -1,8 +1,31 @@
 <?php
 session_start();
-   include('../server/user.php');
-   $data = json_decode(file_get_contents('php://input'), true);
-   $userId = $data['id'];
-   $userObject = new User();
-   $userResult = $userObject->getUserInfo($userId);
-   echo json_encode($userResult);
+include('../../server/user.php');
+include('../utilities/request.php');
+include('../utilities/response.php');
+
+$user = new User();
+$request = new Request(); 
+$response = new Response();
+
+$userId = $request->get("id");
+
+if(!$request->has('id')) {
+   return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
+}
+
+try{
+   $userResult = $user->getUserInfo($userId);
+   if($userResult){
+      echo $response->toJSON($userResult);
+   }
+   
+}  
+catch(Exception $e) 
+{
+  return $response->code($e->code)->toJSON(['error' => $e->message]);
+}
+  
+ 
+
+

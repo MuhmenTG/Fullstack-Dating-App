@@ -66,7 +66,7 @@ async function getUserInfo(){
     const progress = document.querySelectorAll('.progress');
   //  progress[0].innerHTML = "Loarding";
     const userId = await getCurrentSessionId()
-    const response = await HttpRequest.server('../api/getUserInfo.php', 'POST', {id: userId});
+    const response = await HttpRequest.server('../api/User/getUserInfo.php', 'POST', {id: userId});
     let totalParams = 0;    
     let info = 0;
     let percentage = 0;
@@ -127,7 +127,7 @@ async function updateUserInfo(key, v){
     progress[0].innerHTML = "Loarding";
     
     const userId = await getCurrentSessionId();
-    const response = await HttpRequest.server('../api/editUserInfo.php', 'POST', {key, value: v.value, userId});
+    const response = await HttpRequest.server('../api/User/editUserInfo.php', 'POST', {key, value: v.value, userId});
     if(response){
         getUserInfo();
     }

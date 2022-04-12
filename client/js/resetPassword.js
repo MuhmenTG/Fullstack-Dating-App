@@ -12,7 +12,7 @@ async function resetPassword(){
         token,
         email
     }
-    const response = await HttpRequest.server('../api/resetPassword.php', 'POST', data);
+    const response = await HttpRequest.server('../api/User/resetPassword.php', 'POST', data);
     (response) ?
        swal('Updated')
     :

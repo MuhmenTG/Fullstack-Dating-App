@@ -13,7 +13,7 @@ function getLoginsDetails()
 async function userLogin(){
     event.preventDefault();
     const data = await getLoginsDetails()
-    const response = await HttpRequest.server("../api/login.php", 'POST', data);
+    const response = await HttpRequest.server("../api/Auth/login.php", 'POST', data);
     if(response){
         location.href = 'newUserProfilePage.php';    
     }

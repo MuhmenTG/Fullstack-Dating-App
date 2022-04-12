@@ -7,7 +7,7 @@ const email = urlParams.get("email");
 
 async function verifyUser(){
     let data = {token, email}
-    let response = await HttpRequest.server("../api/verifyUser.php", 'POST', data)
+    let response = await HttpRequest.server("../api/Auth/verifyUser.php", 'POST', data)
     if(response)
     {
        document.getElementById('msg').innerHTML = "Verification successfull"

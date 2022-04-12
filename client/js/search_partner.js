@@ -44,7 +44,7 @@ async function searchAdvanched() {
     const isLoggedIn = await checkSession();
     if(isLoggedIn){
         const data = await getSearchParamValues();
-        const response = await HttpRequest.server("../api/advancedSearch.php", "POST", data);
+        const response = await HttpRequest.server("../api/User/advancedSearch.php", "POST", data);
         await showLimitedUserByDefault(response);
     }
     else{
@@ -54,7 +54,7 @@ async function searchAdvanched() {
 
 async function getLimitedUserByDefault() {
     const userId = await getCurrentSessionId();
-    const response = await HttpRequest.server("../api/getLatestUsers.php", "POST", {userId});
+    const response = await HttpRequest.server("../api/User/getLatestUsers.php", "POST", {userId});
     if(userId){
         console.log('loggedIn');
         await showLimitedUserForLoggedInUser(response);

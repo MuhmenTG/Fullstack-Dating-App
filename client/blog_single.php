@@ -142,46 +142,8 @@ include('inc/header.php');
         </div>
     </div>
 </section>
-<section class="leave-replay new-block">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="title2">
-                    <h2 class="fz35">Leave & Reply</h2>
-                    <div class="clearfix"></div>
-                    <p class="fz20">Aliquam a neque tortor. Donec iaculis auctor turpis. Eporttitor<br> mattis
-                        ullamcorper urna. Cras quis elementum</p>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <form>
-                    <div class="row">
-                        <span id="errormsg"></span>
-                    </div>
-                    <div class="row">
+<section class="leave-replay new-block block">
 
-                        <div class="col-lg-4 col-md-4">
-                            <div class="from-group">
-                                <input type="text" class="form-control" id="email" placeholder="Email id">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="from-group">
-                                <textarea class="form-control" id="comment"
-                                    placeholder="Type your comment.."></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 text-center">
-                            <div class="from-group">
-                                <button id="submitComment" class="c-btn btn1">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </section><!-- leave-replay -->
 
 
@@ -300,9 +262,11 @@ include('inc/header.php');
 <script src="js/plugins.js"></script>
 <!-- Custom -->
 <script src="js/custom.js"></script>
+
 <script src="js/singeBlogPage.js" type="module"></script>
-<script src="js/comment.js" type="module"></script>
+
 <script src="js/navbar.js" type="module"></script>
+<script src="js/comment.js" type="module"></script>
 </body>
 
 

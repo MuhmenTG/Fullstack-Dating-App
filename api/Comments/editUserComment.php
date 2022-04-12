@@ -16,11 +16,11 @@ if(!$request->has('message') && !$request->has('commentId')) {
 
 try {
     $updatedComment = $comment->editUserComment($message, $commentId);
-    if($isDeleted){
-        echo $response->toJSON([$updatedComment]);
+    if($updatedComment){
+        echo $response->code(200)->toJSON([$updatedComment]);
     }
     else{
-       echo $response->code(400)->toJSON(['error' => "Could not delete comment"]);
+       echo $response->code(400)->toJSON(['error' => "Could not edit comment"]);
     }
 }  catch(Exception $e) {
     return $response->code($e->code)->toJSON(['error' => $e->message]);

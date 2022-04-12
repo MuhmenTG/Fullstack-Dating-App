@@ -111,7 +111,7 @@ function displayCommentPost(data, userId) {
                     </div>
                 </div>
             </div>
-                    <hr class="hr new-block">`
+                <hr class="hr new-block">`
         } else {
             document.querySelector('.comments-block').innerHTML += `
             <div class="comment-box new-block">
@@ -151,7 +151,61 @@ function displayCommentPost(data, userId) {
         }
 
     })
+    if(userId){
+        document.querySelector('.block').innerHTML =  `
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title2">
+                        <h2 class="fz35">Leave & Reply</h2>
+                        <div class="clearfix"></div>
 
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <form id="addComment">
+                        <div class="row">
+                            <span id="errormsg"></span>
+                        </div>
+                        <div class="row">                    
+                            <div class="col-lg-12">
+                                <div class="from-group">
+                                    <textarea class="form-control" id="comment"
+                                        placeholder="Type your comment.."></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="from-group">
+                                    <button class="c-btn btn1">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        `;
+    }
+    else{
+        document.querySelector('.block').innerHTML =  `
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title2">
+                        <h2 class="fz35">Leave & Reply</h2>
+                        <div class="clearfix"></div>
+                        <p class="fz20">Register or login to leave a comment</p>
+                        <a href="">Login</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        `;
+    }
+ 
+
+    document.querySelector("#addComment").addEventListener('submit', addComment)
     modifyComment(data, "delete-btn", "data-delete", checkUserBeforeModity);
     modifyComment(data, "update-btn", "data-update", checkUserBeforeModity);
 }
@@ -162,6 +216,17 @@ function modifyComment(data, btnClass, btnDataName, callback, btnUserId = "data-
         mButtons[i].addEventListener("click", function () {
         (btnClass === "delete-btn") ?  callback(this.getAttribute(btnDataName), this.getAttribute(btnUserId)) : callback(this.getAttribute(btnDataName), this.getAttribute(btnUserId), data) 
         });
+    }
+}
+
+
+async function addComment(){
+    event.preventDefault();
+    const comment = document.getElementById("comment").value;
+    const commentInfo = {comment: comment, blogId: blogId, userId: userId};
+    const response = await HttpRequest.server('../api/Comments/addUserComment.php', 'POST', commentInfo);
+    if(response.status == 200){
+        showSingleBlogPost(blogId);
     }
 }
 
@@ -177,7 +242,7 @@ async function checkUserBeforeModity(cId, userId, data){
 }
 
 async function getComment(commentId, userId) {
-    const response = await serverHttpRequest('../api/deleteUserComment.php', 'POST', {commentId, userId})
+    const response = await HttpRequest.server('../api/Comments/deleteUserComment.php', 'POST', {commentId, userId})
     if (response) {
         await showSingleBlogPost(blogId)
         return;
@@ -199,8 +264,8 @@ async function postNewComment() {
         commentId,
         message
     }
-    const response = await serverHttpRequest('../api/editUserComment.php', 'POST', data)
-    if (response) {
+    const response = await HttpRequest.server('../api/Comments/editUserComment.php', 'POST', data)
+    if(response[0]) {
         $('#updateModal').modal('hide');
         showSingleBlogPost(blogId)
     }

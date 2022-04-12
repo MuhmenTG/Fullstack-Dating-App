@@ -21,7 +21,7 @@ try {
         echo $response->toJSON([$isDeleted]);
     }
     else{
-       echo $response->code(400)->toJSON(['error' => "Could not comment"]);
+       echo $response->code(400)->toJSON(['error' => "Could not delete comment"]);
     }
 }  catch(Exception $e) {
     return $response->code($e->code)->toJSON(['error' => $e->message]);

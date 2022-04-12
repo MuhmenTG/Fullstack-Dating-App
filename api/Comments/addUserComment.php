@@ -8,17 +8,17 @@ $request = new Request();
 $response = new Response();
 
 $userComment = $request->get("comment");
-$postId = $request->get("post_id");
-$userId = $request->get("userid");
+$postId = $request->get("blogId");
+$userId = $request->get("userId");
 
-if(!$request->has('comment') && !$request->has('post_id')  && !$request->has('userid')) {
+if(!$request->has('comment') && !$request->has('blogId')  && !$request->has('userId')) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }
 
 try {
-    $commented = $message->addUserComment($userComment, $postId, $userId);
+    $commented = $comment->addUserComment($userComment, $postId, $userId);
     if($commented){
-        echo $response->toJSON($commented);
+        echo $response->code(200)->toJSON([$commented]);
     }
     else{
        echo $response->code(400)->toJSON(['error' => "Could not comment"]);

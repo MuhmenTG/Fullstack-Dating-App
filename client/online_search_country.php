@@ -3,7 +3,7 @@
 include('inc/top.php');
 include('inc/header.php');
 ?>
-
+ 
 		<section class="page-info new-block">
 			<div class="fixed-bg" style="background: url('media/images/page-info-bg.jpg');"></div>
 			<div class="overlay"></div>
