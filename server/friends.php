@@ -70,15 +70,14 @@
 
     public function getOutgoingLikes($userId)
     {
-        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = liked.likedBy AND liked.likedBy = :likedBy";
+        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN likes ON userInfomation.id = likes.likedBy AND likes.liked = :likedBy";
         $data = array(":likedBy" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
     public function getIncomingLikes($userId){
-        $selectQuery = "SELECT friends.id AS requestId, friends.acceptenceStatus AS friendStatus, firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN friends ON userInfomation.id = friends.senderId
-        WHERE friends.acceptenceStatus =  :acceptenceStatus AND friends.receiverId = :senderId";
-        $data = array(":acceptenceStatus" => "pending", ":senderId" => $userId);
+        $selectQuery = "SELECT firstName, lastname, userInfomation.id FROM userInfomation INNER JOIN likes ON userInfomation.id = likes.liked AND likes.likedBy = :liked";
+        $data = array(":liked" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
