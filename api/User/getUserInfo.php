@@ -19,7 +19,6 @@ try{
    if($userResult){
       echo $response->toJSON($userResult);
    }
-   
 }  
 catch(Exception $e) 
 {

@@ -12,7 +12,6 @@
     $maxWeight = $data['maxWeight'];
     $education = $data['education'];
     $maxAge = $data['maxAge'];
-    //$socialstatus = $data['socialstatus'];
     $work = $data['work'];
     $maritalStatus = $data['maritalStatus'];
     $smokingStatus = $data['smokingStatus'];

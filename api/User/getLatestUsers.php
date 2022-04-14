@@ -1,4 +1,5 @@
 <?php
+
     include('../../server/user.php');
     include('../utilities/request.php');
     include('../utilities/response.php');
@@ -16,11 +17,11 @@
     try{
         if($userId){
             $likedUsers = $user->getLikedUsers($userId);
-            $showlatestUsers = $user->getUsers();
-            $result = array($likedUsers, $showlatestUsers);
+            $getUsers = $user->getUsers();
+            $result = array($likedUsers, $getUsers);
         }
         else{
-            $result = $showlatestUsers;
+            $result = $getUsers;
         }
         echo $response->toJSON($result);
     }  

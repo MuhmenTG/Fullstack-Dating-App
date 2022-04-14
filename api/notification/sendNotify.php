@@ -2,11 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include('../../server/friends.php');
+include('../../server/notifications.php');
 include('../utilities/request.php');
 include('../utilities/response.php');
      
-$friend = new Friends();
+$notification = new Notification();
 $request = new Request(); 
 $response = new Response();
 
@@ -17,10 +17,9 @@ if(!$request->has('id') || !$request->has('receiverUserId')) {
 }
 
 try {
-    $liked = $friend->changeLike($userId, $receiverUserId);
-   
-    if($liked){
-        echo $liked;
+    $notity = $notification->createNotification("liked you", $userId, $receiverUserId);
+    if($notity){
+        echo $notity;
     }
     else{
         echo $response->code(400)->toJSON(['error' => "Something went wrong"]);

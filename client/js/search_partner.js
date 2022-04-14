@@ -184,8 +184,8 @@ window.sendLike = async(receiverUserId)  => {
     const response = await HttpRequest.server('../api/Friends/likePerson.php', 'POST', data);
     if(response){
        await getLimitedUserByDefault();
+       const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
     }
-
 }
 
 document.querySelector("#searchForm").addEventListener("submit", searchAdvanched);

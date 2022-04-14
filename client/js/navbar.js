@@ -12,6 +12,8 @@ async function authorizedNavbar() {
 						<div class="col-lg-12">
 							<div class="right-nav">
                                 <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span> 
+                                <span class="top-nav-signup_ligin"><a href="logout.php">Notification</a> </span> 
+                                
 								<a href="#" class="support-num">Support Number : +1 (123 ) 456 789</a>
 							</div>
 						</div>
