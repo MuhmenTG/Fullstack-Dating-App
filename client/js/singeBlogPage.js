@@ -225,8 +225,8 @@ async function addComment(){
     const comment = document.getElementById("comment").value;
     const commentInfo = {comment: comment, blogId: blogId, userId: userId};
     const response = await HttpRequest.server('../api/Comments/addUserComment.php', 'POST', commentInfo);
-    if(response.status == 200){
-        showSingleBlogPost(blogId);
+    if(response.status = 200){
+      showSingleBlogPost(blogId)
     }
 }
 
@@ -235,9 +235,6 @@ async function checkUserBeforeModity(cId, userId, data){
     commentId = parseInt(cId);
     if (currentSessionUserId == userId) {
         (data == undefined) ? getComment(commentId, userId) : postComment(commentId, data)
-    } 
-    else {
-        
     } 
 }
 

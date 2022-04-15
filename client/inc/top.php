@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="css/newUserProfilePage.css">
 	<link rel="stylesheet" href="css/colors.css">
 	<link rel="stylesheet" href="css/myStyle.css">
+	<link rel="stylesheet" href="css/notify.css">
 	<link rel="stylesheet" href="sweetalert2.min.css">
 
  <!--	<link rel="stylesheet" href="css/chat.css">-->

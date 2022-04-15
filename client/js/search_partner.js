@@ -162,7 +162,7 @@ window.viewDetails = async (userId) => {
 }
 window.sendFriendRequest = async(receiverUserId)  => {
     const userId = await getCurrentSessionId();
-    const requestTo = receiverUserId;
+    const requestTo = rece$iverUserId;
     const data = {id: userId, receiverUserId: requestTo}
     const response = await HttpRequest.server('../api/Friends/sendFriendRequest.php', 'POST', data);
     switch(response){
@@ -171,6 +171,7 @@ window.sendFriendRequest = async(receiverUserId)  => {
             break;
         case 1:
             swal("Friend request is sent")
+            const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
             break;
         default:
             break;

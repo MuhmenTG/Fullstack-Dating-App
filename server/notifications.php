@@ -16,7 +16,7 @@
     }
 
     public function getNotifications($userId){
-        $selectQuery = "SELECT firstName, lastName, gender, userInfomation.id FROM userInfomation INNER JOIN notifications ON notifications.userToNotify = userInfomation.id AND notifications.userToNotify = :userToNotify AND notifications.isViewed = 0";
+        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify AND notify.isViewed = 0";
         $data = array(":userToNotify" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }

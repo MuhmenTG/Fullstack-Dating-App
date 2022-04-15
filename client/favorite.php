@@ -8,13 +8,14 @@ include('inc/header.php');
 <link rel="stylesheet" href="css/friend.css">
 <section class="search-result-area new-block pdtb-100">
     <div class="container">
-        <div class="row" id="peopleContainer">
+        <div class="row" id="likesBox">
+    
 
 
         </div>
     </div>
 </section>
-
+<a href=""></a>
 
 
 <!-- Plugins -->

@@ -11,10 +11,19 @@ async function authorizedNavbar() {
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="right-nav">
+
                                 <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span> 
-                                <span class="top-nav-signup_ligin"><a href="logout.php">Notification</a> </span> 
-                                
-								<a href="#" class="support-num">Support Number : +1 (123 ) 456 789</a>
+                                <ul class="notification-drop">
+                                <li class="item">
+                                  <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">4</span>     
+                                  <ul>
+                                    <li>First Item</li>
+                                    <li>Second Item</li>
+                                    <li>Third Item</li>
+                                  </ul>
+                                </li>
+                              </ul>                       
+  
 							</div>
 						</div>
 					</div>
@@ -22,11 +31,11 @@ async function authorizedNavbar() {
 
         loggedInNavbar.innerHTML = `
                 <ul class="list-unstyled">
+                
                     <li><a href="newUserProfilePage.php">My Account</a></li>
                     <li><a href="settings.php">My Settings</a></li>
                     <li><a href="search_partner.php">Explore</a></li>
                     <li><a href="blog.php">Blog</a></li>
-                    <li><a href="suggest_candidates.php">Found Matches</a></li>
                     <li><a href="friend_request.php">Friend Requests</a></li>
                     <li><a href="favorite.php">Love&Likes</a></li>
                     <li><a href="chat.php">My messsages</a></li>
@@ -60,7 +69,7 @@ async function authorizedNavbar() {
  
         `;
     }
-   
 }
-
+ 
+  
 authorizedNavbar();
