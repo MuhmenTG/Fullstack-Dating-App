@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include('../../server/notifications.php');
 include('../utilities/request.php');
 include('../utilities/response.php');
@@ -9,15 +11,14 @@ $request = new Request();
 $response = new Response();
 
 $userId = $request->get("id");
-$receiverUserId = $request->get("receiverUserId"); 
-if(!$request->has('id') || !$request->has('receiverUserId')) {
+if(!$request->has('id')) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }
 
 try {
-    $notity = $notification->createNotification("liked you", $userId, $receiverUserId);
-    if($notity){
-        echo $notity;
+    $getNotification = $notification->getUnreadNotifications($userId);
+    if($getNotification){
+        echo $response->code(200)->toJSON($getNotification);
     }
     else{
         echo $response->code(400)->toJSON(['error' => "Something went wrong"]);

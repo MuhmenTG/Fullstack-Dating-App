@@ -1,25 +1,31 @@
 import { checkSession } from "./utilities/checkSession.js";
- 
+import { getNotification } from "./notification.js";
+import { modifyNotification, changeStatus } from "./notification.js";
 async function authorizedNavbar() {
     const isLoggedIn = await checkSession();
     const loggedInNavbar = document.querySelector('.nav');
     const loggedInTopBar = document.querySelector('.topnav');
     if(isLoggedIn){
-
+        const response = await getNotification();
+        console.log(response);
         loggedInTopBar.innerHTML = ` 
                 <div class="container">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="right-nav">
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="right-nav">
 
                                 <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span> 
                                 <ul class="notification-drop">
                                 <li class="item">
                                   <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">4</span>     
                                   <ul>
-                                    <li>First Item</li>
-                                    <li>Second Item</li>
-                                    <li>Third Item</li>
+                                    ${
+                                      response.map((v,i) => {
+                                        return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
+                                        `
+                                      })
+                                    }
+                                
                                   </ul>
                                 </li>
                               </ul>                       
@@ -43,6 +49,7 @@ async function authorizedNavbar() {
                   </ul>
                          
     `;
+    modifyNotification(changeStatus)
     }
     else{
         loggedInTopBar.innerHTML = `
@@ -68,7 +75,11 @@ async function authorizedNavbar() {
         </ul>
  
         `;
+
     }
+
+
+
 }
  
   

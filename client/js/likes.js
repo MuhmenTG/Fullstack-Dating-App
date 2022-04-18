@@ -24,8 +24,9 @@ function showLikedUsers(data, persons) {
                     </div>
                     <div class="txt-block">
                         <h3 class="fz22">${v[0] + ' ' + v[1]}</h3>
-                         <a class="btn"  href="">View Profile</a>
-                        </p>
+                         <a  class="btn" href="viewUserProfile.php?id=${v[2]}">Profile</a>
+
+                         </p>
                    </div>
                     </div>
                 </div>
