@@ -58,12 +58,7 @@ include('inc/header.php');
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
 <!-- Custom -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script src="js/custom.js"></script>
 <script src="js/friends.js" type="module"></script>
 <script src="js/navbar.js" type="module"></script>
-<script src="./js/utilities/pushNotifications/push.min.js"></script>
-<script src="./js/utilities/pushNotifications/serviceWorker.min.js"></script>
-<script>
-    Push.create('Hello World!')
-
-</script>

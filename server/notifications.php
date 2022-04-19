@@ -16,13 +16,14 @@
     }
 
     public function getNotifications($userId){
-        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify ORDER BY DES";
+      
+        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify ORDER BY notify.id DESC";
         $data = array(":userToNotify" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
     public function getUnreadNotifications($userId){
-        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify AND notify.isViwed = 0";
+        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify AND notify.isViewed = 0 AND notify.isShowned = 0";
         $data = array(":userToNotify" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }

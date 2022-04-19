@@ -1,5 +1,5 @@
 import { checkSession } from "./utilities/checkSession.js";
-import { getNotification } from "./notification.js";
+import { getNotification, getRealTimeNotification } from "./notification.js";
 import { modifyNotification, changeStatus } from "./notification.js";
 async function authorizedNavbar() {
     const isLoggedIn = await checkSession();
@@ -20,10 +20,14 @@ async function authorizedNavbar() {
                                   <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">4</span>     
                                   <ul>
                                     ${
-                                      response.map((v,i) => {
-                                        return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
-                                        `
-                                      })
+                                      (response) ? 
+                                      (
+                                        response.map((v,i) => {
+                                          return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
+                                          `
+                                        })
+                                      ) : null  
+                                      
                                     }
                                 
                                   </ul>
@@ -50,6 +54,7 @@ async function authorizedNavbar() {
                          
     `;
     modifyNotification(changeStatus)
+    setInterval(getRealTimeNotification, 10000)
     }
     else{
         loggedInTopBar.innerHTML = `

@@ -55,7 +55,6 @@ class Query extends Database
 
     protected function returnExecutedQueryRecord($selectQuery, $data)
     {
-        
         $statement = $this->connect()->prepare($selectQuery);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);

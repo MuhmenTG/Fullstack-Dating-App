@@ -7,12 +7,18 @@ export async function getNotification(){
     return response;
 }
 
+
 export async function getRealTimeNotification(){
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/notification/getUnreadNotification.php', 'POST', {id: userId});
-    return response;
-}
+    if(response.length > 0){
+        response.map((v,i) => {
+            Push.create(`${v.firstName} ${v.lastName} ${v.msg}`);
+            changeStatus(v.notifyId);
+        })
 
+    }
+}
 
 export function modifyNotification(callback) {
     var mButtons = document.getElementsByClassName("notfications");
@@ -24,8 +30,6 @@ export function modifyNotification(callback) {
 }
 
 export async function changeStatus(notificationId, senderId){
-    console.log(notificationId, senderId);return;
-    const userId = await getCurrentSessionId();
-    const response = await HttpRequest.server('../api/notification/getNotifies.php', 'POST', {userId, notificationId});
+    const response = await HttpRequest.server('../api/notification/changeNotify.php', 'POST', {notificationId});
     return response;
 }
