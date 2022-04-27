@@ -11,6 +11,7 @@ $request = new Request();
 $response = new Response();
 
 $userId = $request->get("id");
+
 if(!$request->has('id')) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }

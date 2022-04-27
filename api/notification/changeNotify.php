@@ -1,24 +1,25 @@
 <?php
-
-include('../../server/friends.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+include('../../server/notifications.php');
 include('../utilities/request.php');
 include('../utilities/response.php');
      
-$friend = new Friends();
+$notification = new Notification();
 $request = new Request(); 
 $response = new Response();
 
-$userId = $request->get("id");
-$receiverUserId = $request->get("receiverUserId"); 
-if(!$request->has('id') || !$request->has('receiverUserId')) {
+$userId = $request->get("notificationId");
+if(!$request->has("notificationId")) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }
 
 try {
-    $liked = $friend->changeLike($userId, $receiverUserId);
-   
-    if($liked){
-        echo $liked;
+    $updateNotfication = $notification->updateNotification($userId);
+    
+    if($updateNotfication){
+        echo $response->code(200)->toJSON([$updateNotfication]);
     }
     else{
         echo $response->code(400)->toJSON(['error' => "Something went wrong"]);

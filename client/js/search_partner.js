@@ -134,9 +134,12 @@ function showLimitedUserForLoggedInUser(data) {
                     <div class="txt-block">
                         <h3 class="fz22">${v[1] + ' ' + v[2]}</h3>
                         <p> ${v[5]} / ${v[9]} / ${v[8]}	</p>
-                        <button class="btn" onclick="viewDetails(${v[0]})"><i class="fa fa-eye"></i> Details</button> 
-                        <button class="btn" onclick="sendFriendRequest(${v[0]})"><i class="fa fa-plus"></i> Friend</button> 
-                        <button class="btn" onclick="sendLike(${v[0]})"><i class="fa fa-heart"></i>${(found) ? 'unLike' : 'Like'}</button>
+
+                        <button class="btn view-btn" data-userId="${v[0]}"><i class="fa fa-eye"></i> Details</button> 
+
+                        <button class="btn sendRequest-btn" data-userId="${v[0]}"><i class="fa fa-plus"></i> Friend</button> 
+
+                        <button class="btn like-btn" data-userId="${v[0]}""><i class="fa fa-heart"></i>${(found) ? 'unLike' : 'Like'}</button>
                     </div>
                 </div>
             </div>
@@ -153,29 +156,72 @@ function showLimitedUserForLoggedInUser(data) {
         </div>
     `;
     }
+
+    userAction("data-userId", "view-btn", viewDetails);
+
+    userAction("data-userId", "sendRequest-btn", sendRequest, "../api/Friends/sendFriendRequest.php");
+
+    userAction("data-userId", "like-btn", sendRequest, "../api/Friends/likePerson.php");
+
+    //userAction("data-userId", "like-btn", sendFriendRequest);
+    //userAction("data-userId", "sendRequest-btn", sendLike);
+
 }
 
+function userAction(userId, btnClass, callback, apiUrl) {
+    const mButtons = document.getElementsByClassName(btnClass);
+    for (let i = 0; i < mButtons.length; i++) {
+        mButtons[i].addEventListener("click", function () {
+        switch (btnClass) {
+            case "view-btn":
+                callback(this.getAttribute(userId)); 
+                break;
+            case "like-btn":
+                callback(this.getAttribute(userId), btnClass, apiUrl); 
+                break;
+            case "sendRequest-btn":
+                callback(this.getAttribute(userId), btnClass, apiUrl); 
+                break;
+        }
+        });
+    }
+}
 
-window.viewDetails = async (userId) => {
+ 
+async function viewDetails(userId){
     const isLoggedIn = await checkSession()
     (!isLoggedIn) ? $("#loginModal").modal() : location.href = `viewUserProfile.php?id=${userId}`; 
 }
-window.sendFriendRequest = async(receiverUserId)  => {
+async function sendRequest(receiverUserId, btnClass, api) {
     const userId = await getCurrentSessionId();
     const requestTo = receiverUserId;
-    const data = {id: userId, receiverUserId: requestTo}
-    const response = await HttpRequest.server('../api/Friends/sendFriendRequest.php', 'POST', data);
-    switch(response){
-        case -1:
-            swal("Request Already sent");
-            break;
-        case 1:
-            swal("Friend request is sent");
-            const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
-            break;
-        default:
-            break;
+    const data = {id: userId, receiverUserId: requestTo};
+    const response = await HttpRequest.server(api, 'POST', data);
+    if(response && btnClass == "like-btn"){
+       await getLimitedUserByDefault();
+       const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
     }
+    else if(response && btnClass == "sendRequest-btn"){
+        switch(response){
+            case -1:
+                swal("Request Already sent");
+                break;
+            case 1:
+                swal("Friend request is sent");
+                const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+/*async function sendFriendRequest(receiverUserId, api){ {
+    const userId = await getCurrentSessionId();;
+    const data = {id: userId, receiverUserId}
+
+    const response = await HttpRequest.server('../api/Friends/sendFriendRequest.php', 'POST', data);
+    
 }
 
 window.sendLike = async(receiverUserId)  => {
@@ -188,7 +234,7 @@ window.sendLike = async(receiverUserId)  => {
        const response = await HttpRequest.server('../api/notification/sendNotify.php', 'POST', data)
     }
 }
-
+*/ 
 document.querySelector("#searchForm").addEventListener("submit", searchAdvanched);
 
 (peopleContainer != null) ? getLimitedUserByDefault() : null;

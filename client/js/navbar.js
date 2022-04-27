@@ -7,7 +7,7 @@ async function authorizedNavbar() {
     const loggedInTopBar = document.querySelector('.topnav');
     if(isLoggedIn){
         const response = await getNotification();
-        console.log(response);
+    //    console.log(response);
         loggedInTopBar.innerHTML = ` 
                 <div class="container">
                                 <div class="row">
@@ -17,17 +17,19 @@ async function authorizedNavbar() {
                                 <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span> 
                                 <ul class="notification-drop">
                                 <li class="item">
-                                  <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">4</span>     
-                                  <ul>
+                                
+                                  <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button">${response.length}</span>     
+                                  <ul class="notficationsList">
                                     ${
-                                      (response) ? 
+                                      (response.length > 0) ? 
                                       (
                                         response.map((v,i) => {
                                           return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
                                           `
                                         })
-                                      ) : null  
-                                      
+                                      ) : (
+                                        `<li class="notfications">No notification found</li>`
+                                      )
                                     }
                                 
                                   </ul>
@@ -55,6 +57,8 @@ async function authorizedNavbar() {
     `;
     modifyNotification(changeStatus)
     setInterval(getRealTimeNotification, 10000)
+    setInterval(displayNotfication, 5000);
+    
     }
     else{
         loggedInTopBar.innerHTML = `
@@ -83,9 +87,26 @@ async function authorizedNavbar() {
 
     }
 
-
-
 }
- 
-  
+
+async function displayNotfication(){
+  const response = await getNotification(); 
+  document.querySelector(".btn__badge").innerHTML = `
+  ${response.length}
+  `
+  document.querySelector(".notficationsList").innerHTML = `
+  ${
+    (response.length > 0) ? 
+    (
+      response.map((v,i) => {
+        return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
+        `
+      })
+    ) : (
+      `<li class="notfications">No notification found</li>`
+    )
+  }
+  `
+}
+
 authorizedNavbar();

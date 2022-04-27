@@ -16,7 +16,6 @@
     }
 
     public function getNotifications($userId){
-      
         $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify ORDER BY notify.id DESC";
         $data = array(":userToNotify" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
@@ -27,7 +26,15 @@
         $data = array(":userToNotify" => $userId);
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
+
+    public function updateNotification($notficationId)
+    {
+        $updateQuery = "UPDATE notifications SET isShowned = 1 WHERE id = :id";
+        $data = array(":id" => $notficationId);
+        return $this->executeQuery($updateQuery, $data); 
+    }
 }
 
 
      
+
