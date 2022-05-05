@@ -14,6 +14,14 @@ include('inc/header.php');
 
         </div>
     </div>
+
+    <div class="container">
+        <div class="row" id="inlikesBox">
+    
+
+
+        </div>
+    </div>
 </section>
 <a href=""></a>
 

@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
     include('../../server/user.php');
     include('../utilities/request.php');
     include('../utilities/response.php');
@@ -19,8 +20,9 @@ error_reporting(E_ALL);
     try{
         if($userId){
             $likedUsers = $user->getLikedUsers($userId);
+            $friendUsers = $user->getFriendRequestedUser($userId);
             $getUsers = $user->getUsers();
-            $result = array($likedUsers, $getUsers);
+            $result = array($likedUsers, $getUsers, $friendUsers);
         }
         else{
             $result = $getUsers;

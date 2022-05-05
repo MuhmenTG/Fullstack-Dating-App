@@ -30,6 +30,7 @@
         }
     }
 
+
     public function changeFriendRequestStatus($requestId, $status)
     {
         $updateQuery = "UPDATE friends SET 

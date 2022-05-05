@@ -3,6 +3,7 @@
   include("inc/query.php");
     class User extends Query {
 
+    
     public function __construct()
     {
         parent::__construct();
@@ -111,6 +112,18 @@
         return $this->fetchRecords($selectQuery, ":userId", $userId);
     }
 
+    public function getFriendRequestedUser($userId){
+        $selectQuery = "SELECT * FROM friends where senderId = :senderId";
+        $isFriendDataExist = array(":senderId" => $userId);
+        $result = $this->returnExecutedQueryRecord($selectQuery, $isFriendDataExist);
+        if((count($result) > 0)){
+            return $result;
+        }
+        else{
+            return false;
+        }
+    }
+
     
     public function logout()
     {
@@ -183,7 +196,7 @@
     }
 
     public function advancedSeachRequest(
-    $gender,
+    $gender = "Male",
     $preference,
     $location,
     $minAge,

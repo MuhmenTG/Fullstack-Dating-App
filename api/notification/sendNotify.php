@@ -10,12 +10,14 @@ $response = new Response();
 
 $userId = $request->get("id");
 $receiverUserId = $request->get("receiverUserId"); 
+$message = $request->get("message");
+
 if(!$request->has('id') || !$request->has('receiverUserId')) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }
 
 try {
-    $notity = $notification->createNotification("liked you", $userId, $receiverUserId);
+    $notity = $notification->createNotification($message, $userId, $receiverUserId);
     if($notity){
         echo $notity;
     }
