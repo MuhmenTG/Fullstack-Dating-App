@@ -35,17 +35,6 @@ include('inc/header.php')
 							<form id="searchForm"> 
 								<div class="row">
 									<div class="col-lg-4 col-md-4">
-										<label>I am a :</label>
-		    							<div class="form-group">
-		    								<select id="gender">
-		    									<option value="" >Choose gender</option>
-		    									<option value="Male" selected>Male</option>
-		    									<option value="Female">Female</option>
-												<option value="Other" >Other</option>
-		    								</select>
-		    							</div>
-									</div>
-									<div class="col-lg-4 col-md-4">
 										<label>Looking For</label>
 		    							<div class="form-group">
 		    								<select id="lookingfor">

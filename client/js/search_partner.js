@@ -4,7 +4,6 @@ import { getCurrentSessionId } from "./utilities/checkSession.js";
 const peopleContainer = document.querySelector("#peopleContainer");
 const userId = await getCurrentSessionId();
 function getSearchParamValues() {
-    let gender = document.getElementById("gender").value;
     let preference = document.getElementById("lookingfor").value;
     let location = document.getElementById("location").value;
     let ageInterval = document.getElementById("range_1").value;
@@ -20,8 +19,7 @@ function getSearchParamValues() {
     let height = heightInterval.split(";");
     let weight = weightInterval.split(";")
     return {
-        gender,
-        preference,
+         preference,
         location,
         minAge: age[0],
         maxAge: age[1],
@@ -46,7 +44,6 @@ async function searchAdvanched() {
     if(isLoggedIn){
         const data = await getSearchParamValues();
         const response = await HttpRequest.server("../api/User/advancedSearch.php", "POST", data);
-        console.log(response);
         await showUsersForLoggedInUser(response);
     }
     else{

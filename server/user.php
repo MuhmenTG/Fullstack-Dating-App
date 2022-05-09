@@ -196,7 +196,6 @@
     }
 
     public function advancedSeachRequest(
-    $gender = "Male",
     $preference,
     $location,
     $minAge,
@@ -213,8 +212,7 @@
        
         
         $selectQuery = "SELECT * FROM userInfomation WHERE ";
-        $selectQuery .= ($gender) ? "gender = :gender" : "";
-        $selectQuery .= ($preference) ? " AND userPreferenceGender = :userPreferenceGender" : "";
+        $selectQuery .= ($preference) ? " userPreferenceGender = :userPreferenceGender" : "";
         $selectQuery .= ($location) ? " AND userLocation = :userLocation" : "";
         $selectQuery .= ($minAge && $maxAge) ? " OR userAge BETWEEN :minAge AND :maxAge " : "";
         $selectQuery .= ($minHeight && $maxHeight) ? " OR userHeight BETWEEN :minHeight AND :maxHeight " : "";
@@ -226,7 +224,6 @@
         
         try {
             $selectStatement = $this->connect()->prepare($selectQuery);  
-            ($gender) ? $selectStatement->bindParam(':gender', $gender) : "";
             ($preference) ? $selectStatement->bindParam(':userPreferenceGender', $preference) : "";
             ($location) ?  $selectStatement->bindParam(':userLocation', $location) : "";
             ($minAge) ? $selectStatement->bindParam(':minAge', $minAge) : "";
@@ -242,7 +239,7 @@
             $selectStatement->execute();
           
             if($result = $selectStatement->fetchAll()) {
-               echo json_encode($result);
+              return $result;
             } 
             else{
               echo false;

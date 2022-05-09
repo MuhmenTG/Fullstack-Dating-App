@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
     include('../../server/user.php');
@@ -10,7 +13,6 @@
     $response = new Response();
 
 
-    $gender = $request->get('gender'); 
     $preference = $request->get('preference');
     $location = $request->get('location');
     $minAge =  $request->get('minAge');
@@ -26,28 +28,26 @@
     $drinkingStatus = $request->get('drinkingStatus');
     $userId =  $request->get('userId');
     try {
-        $userMatchesResult = $user->advancedSeachRequest(
-            $gender,
-            $preference,
-            $location,
-            $minAge,
-            $maxAge,
-            $minHeight,
-            $maxHeight,    
-            $minWeight,
-            $maxWeight,    
-            $education,
-            $work,
-            $maritalStatus,
-            $smokingStatus,
-            $drinkingStatus
-            );
-            if($userMatchesResult && $userId){
+            if($userId){
                 $likedUsers = $user->getLikedUsers($userId);
-                $friendUsers = $user->getFriendRequestedUser($userId);
-                $userMatchesResult = array($userMatchesResult);
 
-                $result = array($userMatchesResult, $likedUsers, $friendUsers); 
+                $friendUsers = $user->getFriendRequestedUser($userId);
+                $userMatchesResult = $user->advancedSeachRequest(
+                    $preference,
+                    $location,
+                    $minAge,
+                    $maxAge,
+                    $minHeight,
+                    $maxHeight,    
+                    $minWeight,
+                    $maxWeight,    
+                    $education,
+                    $work,
+                    $maritalStatus,
+                    $smokingStatus,
+                    $drinkingStatus
+                    );
+                $result = array($likedUsers, $userMatchesResult, $friendUsers); 
 
                 echo $response->toJSON($result);
             }
