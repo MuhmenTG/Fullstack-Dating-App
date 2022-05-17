@@ -295,66 +295,8 @@ include('inc/header.php')
 			</span>
 			<div id="chat-sidebar">
 
-				<div class="sidebar-user-box" id="100" >
-					<img src="media/images/ou1.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette"></i>
-					<span class="slider-username">Sumit Kumar Pradhan </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="101" >
-					<img src="media/images/ou2.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Skptricks </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="102" >
-					<img src="media/images/ou3.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette"></i>
-					<span class="slider-username">Amit Singh </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="103" >
-					<img src="media/images/ou4.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Neeraj Tiwari </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="104"  >
-					<img src="media/images/ou5.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Sorav Singh </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="105" >
-					<img src="media/images/ou6.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Lokesh Singh </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="106" >
-					<img src="media/images/ou7.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette"></i>
-					<span class="slider-username">Tony </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="107" >
-					<img src="media/images/ou8.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Alex Robby </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="108" >
-					<img src="media/images/ou9.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette"></i>
-					<span class="slider-username">Pragaya Mishra </span>
-				</div> 
-
-				<div class="sidebar-user-box" id="109" >
-					<img src="media/images/ou2.jpg" alt=" " />
-					<i class="flaticon-circular-shape-silhouette active"></i>
-					<span class="slider-username">Abhishek Mishra </span>
-				</div> 
-			 
+			
+		 
 			</div>
 		</div>
 	
@@ -376,6 +318,7 @@ include('inc/header.php')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/navbar.js" type="module"></script>
     <script src="js/search_partner.js" type="module"></script>
+	<script src="js/fetchAllOnOfflineUsers.js" type="module"></script>
 	<script src="js/custom.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
 	

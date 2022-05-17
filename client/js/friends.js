@@ -26,18 +26,22 @@ function displayInRequest(response){
         else
         {
 
-            incoming.innerHTML += `
-            <li class="list-group-item text-left">
-                <label class="name">
-                ${v.firstName + " " + v.lastname}
-                </label>
-                <label class="pull-right">
+            incoming.innerHTML +=  `
+            <div class="col-md-3 col-sm-4  col-xs-6">
+            <div class="block-stl2">
+                <div class="img-holder">
+                    <img src="media/images/img13.jpg" alt="" class="img-responsive">
+                </div>
+                <div class="txt-block">
+                    <h3 class="fz22">${v.firstName + ' ' + v.lastname}</h3>
                     <button data-request="${v.requestId}" class="btn rejectRequest-btn">Reject</button>
                     <button data-request="${v.requestId}" class="btn acceptRequest-btn">Accept</button>
                     <button data-request="${v.requestId}" class="btn blockRequest-btn">Block</button>
                     <a href="view_user.php?id=${v.id}" class="btn btn-profile">View Profile</a>
-                </label>
-            </li>`;
+                </div>
+            </div>
+            </div>`;          
+           
         }
     });
     modifyFriendRequest("data-request", "rejectRequest-btn", checkUserBeforeModity);
@@ -57,17 +61,18 @@ function displayOutRequest(response){
     response.map((v, i) => {
      
         outgoing.innerHTML += `
-        <li class="list-group-item text-left">
-            <label class="name">
-                ${v.firstName + " " + v.lastname}
-            </label>
-            <label class="pull-right">
+        <div class="col-md-3 col-sm-4  col-xs-6">
+        <div class="block-stl2">
+            <div class="img-holder">
+                <img src="media/images/img13.jpg" alt="" class="img-responsive">
+            </div>
+            <div class="txt-block">
+                <h3 class="fz22">${v.firstName + ' ' + v.lastname}</h3>
                 <button data-request="${v.requestId}" class="btn deleteRequest-btn">Cancel request</button>
                 <a href="view_user.php?id=${v.id}" class="btn btn-profile">View Profile</a>
-            </label>
-        </li>
-    
-        `;
+            </div>
+        </div>
+        </div>`;
     });
     modifyFriendRequest("data-request", "deleteRequest-btn",  checkUserBeforeModity);
 

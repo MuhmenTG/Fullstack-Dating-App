@@ -82,6 +82,16 @@
         return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
 
+    public function getOnlineUsers($userId){
+        $selectQuery = " SELECT friends.id, friends.acceptenceStatus, userInfomation.firstName, userInfomation.lastName, userInfomation.isLoggedIn FROM friends INNER JOIN userInfomation ON friends.id = userInfomation.id WHERE friends.senderId = :userId AND friends.acceptenceStatus = :acceptenceStatus";
+        $data = array(":userId" => $userId, ":acceptenceStatus" => "accepted");
+        return $this->returnExecutedQueryRecord($selectQuery, $data); 
+    }
+
+
+
+   
+
  
 }
 

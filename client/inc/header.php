@@ -36,4 +36,17 @@
 			</div>
 		</header> <!-- header -->
 
+		<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  		<script>
+			Pusher.logToConsole = true;
+			var pusher = new Pusher('c2d5c567da85f92e033e', {
+			cluster: 'eu'
+			});
+
+			var channel = pusher.subscribe('username');
+			channel.bind('notifications', function(data) {
+			alert(JSON.stringify(data));
+			});
+ 		 </script>
+
  

@@ -16,7 +16,6 @@ export async function getRealTimeNotification(){
             Push.create(`${v.firstName} ${v.lastName} ${v.msg}`);
             changeStatus(v.notifyId);
         })
-
     }
 }
 

@@ -10,8 +10,7 @@ include('inc/header.php');
 
     <div class="header">
         <h3 class="text-muted prj-name">
-            Pending Friend Requests
-        </h3>
+         </h3>
 
     </div>
 
@@ -30,8 +29,7 @@ include('inc/header.php');
 
     <div class="header">
         <h3 class="text-muted prj-name">
-            Your outgoing Friend Request
-        </h3>
+         </h3>
     </div>
 
 

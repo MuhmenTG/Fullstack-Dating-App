@@ -915,7 +915,7 @@ Project:	Lamour  - Responsive HTML Template
 					  return false;
 				});
 				 
-				$(document).on('click', '.sidebar-user-box', function() {
+			/*	$(document).on('click', '.sidebar-user-box', function() {
 					var userImg = $(this).find('img').attr("src");
 					var userID = $(this).attr("id");
 					var username = $(this).children().text() ;
@@ -935,7 +935,7 @@ Project:	Lamour  - Responsive HTML Template
 					$("body").append(chatPopup);
 					displayChatBox();
 				});
-				 
+				 */
 				 
 				 $(document).on('keypress', 'input.msg_input' , function(e) {
 					    if (e.keyCode == 13 ) {   
