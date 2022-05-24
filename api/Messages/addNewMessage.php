@@ -8,16 +8,16 @@ $chatSystem = new ChatSystem();
 $request = new Request(); 
 $response = new Response();
 
-$senderId = $request->get("senderId");
-$reciverId = $request->get("reciverId"); 
+$userId = $request->get("userId");
+$friendId = $request->get("friendId"); 
 $message = $request->get("message");
 
-if(!$request->has('senderId') || !$request->has('reciverId') || !$request->has('message')) {
+if(!$request->has('userId') || !$request->has('friendId') || !$request->has('message')) {
     return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
 }
 
 try {
-    $createMessage = $chatSystem->addNewMessage($senderId, $reciverId, $message);
+    $createMessage = $chatSystem->addNewMessage($userId, $friendId, $message);
     if($createMessage){
         echo $createMessage;
     }

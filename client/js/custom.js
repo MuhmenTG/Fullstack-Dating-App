@@ -963,7 +963,7 @@ Project:	Lamour  - Responsive HTML Template
 				 
 				  
 				    
-				 function displayChatBox(){ 
+				 /*function displayChatBox(){ 
 					  var i = 270, // start position
 					  	  j = 260;  //next position
 					  var window_w = $(window).width();
@@ -1000,7 +1000,7 @@ Project:	Lamour  - Responsive HTML Template
 					      }
 					    }
 					  });  
-				 };
+				 };*/
         }
         	 
     };

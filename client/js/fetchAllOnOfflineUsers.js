@@ -17,7 +17,7 @@ function showUsers(response){
         if(v.isLoggedIn.trim() == "Offline"){
 
             chatSidebar.innerHTML += `
-            <div class="sidebar-user-box" data-chat="${v.id}">
+            <div class="sidebar-user-box" data-fullName="${v.firstName} ${v.lastName}" data-chat="${v.id}">
             <img src="media/images/ou1.jpg" alt=" " />
             <i class="flaticon-circular-shape-silhouette"></i>
             <span class="slider-username">${v.firstName} ${v.lastName}</span>
@@ -27,14 +27,14 @@ function showUsers(response){
         }
         else if(v.isLoggedIn.trim() == "Online"){
             chatSidebar.innerHTML += `
-            <div class="sidebar-user-box" data-chat="${v.id}">
+            <div class="sidebar-user-box" data-fullName="${v.firstName} ${v.lastName}" data-chat="${v.id}">
             <img src="media/images/ou2.jpg" alt=" " />
             <i class="flaticon-circular-shape-silhouette active"></i>
             <span class="slider-username">${v.firstName} ${v.lastName}</span>
             </div> `;
         }
     })
-    chatPopUp("data-chat", "sidebar-user-box", chat);
+    chatPopUp("data-chat", "data-fullName", "sidebar-user-box", chat);
 
 
 
@@ -42,29 +42,87 @@ function showUsers(response){
 }
 getOnOfflineUsers();
 
-function chatPopUp(userId, btnClass, callback) {
+function chatPopUp(userId, fullName, btnClass, callback) {
     const mButtons = document.getElementsByClassName(btnClass);
     for (let i = 0; i < mButtons.length; i++) {
         mButtons[i].addEventListener("click", function () {
-            callback(this.getAttribute(userId));
+            callback(this.getAttribute(userId), this.getAttribute(fullName));
         });
     }
 }
 
-function chat(userId){
-  /*  if (userArray.includes(userId) != -1) {
-        userArray.splice(includes(userId, userArray), 1);
-    };*/
-    userArray.unshift(userId);
+async function chat(userId, fullName){
+const loggedInUserId = await getCurrentSessionId();
+const data = await getMessagesBetweenUsers(userId);
+    let chat = {
+        id:userId,
+        chatPopUp:`
+        <div class="container1">
+          <div class="chatbox">
+            <div class="top-bar">
+              <div class="avatar"><p>V</p></div>
+              <div class="name">${fullName}</div>
+              <div class="icons">
+                <i class="fas fa-phone"></i>
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="menu">
+                <div class="dots"></div>
+              </div>
+            </div>
+            <div class="middle">
+              <div class="voldemort">
+                ${data.map((v, i) => {
+                  if(v.senderID == loggedInUserId){
+                  return `<div class="incoming"> <div class="bubble">${v.textMessage}</div> </div>`
+                  }
+                  return `<div class="outgoing"> <div class="bubble lower">${v.textMessage}</div> </div>`
+                })}
+               
+    
+                <div class="typing">
+                  <div class="bubble">
+                    <div class="ellipsis one"></div>
+                    <div class="ellipsis two"></div>
+                    <div class="ellipsis three"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-bar">
+              <div class="chat">
+                <input id="chatMsg" class="inputChat" type="text" placeholder="Type a message..." />
+                <button id="sendMessageButton" class="button1" type="submit"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+    
+         
+        </div>`
+    };
+
+    userArray.push(chat);
+    userArray.map((v, i) => {
+        document.querySelector("body").innerHTML += v.chatPopUp;
+    })
+ //   const chatPopup = 
 
 
-    const chatPopup =  '<div class="msg_box" style="right:270px" rel="'+ userId+'">'+
-    '<div class="msg_head"><a href="#"><img src="'+ +'" class="img-circle img-responsive"></a><span class="u_name"> '+  +
-    '</span><div class="close">x</div> </div>'+
-    '<div class="msg_wrap"> <div class="msg_body"> <div class="msg_push"></div> </div>'+
-    '<div class="msg_footer text-block"><input type="text" placeholder="Type and hit enter" class="msg_input form-control"><span class="send-msg-btn"><i class="fa fa-paper-plane-o"></i></span></div></div></div>';     
-
-    $("body").append(chatPopup);
-
+async function sendMessage(friendId){
+  const userId = await getCurrentSessionId();
+  const message = document.getElementById("chatMsg").value;
+  const response = await HttpRequest.server('../api/Messages/addNewMessage.phpp', 'POST', {userId, friendId, message});
+  if(response){}
 }
 
+async function getMessagesBetweenUsers(friendId){
+  const userId = await getCurrentSessionId();
+  const response = await HttpRequest.server('../api/Messages/fetchConversation.php', 'POST', {userId, friendId});
+  return response;
+}
+
+document.querySelector('#sendMessageButton').addEventListener('submit', sendMessage);
+ 
+}
+
+ 

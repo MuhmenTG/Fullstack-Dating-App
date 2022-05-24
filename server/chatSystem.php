@@ -1,6 +1,10 @@
 <?php
   session_start();
   include("inc/query.php");
+  ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
     class ChatSystem extends Query {
 
     public function __construct()
@@ -11,13 +15,14 @@
      
     public function getConversationBetweenTwoUsers($senderId, $reciverId)
     {     
+      
       $selectQuery = "SELECT  userChat.*, 
       CONCAT(userInfo1.firstName, ' ', userInfo1.lastName) as nameFrom,
       CONCAT(userInfo2.firstname, ' ', userInfo2.lastname) as nameTo  
       FROM userChat  
       INNER JOIN userInfomation userInfo1 ON :senderId = userInfo1.id
       INNER JOIN userInfomation userInfo2 ON :reciverId = userInfo2.id
-      ";
+      ORDER BY messageTime DESC";
       $data = array(":senderId" => $senderId, ":reciverId" => $reciverId);
       return $this->returnExecutedQueryRecord($selectQuery, $data); 
     }
