@@ -54,6 +54,7 @@ function chatPopUp(userId, fullName, btnClass, callback) {
 async function chat(userId, fullName){
 const loggedInUserId = await getCurrentSessionId();
 const data = await getMessagesBetweenUsers(userId);
+console.log(data);
     let chat = {
         id:userId,
         chatPopUp:`
@@ -92,7 +93,7 @@ const data = await getMessagesBetweenUsers(userId);
             <div class="bottom-bar">
               <div class="chat">
                 <input id="chatMsg" class="inputChat" type="text" placeholder="Type a message..." />
-                <button id="sendMessageButton" class="button1" type="submit"><i class="fas fa-paper-plane"></i></button>
+                <button id="sendMessageButton" data-senderId=${userId} class="button1" type="submit"><i class="fas fa-paper-plane"></i></button>
               </div>
             </div>
           </div>
@@ -100,19 +101,29 @@ const data = await getMessagesBetweenUsers(userId);
          
         </div>`
     };
-
+   
     userArray.push(chat);
     userArray.map((v, i) => {
-        document.querySelector("body").innerHTML += v.chatPopUp;
+      modifyMsg("button1", "data-senderId", sendMessage, i, v)
     })
  //   const chatPopup = 
 
 
-async function sendMessage(friendId){
+
+ function modifyMsg(btnClass, reciverId, callback, chatNumber, chat) {
+  document.querySelector("body").innerHTML += chat.chatPopUp;
+  document.getElementsByClassName(btnClass)[chatNumber].addEventListener("click", function () {
+      callback(this.getAttribute(reciverId)); 
+  });
+}
+
+async function sendMessage(reciverId){
   const userId = await getCurrentSessionId();
-  const message = document.getElementById("chatMsg").value;
-  const response = await HttpRequest.server('../api/Messages/addNewMessage.phpp', 'POST', {userId, friendId, message});
-  if(response){}
+  const message = document.getElementById("chatMsg").value; 
+  const response = await HttpRequest.server('../api/Messages/addNewMessage.php', 'POST', {userId, reciverId, message});
+  if(response){
+    
+  }
 }
 
 async function getMessagesBetweenUsers(friendId){
@@ -120,8 +131,6 @@ async function getMessagesBetweenUsers(friendId){
   const response = await HttpRequest.server('../api/Messages/fetchConversation.php', 'POST', {userId, friendId});
   return response;
 }
-
-document.querySelector('#sendMessageButton').addEventListener('submit', sendMessage);
  
 }
 
