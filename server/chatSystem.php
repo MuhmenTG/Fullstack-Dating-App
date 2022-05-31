@@ -1,21 +1,16 @@
 <?php
   session_start();
   include("inc/query.php");
-  ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+  class ChatSystem extends Query {
 
-    class ChatSystem extends Query {
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+  public function __construct()
+  {
+      parent::__construct();
+  }
 
      
     public function getConversationBetweenTwoUsers($senderId, $reciverId)
     {     
-      
       $selectQuery = "SELECT  userChat.*, 
       CONCAT(userInfo1.firstName, ' ', userInfo1.lastName) as nameFrom,
       CONCAT(userInfo2.firstname, ' ', userInfo2.lastname) as nameTo  
@@ -24,13 +19,12 @@ error_reporting(E_ALL);
       INNER JOIN userInfomation userInfo2 ON :reciverId = userInfo2.id
       ORDER BY messageTime DESC";
       $data = array(":senderId" => $senderId, ":reciverId" => $reciverId);
-      return $this->returnExecutedQueryRecord($selectQuery, $data); 
+      return $this->returnRecordsOfExecutedQuery($selectQuery, $data); 
     }
 
     public function addNewMessage($senderId, $reciverId, $message)
     {
-      $insertQuery = "INSERT INTO userChat (senderID, receiverID, textMessage) 
-      VALUES(:senderID, :receiverID, :textMessage)";
+      $insertQuery = "INSERT INTO userChat (senderID, receiverID, textMessage) VALUES(:senderID, :receiverID, :textMessage)";
       $data = array(":senderID" => $senderId, ":receiverID" => $reciverId, ":textMessage" => $message);
       return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
     }

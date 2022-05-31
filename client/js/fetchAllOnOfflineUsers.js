@@ -122,7 +122,15 @@ async function sendMessage(reciverId){
   const message = document.getElementById("chatMsg").value; 
   const response = await HttpRequest.server('../api/Messages/addNewMessage.php', 'POST', {userId, reciverId, message});
   if(response){
-    
+    const data = await getMessagesBetweenUsers(userId);
+    document.querySelector('.voldemort').innerHTML =+ `
+    ${data.map((v, i) => {
+      if(v.senderID == userId){
+      return `<div class="incoming"> <div class="bubble">${v.textMessage}</div> </div>`
+      }
+      return `<div class="outgoing"> <div class="bubble lower">${v.textMessage}</div> </div>`
+    })}
+    `
   }
 }
 

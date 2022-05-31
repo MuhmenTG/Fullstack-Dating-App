@@ -115,7 +115,7 @@
     public function getFriendRequestedUser($userId){
         $selectQuery = "SELECT * FROM friends where senderId = :senderId";
         $isFriendDataExist = array(":senderId" => $userId);
-        $result = $this->returnExecutedQueryRecord($selectQuery, $isFriendDataExist);
+        $result = $this->returnRecordsOfExecutedQuery($selectQuery, $isFriendDataExist);
         if((count($result) > 0)){
             return $result;
         }

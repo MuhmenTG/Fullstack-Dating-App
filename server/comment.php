@@ -30,9 +30,7 @@ class Comment extends Query {
 
     public function editUserComment($message, $commentId)
     {
-        $updateQuery = "UPDATE commentsToBlog SET 
-        commentMessage = :commentMessage
-        WHERE id = :id"; 
+        $updateQuery = "UPDATE commentsToBlog SET commentMessage = :commentMessage WHERE id = :id"; 
         $data = array(":commentMessage" => $message, ":id" => $commentId);
         return $this->executeQuery($updateQuery, $data); 
     }

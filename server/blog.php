@@ -31,7 +31,6 @@
 
     public function getSpecificBlog($searchParams = NULL)
     {
-        
         $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
         u.firstName, u.lastName, u.id
         from blog b, userInfomation u
@@ -45,7 +44,8 @@
         $selectQuery = "SELECT c.commentMessage, c.id, c.userId, c.postId, u.firstName, c.date FROM 
         ( 
             SELECT * FROM commentsToBlog WHERE postId = :id
-        ) AS c
+        ) 
+        AS c
         INNER JOIN userInfomation AS u
         ON u.id = c.userId";
         return $this->fetchRecords($selectQuery, ":id", $id);

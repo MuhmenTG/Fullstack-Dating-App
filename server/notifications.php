@@ -6,7 +6,10 @@
     public function __construct()
     {
        parent::__construct();
-    }
+    }  
+
+    const readNotfication = "Read";
+    const unreadNotification = "Unread";
 
     public function createNotification($msg, $receiverUserId, $userId){
         $insertQuery = "INSERT INTO notifications (msg, userToNotify, userWhoFiredEvent) 
@@ -15,24 +18,27 @@
         return $this->executeQuery($insertQuery, $data); 
     }
 
-    public function getNotifications($userId){
-        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify ORDER BY notify.id DESC";
+    public function getNotificationsByType($userId, $notificationType)
+    {
+        $selectQueryAllNotifies = "SELECT u.firstName, u.lastName, u.gender, u.id 
+        AS userId, notify.msg, notify.id AS notifyId FROM userInfomation AS u INNER JOIN notifications 
+        AS notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify ORDER BY notify.id DESC";
         $data = array(":userToNotify" => $userId);
-        return $this->returnExecutedQueryRecord($selectQuery, $data); 
+        if($notificationType == "Read") return $this->returnRecordsOfExecutedQuery($selectQueryAllNotifies, $data);
+        else if($notificationType == "Unread"){
+            $selectQueryAllNotifies .=  " AND notify.isViewed = 0 AND notify.isShowned = 0";
+            return $this->returnRecordsOfExecutedQuery($selectQueryAllNotifies, $data); 
+        }
     }
-
-    public function getUnreadNotifications($userId){
-        $selectQuery = "SELECT u.firstName, u.lastName, u.gender, u.id as userId, notify.msg, notify.id as notifyId FROM userInfomation AS u INNER JOIN notifications as notify ON notify.userWhoFiredEvent = u.id AND notify.userToNotify = :userToNotify AND notify.isViewed = 0 AND notify.isShowned = 0";
-        $data = array(":userToNotify" => $userId);
-        return $this->returnExecutedQueryRecord($selectQuery, $data); 
-    }
-
+    
     public function updateNotification($notficationId)
     {
         $updateQuery = "UPDATE notifications SET isShowned = 1 WHERE id = :id";
         $data = array(":id" => $notficationId);
         return $this->executeQuery($updateQuery, $data); 
     }
+
+
 }
 
 

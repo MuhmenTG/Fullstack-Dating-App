@@ -35,7 +35,6 @@ async function authorizedNavbar() {
                                   </ul>
                                 </li>
                               </ul>                       
-  
 							</div>
 						</div>
 					</div>

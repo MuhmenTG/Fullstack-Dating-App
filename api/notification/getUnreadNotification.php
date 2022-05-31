@@ -13,7 +13,7 @@ if(!$request->has('id')) {
 }
 
 try {
-    $getNotification = $notification->getUnreadNotifications($userId);
+    $getNotification = $notification->getNotificationsByType($userId, "Unread");
    
     if($getNotification){
         echo $response->code(200)->toJSON($getNotification);

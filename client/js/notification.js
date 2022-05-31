@@ -11,6 +11,7 @@ export async function getNotification(){
 export async function getRealTimeNotification(){
     const userId = await getCurrentSessionId();
     const response = await HttpRequest.server('../api/notification/getUnreadNotification.php', 'POST', {id: userId});
+    console.log(response);return;
     if(response.length > 0){
         response.map((v,i) => {
             Push.create(`${v.firstName} ${v.lastName} ${v.msg}`);
