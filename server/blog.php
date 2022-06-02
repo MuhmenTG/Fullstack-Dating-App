@@ -18,28 +18,30 @@
         WHERE b.userId = u.id";
         switch ($paramType) {
             case 'NULL':
-                return $this->fetchRecords($selectQuery);
+                return $this->returnRecordsOfExecutedQuery($selectQuery);
                 break;
             case 'string':
                 $selectQuery .= " AND u.firstName LIKE :firstName";
-                return $this->fetchRecords($selectQuery, ":firstName", '%'.$searchParams.'%');
+                $data = array(":firstName" => '%'.$searchParams.'%');
+                return $this->returnRecordsOfExecutedQuery($selectQuery, $data);
                 break;
             default:
                 return;
         }
     }
 
-    public function getSpecificBlog($searchParams = NULL)
+    public function getSpecificBlog($id = NULL)
     {
         $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
         u.firstName, u.lastName, u.id
         from blog b, userInfomation u
         WHERE b.userId = u.id AND b.id = :id";
-        return $this->fetchRecords($selectQuery, ":id", $searchParams);
+        $data = array(":id" => $id);
+        return $this->returnRecordsOfExecutedQuery($selectQuery, $data);
     }
 
 
-    public function specificCommentRecord($tableName, $column, $id)
+    public function specificCommentRecord($id)
     {
         $selectQuery = "SELECT c.commentMessage, c.id, c.userId, c.postId, u.firstName, c.date FROM 
         ( 
@@ -48,10 +50,9 @@
         AS c
         INNER JOIN userInfomation AS u
         ON u.id = c.userId";
-        return $this->fetchRecords($selectQuery, ":id", $id);
+        $data = array(":id" => $id);
+        return $this->returnRecordsOfExecutedQuery($selectQuery, $data);
     }
-
-
 }
 
 

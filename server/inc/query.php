@@ -36,7 +36,6 @@ class Query extends Database
     }
      
     protected function executeQuery($query, $data){
-       
         $statement = $this->connect()->prepare($query);
         foreach($data as $key => &$value) {    
             $statement->bindParam($key, $value);
@@ -53,17 +52,23 @@ class Query extends Database
         return  $row;   
     }
 
-    protected function returnRecordsOfExecutedQuery($selectQuery, $data)
+    protected function returnRecordsOfExecutedQuery($selectQuery, $data = null)
     {
         $statement = $this->connect()->prepare($selectQuery);
-        foreach($data as $key => &$value) {    
-            $statement->bindParam($key, $value);
+        if(!empty($data))
+        {
+            foreach($data as $key => &$value) { 
+                $statement->bindParam($key, $value);
+            }
+            $statement->execute();
+        }   
+        else{
+            $statement->execute();
         }
-        $statement->execute();
         $result = $statement->fetchAll();
         return $result;
     }
-
+ 
     protected function isColumnExits($table, $colmns)
     {
         $showQuery = "SHOW COLUMNS FROM $table LIKE '$colmns'";

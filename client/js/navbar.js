@@ -7,6 +7,8 @@ async function authorizedNavbar() {
     const loggedInTopBar = document.querySelector('.topnav');
     if(isLoggedIn){
         const response = await getNotification();
+        console.log(response);
+
     //    console.log(response);
         loggedInTopBar.innerHTML = ` 
                 <div class="container">
@@ -21,7 +23,7 @@ async function authorizedNavbar() {
                                   <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button">${response.length}</span>     
                                   <ul class="notficationsList">
                                     ${
-                                      (response.length > 0) ? 
+                                      (response.code != 400) ? 
                                       (
                                         response.map((v,i) => {
                                           return `<li class="notfications"  data-userId="${v.userId}" data-notifyId="${v.notifyId}">${v.firstName} ${v.lastName} ${v.msg}</li>
@@ -41,8 +43,7 @@ async function authorizedNavbar() {
 				</div>`;
 
         loggedInNavbar.innerHTML = `
-                <ul class="list-unstyled">
-                
+                <ul class="list-unstyled">s
                     <li><a href="newUserProfilePage.php">My Account</a></li>
                     <li><a href="settings.php">My Settings</a></li>
                     <li><a href="search_partner.php">Explore</a></li>
@@ -50,7 +51,7 @@ async function authorizedNavbar() {
                     <li><a href="friend_request.php">Friend Requests</a></li>
                     <li><a href="favorite.php">Love&Likes</a></li>
                     <li><a href="chat.php">My messsages</a></li>
-
+                    <li><a href="shoppy.php">Shopping</a></li>
                   </ul>
                          
     `;

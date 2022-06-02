@@ -18,12 +18,11 @@ if(!$request->has('id')) {
 
 try {
     $getNotification = $notification->getNotificationsByType($userId, "Read");
-    
-    if($getNotification){
+    if(count($getNotification) > 0 ){
         echo $response->code(200)->toJSON($getNotification);
     }
     else{
-        echo $response->code(400)->toJSON(['error' => "Something went wrong"]);
+        echo $response->code(400)->toJSON(['error' => "Something went wrong, no notifies found"]);
     }
 }  catch(Exception $e) {
     return $response->code($e->code)->toJSON(['error' => $e->message]);

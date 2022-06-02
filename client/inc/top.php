@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="css/myStyle.css">
 	<link rel="stylesheet" href="css/notify.css">
 	<link rel="stylesheet" href="css/chat1.css">
+<!--	>-->
+
 	<link rel="stylesheet" href="sweetalert2.min.css">
 
 	<script src="js/notification.js" type="module"></script>

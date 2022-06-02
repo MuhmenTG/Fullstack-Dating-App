@@ -103,13 +103,14 @@
     public function getUsers()
     {
         $selectQuery = "SELECT * FROM userInfomation";                                
-        return $this->fetchRecords($selectQuery);
+        return $this->returnRecordsOfExecutedQuery($selectQuery);
     }
 
     public function getLikedUsers($userId)
     {
-        $selectQuery = "SELECT * FROM likes where likedBy = :userId";             
-        return $this->fetchRecords($selectQuery, ":userId", $userId);
+        $selectQuery = "SELECT * FROM likes where likedBy = :userId";  
+        $data = array(":userId" => $userId);    
+        return $this->returnRecordsOfExecutedQuery($selectQuery, $data);
     }
 
     public function getFriendRequestedUser($userId){

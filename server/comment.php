@@ -9,9 +9,6 @@ class Comment extends Query {
     public function __construct()
     {
         parent::__construct();
-        /*if(isset($_SESSION['id']) && !empty($_SESSION['id'])){
-            $this->userID = $_SESSION['id'];
-        }*/
     }
 
     public function addUserComment($comment, $post_id, $user_id)
