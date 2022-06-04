@@ -15,7 +15,8 @@ async function authorizedNavbar() {
                                 <div class="row">
                                   <div class="col-lg-12">
                                     <div class="right-nav">
-
+                                    <span class="top-nav-signup_ligin">
+                                    <i class="fa fa-shopping-basket"></i><a href="basket.php">My Basket</a> </span> 
                                 <span class="top-nav-signup_ligin"><a href="logout.php">logout</a> </span> 
                                 <ul class="notification-drop">
                                 <li class="item">
