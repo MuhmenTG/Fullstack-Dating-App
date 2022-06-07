@@ -1,4 +1,4 @@
-import { CART_KEY } from "../../api";
+import { CART_KEY } from "../../api/index.js";
 
 
 function setToLocalStorage(key, value){
@@ -6,7 +6,7 @@ function setToLocalStorage(key, value){
 }
 
 function getFromLocalStorage(key){
-   return localStorage.getItem(key)
+   return JSON.parse(localStorage.getItem(key))
 }
 
 export function setCartToLocalStorage(value){

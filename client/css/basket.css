@@ -100,18 +100,13 @@ a {
     width: 100%
 }
 
-.btn-light {
+.btn-light{
     color: #ffffff;
     background-color: #F44336;
     border-color: #f8f9fa;
     font-size: 12px
 }
 
-.btn-light:hover {
-    color: #ffffff;
-    background-color: #F44336;
-    border-color: #F44336
-}
 
 .btn-apply {
     font-size: 11px

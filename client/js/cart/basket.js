@@ -1,39 +1,75 @@
+import { getCartFromLocalStorage, setCartToLocalStorage } from "../utilities/localStorage/localstorage.js";
+
 let productBasket = document.getElementById("productBasket");
 
 function getItems(){
-    if(JSON.parse(localStorage.getItem("CART_KEY")) === null){
-        console.log('No items found');
-    }
-    else{
-        JSON.parse(localStorage.getItem("CART_KEY")).map((v, i)=>{
-            console.log(productBasket);return;
-            productBasket += `
+    productBasket.innerHTML = "";
+    const data = getCartFromLocalStorage();
+    if(data){
+        data.map((v, i)=>{
+            productBasket.innerHTML += `
             <tr>
                 <td>
                     <figure class="itemside align-items-center">
                         <figcaption class="info"> <a href="#" class="title text-dark"
                                 data-abc="true">${v.productName}</a>
-                            <p class="text-muted small">SIZE: L <br> Brand: MAXTRA</p>
+                            <p class="text-muted small">${v.productName}</p>
                         </figcaption>
                     </figure>
                 </td>
-                <td> <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                <td> <select class="form-control setQuantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select> </td>
                 <td>
-                    <div class="price-wrap"> <var class="price">$10.00</var> <small
-                            class="text-muted"> $9.20 each </small> </div>
+                    <div class="price-wrap"> <var class="price">DKK</var> <small
+                            class="text-muted">${v.prodctPrice} DKK</small> </div>
                 </td>
-                <td class="text-right d-none d-md-block"> <a href=""
-                        class="btn btn-light" data-abc="true"> Remove</a> </td>
+                <td class="text-right d-none d-md-block"> 
+                <button data-productId="${v.productId}" class="btn-light">remove</button>
+                
+                </td>
             </tr>
-   
-
-            `
+            `;
         })
+   //     modifyItem("data-productId", "btn-light", removeItemFromCart)
+        modifyItem("data-quantity", "setQuantity", editQuantity)
+
     }
+    else{
+        productBasket.innerHTML = `No items found`;
+    }
+    
 }
 getItems();
+
+function modifyItem(productId, btnClass, callback) {
+    const buttons = document.getElementsByClassName(btnClass);
+    for (let i = 0; i < buttons.length; i++) {
+        switch (btnClass) {
+            case "btn-light":
+                buttons[i].addEventListener("click", function () {
+                    callback(this.getAttribute(productId)); 
+                });
+            break;
+            case "setQuantity":
+                buttons[i].addEventListener("change", function() {
+                    console.log(this.value);
+                });
+                break;
+            } 
+    }
+}
+
+function removeItemFromCart(productId){
+    const items = getCartFromLocalStorage();
+    items.splice(productId, 1);
+    setCartToLocalStorage(items);
+    getItems();
+}
+
+function editQuantity(){
+
+}

@@ -1,3 +1,4 @@
+import { setCartToLocalStorage } from "../utilities/localStorage/localstorage.js";
 import { HttpRequest } from "../utilities/serverHttpRequest.js";
 const productsRow = document.getElementById("gallery");
 let products = []
@@ -47,5 +48,5 @@ function addToCart(productId, productName, productDescription, prodctPrice)
 {
     let product = {productId, productName, productDescription, prodctPrice}
     products.push(product);
-    localStorage.setItem("CART_KEY", JSON.stringify(products));
+    setCartToLocalStorage(products);
 }
