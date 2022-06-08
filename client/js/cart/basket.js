@@ -17,12 +17,12 @@ function getItems(){
                         </figcaption>
                     </figure>
                 </td>
-                <td> <select class="form-control setQuantity">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select> </td>
+                <td> 
+                <select data-quantity="${this}" class="form-control setQuantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                </td>
                 <td>
                     <div class="price-wrap"> <var class="price">DKK</var> <small
                             class="text-muted">${v.prodctPrice} DKK</small> </div>
@@ -47,7 +47,9 @@ getItems();
 
 function modifyItem(productId, btnClass, callback) {
     const buttons = document.getElementsByClassName(btnClass);
+  
     for (let i = 0; i < buttons.length; i++) {
+        console.log(btnClass);
         switch (btnClass) {
             case "btn-light":
                 buttons[i].addEventListener("click", function () {
@@ -56,7 +58,7 @@ function modifyItem(productId, btnClass, callback) {
             break;
             case "setQuantity":
                 buttons[i].addEventListener("change", function() {
-                    console.log(this.value);
+                    console.log(this.value);return;
                 });
                 break;
             } 
