@@ -30,7 +30,7 @@
         }
     }
 
-    public function getSpecificBlog($id = NULL)
+    public function getSpecificBlog(int $id = NULL) : array
     {
         $selectQuery = "SELECT b.id, b.userId, b.heading, b.shortDescription, b.longDescription, b.createdDate, 
         u.firstName, u.lastName, u.id
@@ -41,7 +41,7 @@
     }
 
 
-    public function specificCommentRecord($id)
+    public function specificCommentRecord(int $id) : array
     {
         $selectQuery = "SELECT c.commentMessage, c.id, c.userId, c.postId, u.firstName, c.date FROM 
         ( 

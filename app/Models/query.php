@@ -1,5 +1,4 @@
 <?php
-
 include("databaseConnection.php");
 class Query extends Database  
 {
@@ -37,16 +36,16 @@ class Query extends Database
     }
      
     protected function executeQuery($query, $data){
-      
         $statement = $this->connect()->prepare($query);
-        foreach($data as $key => &$value) {    
+        foreach($data as $key => &$value) {  
             $statement->bindParam($key, $value);
         }
-        echo $executeQuery = $statement->execute();
-        exit;
-        return ($executeQuery)? true : false;
+        $executeQuery = $statement->execute();
+        return ($executeQuery) ? true : false;
     }
+
     
+  
     protected function isRecordExits($recordSelect, $table, $colmn, $param, $isVerfied = false)
     {
         $selectQuery = "SELECT $recordSelect FROM $table WHERE $colmn = :params";

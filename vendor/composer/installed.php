@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd5876655da20da43f475dd0a0bfa260166d6461b',
+    'reference' => '258f42b2d5c43921951532b72dd0535ae80cad05',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd5876655da20da43f475dd0a0bfa260166d6461b',
+      'reference' => '258f42b2d5c43921951532b72dd0535ae80cad05',
     ),
     'paragonie/random_compat' => 
     array (
@@ -40,12 +40,12 @@
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.5.1',
-      'version' => '6.5.1.0',
+      'pretty_version' => 'v6.6.3',
+      'version' => '6.6.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'dd803df5ad7492e1b40637f7ebd258fee5ca7355',
+      'reference' => '9400f305a898f194caff5521f64e5dfa926626f3',
     ),
     'psr/log' => 
     array (
@@ -64,6 +64,40 @@
       array (
       ),
       'reference' => '1024077ff60beebaf5706b4e0208a1e648d20cf4',
+    ),
+    'sendgrid/php-http-client' => 
+    array (
+      'pretty_version' => '3.14.4',
+      'version' => '3.14.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '6d589564522be290c7d7c18e51bcd8b03aeaf0b6',
+    ),
+    'sendgrid/sendgrid' => 
+    array (
+      'pretty_version' => '7.11.5',
+      'version' => '7.11.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1d2fd3b72687fe82264853a8888b014f8f99e81f',
+    ),
+    'sendgrid/sendgrid-php' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
+    ),
+    'starkbank/ecdsa' => 
+    array (
+      'pretty_version' => '0.0.5',
+      'version' => '0.0.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '484bedac47bac4012dc73df91da221f0a66845cb',
     ),
   ),
 );

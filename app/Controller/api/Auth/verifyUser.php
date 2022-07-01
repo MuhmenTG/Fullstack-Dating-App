@@ -1,34 +1,34 @@
 <?php
-    include('../../../Models/user.php');
+    header('Access-Control-Allow-Origin: *');
+
+    include('../../../Models/auth.php');
     include('../utilities/request.php');
     include('../utilities/response.php');
-    include('../../../../vendor/mail.php');
+    include('../../../../sendEmail.php');
 
-    $user = new User();
+    $auth = new Auth();
     $request = new Request(); 
     $response = new Response();
 
     $token = $request->get("token");
-    $emailaddress = $request->get("email");
+    $email = $request->get("email");
     
     if(!$request->has('token') || !$request->has('email')) {
         return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
     }
     
     try {
-        $verifed = $user->verifyUser($token);
+        $verifed = $auth->verifyUser($token, $email);
         if($verifed){
-            echo $response->toJSON([$verifed]);
+            echo $response->toJSON(['msg' => "Verification success", "code" => 200]);
             $message = "Hello new member, your profile has been verified";
-            Email::sendMail($emailaddress, 'Succesfull - Profile verified', $message);
+            Email::sendMail($email, 'Succesfull - Profile verified', $message);
         }
         else{
-            echo $response->code(400)->toJSON(['error' => "Something went wrong"]);
-            $message = "Hello new member, your profile has not been verified";
-            Email::sendMail($emailaddress, 'Account verification unsuccesful', $message);
+            echo $response->toJSON(['msg' => "Something went wrong", "code" => 400]);
         }
     }  catch(Exception $e) {
-        return $response->code($e->code)->toJSON(['error' => $e->message]);
+        $response->code(500)->toJSON(['msg' => $e->getCode()]);
     }
      
         

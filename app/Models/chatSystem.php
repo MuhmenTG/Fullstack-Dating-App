@@ -9,7 +9,7 @@
   }
 
      
-    public function getConversationBetweenTwoUsers($senderId, $reciverId)
+    public function getConversationBetweenTwoUsers(int $senderId, int $reciverId)
     {     
       $selectQuery = "SELECT  userChat.*, 
       CONCAT(userInfo1.firstName, ' ', userInfo1.lastName) as nameFrom,
@@ -22,14 +22,14 @@
       return $this->returnRecordsOfExecutedQuery($selectQuery, $data); 
     }
 
-    public function addNewMessage($senderId, $reciverId, $message)
+    public function addNewMessage(int $senderId, int $reciverId, int $message)
     {
       $insertQuery = "INSERT INTO userChat (senderID, receiverID, textMessage) VALUES(:senderID, :receiverID, :textMessage)";
       $data = array(":senderID" => $senderId, ":receiverID" => $reciverId, ":textMessage" => $message);
       return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
     }
     
-    public function deleteSentMessage($senderId, $reciverId, $messageId){
+    public function deleteSentMessage(int $senderId, int $reciverId, int $messageId){
       $deleteQuery = "DELETE FROM userChat WHERE senderID = :senderID AND receiverID = :receiverID AND messageID = :messageID";
       $data = array($senderId => ":senderID", $reciverId => ":receiverID", $messageId => ":messageID");
       return $this->executeQuery($deleteQuery, $data);  

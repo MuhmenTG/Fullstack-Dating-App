@@ -11,21 +11,21 @@ class Comment extends Query {
         parent::__construct();
     }
 
-    public function addUserComment($comment, $post_id, $user_id)
+    public function addUserComment(string $comment, int $postId, int $userId) : bool
     {
         $insertQuery = "INSERT INTO commentsToBlog (userId, postId, commentMessage) 
         VALUES(:userId, :postId, :commentMessage)";
-        $data = array(":userId" => $user_id, ":postId" => $post_id, ":commentMessage" => $comment);
+        $data = array(":userId" => $userId, ":postId" => $postId, ":commentMessage" => $comment);
         return $this->executeQuery($insertQuery, $data); 
     } 
 
-    public function deleteUserComment($commentId, $userId){
+    public function deleteUserComment(int $commentId, int $userId) : bool{
         $deleteQuery = "DELETE FROM commentsToBlog WHERE id = :id AND userId = :userId"; 
         $data = array(":id" => $commentId, ":userId" => $userId);
         return $this->executeQuery($deleteQuery, $data); 
     }
 
-    public function editUserComment($message, $commentId)
+    public function editUserComment(string $message, int $commentId) : bool
     {
         $updateQuery = "UPDATE commentsToBlog SET commentMessage = :commentMessage WHERE id = :id"; 
         $data = array(":commentMessage" => $message, ":id" => $commentId);

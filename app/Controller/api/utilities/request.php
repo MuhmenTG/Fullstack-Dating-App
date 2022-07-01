@@ -21,10 +21,4 @@ class Request
     return $this->data[$key];
   }
 
-	/*public static function get(string $key): mixed
-  {
-    $data = json_decode(file_get_contents('php://input'), true);
-    return $data[$key];
-  }*/
-
 }

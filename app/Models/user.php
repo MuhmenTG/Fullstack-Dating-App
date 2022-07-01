@@ -2,51 +2,14 @@
   
   include("query.php");
     class User extends Query {
-
     
     public function __construct()
     {
         parent::__construct();
     }
-
-     
-    public function login($email, $userPassword )
-    {     
-        $result = $this->isRecordExits('userPassword, id', 'userInfomation', 'email', $email, true);  
-        if(!$result){ 
-            return false; 
-        }
-        if(password_verify($userPassword, $result['userPassword']))
-        {     
-            $this->changeLoggedInStatus($result['id']);
-            return $result['id'];
-        }
-        else{
-            return false;
-        }
-    }
     
 
-    public function registerUser($firstName, $lastName, $emailaddress, $password, $gender, $token)
-    {
-        $result = $this->isRecordExits('email', 'userInfomation', 'email', $emailaddress);
-     
-        if($result)
-        {
-            return -1;
-        }
-        else{
-         
-            $insertQuery = "INSERT INTO userInfomation (firstName, lastName, email, userPassword, gender, verifyToken) 
-            VALUES(:firstName, :lastName, :email, :userPassword, :gender, :verifyToken)";
-            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-            $data = array(":firstName" => $firstName, ":lastName" => $lastName, ":email" => $emailaddress, ":userPassword" => $hashPassword, ":gender" => $gender, ":verifyToken" => $token);
-    
-            return ($this->executeQuery($insertQuery, $data)) ? 1 : 0; 
-        }
-     
-    }    
- 
+
 
     public function completeAndEditProfileInfo($key, $value, $userId){
         try 
@@ -71,44 +34,8 @@
         return $this->executeQuery($updateQuery, $data);
     }
 
-    public function verifyUser($token)
-    {
-        $updateQuery = "UPDATE userInfomation SET 
-        isVerified = 1 WHERE verifyToken = :verifyToken";
-        $data = array(":verifyToken" => $token);
-        return $this->executeQuery($updateQuery, $data);
-    }
-        
-    public function resetPasswordSetToken($email, $token)
-    {
-        if($this->isRecordExits('email', 'userInfomation', 'email', $email)) 
-        {
-            $insertQuery = "INSERT INTO resetPassword (userEmail, token) 
-            VALUES(:userEmail, :token)";
-            $data = array(":userEmail" => $email, ":token" => $token);
-            return $this->executeQuery($insertQuery, $data) ? 1 : 0;
-        }
-        else{
-           return -1;         
-        } 
-    }
-
-    public function updatePassword($newPassword, $token, $email){
-        $executeQuery = $this->isRecordExits("token", "resetPassword", "token", $token); 
-        if($executeQuery){
-            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-            $updateQuery = "UPDATE userInfomation SET 
-            userPassword = :userPassword
-            WHERE email = :email";
-            $data2 = array(":userPassword" => $newPasswordHash, ":email" => $email);
-            return $this->executeQuery($updateQuery, $data2);
-        }
-        else{
-            return false;
-        }
-    }
-
-
+  
+ 
     public function getProfileInfomation($userId)
     {
         $selectQuery = "SELECT * FROM userInfomation WHERE id = :id";                                

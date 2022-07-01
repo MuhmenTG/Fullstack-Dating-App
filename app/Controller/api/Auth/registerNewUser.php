@@ -1,16 +1,12 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Origin: *');
 
-    include('../../../Models/user.php');
+    include('../../../Models/auth.php');
     include('../utilities/request.php');
     include('../utilities/response.php');
-    include('../../../../vendor/mail.php');
+    include('../../../../sendEmail.php');
 
-
-    $user = new User();
+    $auth = new Auth();
     $request = new Request(); 
     $response = new Response();
 
@@ -22,20 +18,25 @@ header('Access-Control-Allow-Origin: *');
 
 
     if(!$request->has('regFirstName') && !$request->has('regLastName') && !$request->has('regEmail') && !$request->has('regConPassword') && !$request->has('regGender')) {
-        return $response->code(400)->toJSON(['error' => 'Missing some input from you.']);
+        return $response->code(400)->toJSON(['msg' => 'Missing some input from you.']);
     }
+
 
     try {
         $token = bin2hex(openssl_random_pseudo_bytes(8));
-        $userRegister = $user->registerUser($regFirstName, $regLastName, $regEmail, $regConPassword, $regGender, $token);
+        $userRegister = $auth->registerUser($regFirstName, $regLastName, $regEmail, $regConPassword, $regGender, $token);
         if($userRegister == 1){
-            $message = "Hi from PHP mailer". "<a href='http://localhost:8888/RistaByMuhmen/client/verify.php?token=${token}&email=${regEmail}'>Click here to verify</a>";
-            Email::sendMail($regEmail, 'Thanks for your registration', $message);
+            echo $response->toJSON(['msg' => "Registration success", "code" => 200]);
+            $message = "Hello new member. Please use the following link ". "<a `href=http://localhost:3000/verification/${token}/${regEmail}>Click here to verify</a>";
+            Email::sendMail($regEmail, "Account Verification", $message);
+        }
+        elseif($userRegister == -1){
+            echo $response->toJSON(['msg' => "User already registered", "code" =>300]);
         }
         else{
-           echo $response->code(400)->toJSON(['error' => "Registration failed"]);
+           return $response->code(400)->toJSON(['msg' => "Registration failed"]);
         }
     }  catch(Exception $e) {
-        $response->code($e->code)->toJSON(['error' => $e->getMessage()]);
+        $response->code(500)->toJSON(['msg' => $e->getCode()]);
     }
       

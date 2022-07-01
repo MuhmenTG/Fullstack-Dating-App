@@ -1,10 +1,10 @@
 <?php
     session_start();
-    include('../../../Models/user.php');
+    include('../../../Models/auth.php');
     include('../utilities/request.php');
     include('../utilities/response.php');
 
-    $user = new User();
+    $auth = new Auth();
     $request = new Request(); 
     $response = new Response();
 
@@ -16,7 +16,7 @@
     }
 
     try{
-        $userLogin = $user->login($email, $userPassword);
+        $userLogin = $auth->login($email, $userPassword);
         if($userLogin){
             $_SESSION['email'] = $email;
             $_SESSION['id'] = $userLogin;

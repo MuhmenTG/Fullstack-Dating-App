@@ -15,7 +15,6 @@ class Response{
 
     public function toJSON(array $input): string
     {
-        //header('Content-Type: application/json');
         return json_encode($input);
     }
 
